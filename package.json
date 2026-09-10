@@ -1,0 +1,19 @@
+{
+  "name": "lakshana-portfolio",
+  "version": "1.0.0",
+  "description": "Lakshana G S — Personal Portfolio Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "lakshana",
+    "developer",
+    "ai"
+  ],
+  "author": "Lakshana G S",
+  "license": "MIT"
+}

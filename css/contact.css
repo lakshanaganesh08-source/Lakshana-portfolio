@@ -1,0 +1,374 @@
+/**
+ * CONTACT & FOOTER — MODERN EDITORIAL STUDIO
+ * Lakshana G S Portfolio
+ */
+
+/* ==================================================
+   CONTACT SECTION (Stage G)
+   ================================================== */
+.contact-section {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-24);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  position: relative;
+}
+
+/* Editorial Container Card */
+.contact-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle accent accent line on top */
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(2.5rem, 5vw, 4.5rem);
+  width: 48px;
+  height: 2px;
+  background: var(--color-accent-lavender);
+  opacity: 0.8;
+}
+
+/* Two-column layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+/* 1. Left Editorial Intro */
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.contact-eyebrow-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-lavender);
+}
+
+.contact-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-5);
+}
+
+.contact-heading-sub {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.contact-copy {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 480px;
+}
+
+/* 2. Right Action Channels */
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contact-channel-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.channel-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+/* Prominent Email Direct Channel */
+.contact-email-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contact-email-link:hover {
+  transform: translateX(3px);
+  border-color: var(--color-accent-lavender-border);
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-email-link .email-text {
+  word-break: break-all;
+}
+
+.contact-email-link .contact-arrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  color: var(--color-accent-lavender);
+  transition: transform var(--transition-fast);
+  margin-left: var(--space-3);
+  flex-shrink: 0;
+}
+
+.contact-email-link:hover .contact-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Secondary Actions / Resume & Links */
+.contact-secondary-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.contact-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  letter-spacing: var(--tracking-wide);
+  transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.contact-pill-link:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+  background-color: var(--color-surface-subtle);
+  transform: translateY(-1px);
+}
+
+.contact-pill-link .link-arrow {
+  font-size: 0.8125rem;
+  color: var(--color-text-tertiary);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.contact-pill-link:hover .link-arrow {
+  color: var(--color-accent-lavender);
+  transform: translate(2px, -2px);
+}
+
+/* ==================================================
+   MINIMAL FOOTER
+   ================================================== */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  padding: var(--space-10) 0 var(--space-12) 0;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+/* Left Brand Metadata */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-wider);
+}
+
+.footer-role {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Center Editorial Touch */
+.footer-center {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Right Actions & Copyright */
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.footer-copyright {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Back to top button */
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wider);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.back-to-top-btn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+  background-color: var(--color-surface);
+}
+
+.back-to-top-arrow {
+  font-size: 0.75rem;
+  transition: transform var(--transition-fast);
+}
+
+.back-to-top-btn:hover .back-to-top-arrow {
+  transform: translateY(-2px);
+}
+
+/* ==================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================== */
+@media (max-width: 960px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .contact-card {
+    padding: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .contact-copy {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .footer-actions {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-card::before {
+    left: var(--space-6);
+  }
+
+  .contact-email-link {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .footer-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .back-to-top-btn {
+    align-self: flex-start;
+  }
+}
+
+/* ==================================================
+   REDUCED MOTION SUPPORT
+   ================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .contact-email-link,
+  .contact-pill-link,
+  .contact-arrow,
+  .link-arrow,
+  .back-to-top-arrow {
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,108 @@
+/**
+ * DESIGN TOKENS — MODERN EDITORIAL STUDIO
+ * Lakshana G S Portfolio
+ */
+
+:root {
+  /* Color Palette — Light Canvas Foundation */
+  --color-bg: #FAFAF8;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F4F4EE;
+  --color-surface-muted: #EFEFE9;
+
+  /* Typography Colors */
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-tertiary: #9E9E94;
+  --color-text-inverse: #FAFAF8;
+
+  /* Borders & Dividers */
+  --color-border: #E8E8E1;
+  --color-border-subtle: #F0F0EA;
+  --color-border-hover: #D2D2C8;
+
+  /* Subtle Editorial Accents (Used with strict restraint) */
+  --color-accent-lavender: #866AC8;
+  --color-accent-lavender-subtle: #F1EDFA;
+  --color-accent-lavender-border: rgba(134, 106, 200, 0.2);
+
+  --color-accent-peach: #E48366;
+  --color-accent-peach-subtle: #FDF1ED;
+  --color-accent-peach-border: rgba(228, 131, 102, 0.2);
+
+  /* Status Indicator */
+  --color-status-active: #10B981;
+  --color-status-active-subtle: #ECFDF5;
+
+  /* Typography Families */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', Consolas, Monaco, monospace;
+
+  /* Typography Scales */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-md: 1.125rem;   /* 18px */
+  --font-size-lg: 1.375rem;   /* 22px */
+  --font-size-xl: 1.75rem;    /* 28px */
+  --font-size-2xl: 2.25rem;   /* 36px */
+  --font-size-3xl: 3rem;      /* 48px */
+  --font-size-4xl: 3.75rem;   /* 60px */
+  --font-size-hero: clamp(2.5rem, 5.5vw, 4.25rem);
+
+  /* Line Heights */
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.25;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.75;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.06em;
+  --tracking-wider: 0.12em;
+
+  /* Spacing System */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+
+  /* Layout Containers */
+  --container-max-width: 1240px;
+  --container-padding: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* Shadows (Subtle, diffused light mode shadows) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 12px 36px -4px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+
+  /* Transitions & Animation Easing */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --transition-fast: 150ms var(--ease-standard);
+  --transition-normal: 250ms var(--ease-editorial);
+  --transition-slow: 450ms var(--ease-editorial);
+
+  /* Header Height */
+  --header-height: 84px;
+  --header-height-scrolled: 68px;
+}

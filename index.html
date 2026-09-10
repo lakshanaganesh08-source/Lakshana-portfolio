@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakshana G S — AI & Software Developer</title>
+  <meta name="description"
+    content="Portfolio of Lakshana G S — B.E. Computer Science & Engineering, AI & Software Developer exploring artificial intelligence, software architectures, and creative technology.">
+  <meta name="theme-color" content="#FAFAF8">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Lakshana G S — AI & Software Developer">
+  <meta property="og:description" content="Exploring AI, software, and creative technology through things I build.">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheets (Modular Design Architecture) -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/work.css">
+  <link rel="stylesheet" href="css/about-skills.css">
+  <link rel="stylesheet" href="css/experience.css">
+  <link rel="stylesheet" href="css/recognition.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/interactions.css">
+</head>
+
+<body>
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+
+      <!-- Brand Anchor -->
+      <a href="#hero" class="site-brand" aria-label="Lakshana G S Home">
+        <span class="brand-name">LAKSHANA G S</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="protosem.html" class="nav-link">
+          ProtoSem <span class="external-arrow">↗</span>
+        </a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="assets/Lakshana_GS_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link">
+          Resume <span class="external-arrow">↗</span>
+        </a>
+      </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
+        aria-controls="mobile-nav">
+        <span class="hamburger-box">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-nav" class="mobile-nav-overlay" aria-hidden="true">
+    <ul class="mobile-nav-list">
+      <li><a href="#work" class="mobile-nav-link">Work <span>↗</span></a></li>
+      <li><a href="#about" class="mobile-nav-link">About <span>↗</span></a></li>
+      <li><a href="#skills" class="mobile-nav-link">Skills <span>↗</span></a></li>
+      <li><a href="protosem.html" class="mobile-nav-link">ProtoSem <span>↗</span></a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact <span>↗</span></a></li>
+      <li>
+        <a href="assets/Lakshana_GS_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mobile-nav-link">
+          Resume <span>↗</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="mobile-nav-footer">
+      <span>LAKSHANA G S</span>
+      <span>AI & SOFTWARE DEVELOPER</span>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main id="main-content">
+
+    <!-- 01 — HERO SECTION -->
+    <section class="hero-section" id="hero" aria-label="Introduction">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left: Editorial Narrative Column -->
+          <div class="hero-content">
+
+            <!-- Eyebrow Category -->
+            <div class="hero-eyebrow hero-animate-1">
+              <span class="hero-eyebrow-dot"></span>
+              <span>AI / SOFTWARE / CREATIVE TECHNOLOGY</span>
+            </div>
+
+            <!-- Identity Name -->
+            <h1 class="hero-title hero-animate-2">LAKSHANA G S</h1>
+
+            <!-- Role & Degree -->
+            <div class="hero-role-wrapper hero-animate-3">
+              <span class="hero-role">AI & SOFTWARE DEVELOPER</span>
+              <span class="hero-degree">B.E. Computer Science & Engineering</span>
+            </div>
+
+            <!-- Core Statement -->
+            <p class="hero-tagline hero-animate-4">
+              Exploring AI, software, and creative technology through things I build.
+            </p>
+
+            <!-- Quiet Status Line -->
+            <div class="hero-status hero-animate-4">
+              <span class="status-indicator"></span>
+              <span>Currently exploring AI & Software Development</span>
+            </div>
+
+            <!-- Action Triggers -->
+            <div class="btn-group hero-animate-4">
+              <a href="#work" class="btn btn-primary btn-magnetic">
+                VIEW MY WORK <span class="btn-arrow">↗</span>
+              </a>
+              <a href="assets/Lakshana_GS_Resume.pdf" target="_blank" rel="noopener noreferrer"
+                class="btn btn-secondary btn-magnetic">
+                RESUME <span class="btn-arrow">↗</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Right: Editorial Portrait Column -->
+          <div class="hero-visual">
+            <div class="portrait-frame hero-profile-parallax hero-animate-profile" id="portrait-container">
+
+              <!-- Actual Profile Image (Loaded from local path when provided) -->
+              <img src="assets/images/lakshana-profile.jpg" alt="Editorial Portrait of Lakshana G S"
+                class="portrait-image" loading="eager">
+
+              <!-- Editorial Fallback Frame (Rendered if image is loading or pending placement) -->
+              <div class="portrait-fallback" id="portrait-fallback" aria-hidden="true">
+                <span class="portrait-fallback-caption">Editorial Portrait</span>
+                <div class="portrait-fallback-monogram">LGS</div>
+                <span class="portrait-fallback-caption">Lakshana G S • 2026</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 — SELECTED WORK / PROJECTS -->
+    <section class="work-section" id="work" aria-label="Selected Work">
+      <div class="container">
+
+        <!-- Section Intro -->
+        <div class="section-intro reveal-on-scroll">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>SELECTED WORK</span>
+          </div>
+          <h2 class="section-title">Things I've built<br>that I'm proud of.</h2>
+          <p class="section-lead">
+            A selection of projects where I explore AI, software development, data, and practical technology solutions.
+          </p>
+        </div>
+
+        <!-- Projects Stream -->
+        <div class="projects-stream">
+
+          <!-- PROJECT 01: CONSTRUCTIQ AI (Featured Flagship Project) -->
+          <article class="project-featured reveal-on-scroll" id="project-constructiq" data-project-id="constructiq-ai">
+
+            <!-- Top Meta Header -->
+            <div class="project-meta-header">
+              <span class="project-context">INFOSYS SPRINGBOARD · AI / SOFTWARE · 2026</span>
+              <span class="project-category">AI / CONSTRUCTION INTELLIGENCE</span>
+            </div>
+
+            <!-- Project Title -->
+            <h3 class="project-featured-title">ConstructIQ AI</h3>
+
+            <!-- Large Editorial Visual Canvas -->
+            <div class="project-visual-frame featured-visual-frame">
+              <img src="assets/images/ConstructIQ.png"
+                alt="ConstructIQ AI — Construction Intelligence Platform Interface" class="project-image"
+                loading="lazy">
+
+              <!-- Editorial Fallback Canvas (Active when screenshot is pending placement) -->
+              <div class="project-fallback-canvas" aria-hidden="true">
+                <div class="canvas-header">
+                  <span>FEATURED PLATFORM</span>
+                  <span>STREAMLIT • PYTHON • LLM ARCHITECTURE</span>
+                </div>
+                <div class="canvas-center">
+                  <div class="canvas-brand-monogram">CONSTRUCTIQ AI</div>
+                  <p class="canvas-subtext">AI-Powered Construction Intelligence & Decision-Support Platform</p>
+                </div>
+                <div class="canvas-footer">
+                  <span>Decision Support • Safety & Risk • Rework Intelligence • Material Estimation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Two-Column Editorial Details -->
+            <div class="project-featured-details">
+
+              <div class="details-narrative">
+                <p class="project-description">
+                  An AI-powered construction intelligence platform designed to help teams understand project risk,
+                  safety, compliance, materials, and rework through a unified decision-support interface.
+                </p>
+
+                <!-- Capabilities Matrix (Restrained typography, not rainbow badges) -->
+                <div class="capabilities-block">
+                  <span class="block-label">CORE CAPABILITIES</span>
+                  <ul class="capabilities-list">
+                    <li>Construction project dashboard</li>
+                    <li>Safety & risk intelligence</li>
+                    <li>Compliance agent</li>
+                    <li>Insurance agent</li>
+                    <li>Material estimation</li>
+                    <li>Rework intelligence</li>
+                    <li>AI-powered project Q&A</li>
+                    <li>Construction document intelligence</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="details-tech-action">
+                <div class="tech-block">
+                  <span class="block-label">TECHNOLOGY</span>
+                  <div class="tech-stack-list">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Plotly</span>
+                    <span class="tech-tag">AI / LLM technologies</span>
+                    <span class="tech-tag">SQLite</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://github.com/lakshanaganesh08-source/ConstructIQ_AI" target="_blank"
+                    rel="noopener noreferrer" class="btn btn-primary project-action-btn"
+                    aria-label="View ConstructIQ AI repository on GitHub">
+                    VIEW PROJECT <span class="btn-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- PROJECT 02: SMART FOOD DELIVERY WEB APPLICATION -->
+          <article class="project-secondary reveal-on-scroll" id="project-food-delivery"
+            data-project-id="smart-food-delivery">
+
+            <div class="secondary-grid">
+
+              <!-- Visual Column -->
+              <div class="project-visual-frame secondary-visual-frame">
+                <img src="assets/images/Smart_food.png" alt="Smart Food Delivery Web Application Interface"
+                  class="project-image" loading="lazy">
+
+                <!-- Editorial Fallback Canvas (Active when screenshot is pending placement) -->
+                <div class="project-fallback-canvas" aria-hidden="true">
+                  <div class="canvas-header">
+                    <span>FULL STACK WEB</span>
+                    <span>PHP • MYSQL • JAVASCRIPT</span>
+                  </div>
+                  <div class="canvas-center">
+                    <div class="canvas-brand-monogram">FOOD DELIVERY</div>
+                    <p class="canvas-subtext">Interactive Ordering & Management System</p>
+                  </div>
+                  <div class="canvas-footer">
+                    <span>Structured Frontend • Backend Logic • Database Schema</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Content Column -->
+              <div class="secondary-content">
+                <div class="project-meta-header">
+                  <span class="project-category">FULL STACK / WEB DEVELOPMENT</span>
+                </div>
+
+                <h3 class="project-secondary-title">Smart Food Delivery Web Application</h3>
+
+                <p class="project-description">
+                  A smart food delivery web application focused on creating a smooth ordering experience with structured
+                  frontend, backend, and database functionality.
+                </p>
+
+                <div class="tech-block">
+                  <span class="block-label">TECHNOLOGY</span>
+                  <div class="tech-stack-list">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <!-- Non-breaking placeholder action ready for live URL or detail page -->
+                  <a href="#project-food-delivery" class="btn btn-secondary project-action-btn"
+                    data-action="view-project" aria-label="View Smart Food Delivery project">
+                    VIEW PROJECT <span class="btn-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </article>
+
+          <!-- PROJECT 03: TERMINAL RUNNER GAME -->
+          <article class="project-secondary reveal-on-scroll" id="project-terminal-runner"
+            data-project-id="terminal-runner">
+
+            <div class="secondary-grid">
+
+              <!-- Visual Column -->
+              <div class="project-visual-frame secondary-visual-frame">
+                <img src="assets/images/Terminal_runner.png"
+                  alt="Terminal Runner Game — Containerized & Web Arcade Game Interface" class="project-image"
+                  loading="lazy">
+
+                <!-- Editorial Fallback Canvas (Active when screenshot is pending placement) -->
+                <div class="project-fallback-canvas" aria-hidden="true">
+                  <div class="canvas-header">
+                    <span>CONTAINER &amp; WEB GAME</span>
+                    <span>DOCKER • LINUX • JAVASCRIPT</span>
+                  </div>
+                  <div class="canvas-center">
+                    <div class="canvas-brand-monogram">TERMINAL RUNNER</div>
+                    <p class="canvas-subtext">Arcade Game in Linux Terminal &amp; Vercel Web Deployment</p>
+                  </div>
+                  <div class="canvas-footer">
+                    <span>Docker Container • Linux CLI • HTML5 Canvas • Live Vercel App</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Content Column -->
+              <div class="secondary-content">
+                <div class="project-meta-header">
+                  <span class="project-context">DOCKER · LINUX · VERCEL</span>
+                  <span class="project-category">CONTAINERIZATION / WEB GAMING</span>
+                </div>
+
+                <h3 class="project-secondary-title">Terminal Runner Game</h3>
+
+                <p class="project-description">
+                  An arcade-style runner game containerized with Docker to run directly inside a Linux terminal,
+                  and rebuilt using modern HTML5, CSS, and JavaScript for seamless browser gameplay deployed on Vercel.
+                </p>
+
+                <div class="tech-block">
+                  <span class="block-label">TECHNOLOGY</span>
+                  <div class="tech-stack-list">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Linux</span>
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Vercel</span>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <a href="https://terminal-runner-vercel-three.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-secondary project-action-btn" aria-label="Play Terminal Runner Game Live on Vercel">
+                    PLAY LIVE DEMO <span class="btn-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03 — ABOUT SECTION -->
+    <section class="about-section" id="about" aria-label="About Lakshana">
+      <div class="container">
+
+        <!-- Asymmetric 2-Column Editorial Grid -->
+        <div class="about-grid">
+
+          <!-- Left Column: Title & Anchor Context -->
+          <div class="about-lead-col">
+            <div class="section-eyebrow">
+              <span class="eyebrow-line"></span>
+              <span>ABOUT</span>
+            </div>
+            <h2 class="about-heading">
+              Building with curiosity,<br>learning by creating.
+            </h2>
+            <div class="about-meta-tag">
+              <span>CSE · KCT</span>
+              <span class="meta-separator">•</span>
+              <span>AI / SOFTWARE / CREATIVE TECHNOLOGY</span>
+            </div>
+          </div>
+
+          <!-- Right Column: Narrative & Education Metadata -->
+          <div class="about-content-col reveal-on-scroll">
+
+            <div class="about-narrative">
+              <p class="about-paragraph">
+                I'm a Computer Science and Engineering student exploring the space between <span
+                  class="interactive-keyword">artificial intelligence<span class="keyword-tooltip">Applied ML &amp;
+                    GenAI Architectures</span></span>, <span class="interactive-keyword">software development<span
+                    class="keyword-tooltip">Scalable Full-Stack Engineering</span></span>, and <span
+                  class="interactive-keyword">creative technology<span class="keyword-tooltip">Interactive Digital
+                    Interfaces</span></span>.
+              </p>
+              <p class="about-paragraph">
+                I enjoy turning ideas into practical digital experiences — from AI-powered applications and data-driven
+                tools to full-stack projects. My approach is simple: learn deeply, build consistently, and keep
+                experimenting.
+              </p>
+            </div>
+
+            <!-- Restrained Education Metadata (Editorial Ledger) -->
+            <div class="education-block">
+              <span class="block-label">ACADEMIC FOUNDATION</span>
+              <div class="education-entry">
+                <div class="edu-main">
+                  <h3 class="edu-degree">B.E. Computer Science & Engineering</h3>
+                  <p class="edu-institution">Kumaraguru College of Technology</p>
+                </div>
+                <div class="edu-meta">
+                  <span class="edu-timeline">2024 — 2028</span>
+                  <span class="edu-cgpa">CGPA: 9.2 / 10</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDITORIAL TRANSITIONAL STATEMENT -->
+    <div class="editorial-statement-container" aria-label="Philosophy Statement">
+      <div class="container">
+        <div class="editorial-statement-box">
+          <p class="editorial-statement-text">
+            "Currently exploring the intersection of AI, software engineering, and creative technology."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 — TECHNICAL IDENTITY / SKILLS -->
+    <section class="skills-section reveal-on-scroll" id="skills" aria-label="Technical Identity">
+      <div class="container">
+
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>TECHNICAL IDENTITY</span>
+          </div>
+          <h2 class="section-title">Tools I use<br>to turn ideas into software.</h2>
+        </div>
+
+        <!-- Interactive Category Filter Bar -->
+        <div class="skills-filter-bar" role="tablist" aria-label="Skill Domain Filters">
+          <button class="skills-filter-btn is-active" data-filter="all">All Disciplines <span
+              class="filter-count">22</span></button>
+          <button class="skills-filter-btn" data-filter="programming">Programming <span
+              class="filter-count">4</span></button>
+          <button class="skills-filter-btn" data-filter="ai-data">AI &amp; Data <span
+              class="filter-count">4</span></button>
+          <button class="skills-filter-btn" data-filter="web-software">Web &amp; Software <span
+              class="filter-count">4</span></button>
+          <button class="skills-filter-btn" data-filter="database-tools">Database &amp; Tools <span
+              class="filter-count">5</span></button>
+          <button class="skills-filter-btn" data-filter="creative-design">Creative &amp; Design <span
+              class="filter-count">5</span></button>
+        </div>
+
+        <!-- Editorial Skill Matrix (5 Curated Interactive Groups) -->
+        <div class="skills-matrix">
+
+          <!-- Group 01: Programming -->
+          <div class="skill-group-card accent-lavender" data-category="programming">
+            <div class="skill-group-header">
+              <div class="skill-group-title-row">
+                <div class="skill-group-title-left">
+                  <span class="skill-group-num">01</span>
+                  <h3 class="skill-group-title">PROGRAMMING</h3>
+                </div>
+                <span class="skill-count-badge">4 Technologies</span>
+              </div>
+              <p class="skill-group-tagline">Core Logic &amp; Algorithmic Foundations</p>
+            </div>
+            <div class="skill-chips-grid">
+              <span class="skill-chip" tabindex="0"
+                data-context="Python: Primary language for AI/ML engineering, data analysis, and the ConstructIQ AI platform."><span
+                  class="skill-chip-dot"></span>Python</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Java: Enterprise object-oriented programming applied in AICTE / EduSkills Java Full Stack internship."><span
+                  class="skill-chip-dot"></span>Java</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="C: Fundamental computer science, memory management, and structured systems."><span
+                  class="skill-chip-dot"></span>C</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="C++: Object-oriented software architecture and algorithmic data structures."><span
+                  class="skill-chip-dot"></span>C++</span>
+            </div>
+          </div>
+
+          <!-- Group 02: AI & Data -->
+          <div class="skill-group-card accent-peach" data-category="ai-data">
+            <div class="skill-group-header">
+              <div class="skill-group-title-row">
+                <div class="skill-group-title-left">
+                  <span class="skill-group-num">02</span>
+                  <h3 class="skill-group-title">AI &amp; DATA</h3>
+                </div>
+                <span class="skill-count-badge">4 Disciplines</span>
+              </div>
+              <p class="skill-group-tagline">Predictive Models &amp; Data Insights</p>
+            </div>
+            <div class="skill-chips-grid">
+              <span class="skill-chip" tabindex="0"
+                data-context="Artificial Intelligence: Intelligent decision systems, agent workflows, and predictive inference."><span
+                  class="skill-chip-dot"></span>Artificial Intelligence</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Machine Learning: Supervised/unsupervised models, validated in Google AI-ML Virtual Internship."><span
+                  class="skill-chip-dot"></span>Machine Learning</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Data Analysis: Empirical feature stability and data exploration for ICSL-DSGA 2026 research."><span
+                  class="skill-chip-dot"></span>Data Analysis</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Pandas: High-performance dataset transformation, cleaning, and matrix computation."><span
+                  class="skill-chip-dot"></span>Pandas</span>
+            </div>
+          </div>
+
+          <!-- Group 03: Web & Software -->
+          <div class="skill-group-card accent-emerald" data-category="web-software">
+            <div class="skill-group-header">
+              <div class="skill-group-title-row">
+                <div class="skill-group-title-left">
+                  <span class="skill-group-num">03</span>
+                  <h3 class="skill-group-title">WEB &amp; SOFTWARE</h3>
+                </div>
+                <span class="skill-count-badge">4 Stacks</span>
+              </div>
+              <p class="skill-group-tagline">Applied Web &amp; Full-Stack Experiences</p>
+            </div>
+            <div class="skill-chips-grid">
+              <span class="skill-chip" tabindex="0"
+                data-context="HTML5 &amp; CSS3: Semantic structure, responsive layouts, and modern typography tokens."><span
+                  class="skill-chip-dot"></span>HTML5 &amp; CSS3</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="JavaScript: Interactive clientside logic, asynchronous DOM handling, and dynamic UI state."><span
+                  class="skill-chip-dot"></span>JavaScript</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Streamlit: Rapid deployment framework powering the interactive ConstructIQ AI interface."><span
+                  class="skill-chip-dot"></span>Streamlit</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Full-Stack Architecture: Connecting frontend interfaces with databases, APIs, and business logic."><span
+                  class="skill-chip-dot"></span>Full-Stack Architecture</span>
+            </div>
+          </div>
+
+          <!-- Group 04: Database & Tools -->
+          <div class="skill-group-card accent-indigo" data-category="database-tools">
+            <div class="skill-group-header">
+              <div class="skill-group-title-row">
+                <div class="skill-group-title-left">
+                  <span class="skill-group-num">04</span>
+                  <h3 class="skill-group-title">DATABASE &amp; TOOLS</h3>
+                </div>
+                <span class="skill-count-badge">6 Tools</span>
+              </div>
+              <p class="skill-group-tagline">Data Persistence &amp; Developer Workflows</p>
+            </div>
+            <div class="skill-chips-grid">
+              <span class="skill-chip" tabindex="0"
+                data-context="Docker: Containerization workflows for portable Linux terminal applications and environments."><span
+                  class="skill-chip-dot"></span>Docker</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="MySQL: Relational database schema design utilized in Smart Food Delivery management."><span
+                  class="skill-chip-dot"></span>MySQL</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="SQLite: Lightweight local database engine for embedded prototyping and testing."><span
+                  class="skill-chip-dot"></span>SQLite</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Git / GitHub: Version control, branching workflows, and collaborative codebase tracking."><span
+                  class="skill-chip-dot"></span>Git / GitHub</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="VS Code: Primary IDE configured for multi-language development and debugging."><span
+                  class="skill-chip-dot"></span>VS Code</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Google Colab: Cloud-hosted Jupyter environment for machine learning benchmarks and experiments."><span
+                  class="skill-chip-dot"></span>Google Colab</span>
+            </div>
+          </div>
+
+          <!-- Group 05: Creative / Design -->
+          <div class="skill-group-card accent-rose" data-category="creative-design">
+            <div class="skill-group-header">
+              <div class="skill-group-title-row">
+                <div class="skill-group-title-left">
+                  <span class="skill-group-num">05</span>
+                  <h3 class="skill-group-title">CREATIVE / DESIGN</h3>
+                </div>
+                <span class="skill-count-badge">5 Applications</span>
+              </div>
+              <p class="skill-group-tagline">UI Prototyping &amp; Visual Systems</p>
+            </div>
+            <div class="skill-chips-grid">
+              <span class="skill-chip" tabindex="0"
+                data-context="Figma: UI/UX wireframing, layout prototyping, and user journey design."><span
+                  class="skill-chip-dot"></span>Figma</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Photoshop: Digital asset editing, photo manipulation, and raster design."><span
+                  class="skill-chip-dot"></span>Photoshop</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Illustrator: Vector icon design, scalable graphics, and visual branding."><span
+                  class="skill-chip-dot"></span>Illustrator</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="Blender: 3D spatial modeling, asset exploration, and rendering."><span
+                  class="skill-chip-dot"></span>Blender</span>
+              <span class="skill-chip" tabindex="0"
+                data-context="GIMP: Open-source image processing and texture preparation."><span
+                  class="skill-chip-dot"></span>GIMP</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Real-World Context Ribbon -->
+        <div class="skills-context-banner" id="skills-context-banner" aria-live="polite">
+          <span class="context-indicator-dot"></span>
+          <span class="context-label">PRACTICAL APPLICATION:</span>
+          <span class="context-text" id="skills-context-text">Hover or focus any technology chip above to see its
+            real-world implementation across my projects &amp; fellowships.</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 05 — EXPERIENCE & LEARNING -->
+    <section class="experience-section reveal-on-scroll" id="experience" aria-label="Experience and Learning">
+      <div class="container">
+
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>EXPERIENCE & LEARNING</span>
+          </div>
+          <h2 class="section-title">Learning by building,<br>growing through experience.</h2>
+          <p class="section-lead">
+            Alongside my academic journey, I've been building practical projects, exploring emerging technologies, and
+            gaining exposure to industry-oriented problem solving.
+          </p>
+        </div>
+
+        <!-- 1. Featured Industry Experience (Primary Visual Weight) -->
+        <div class="featured-experience-card">
+          <div class="exp-meta-header">
+            <span class="exp-year-org">2026 · INFOSYS SPRINGBOARD</span>
+            <span class="exp-program-tag">Virtual Internship 7.0</span>
+          </div>
+
+          <h3 class="exp-project-title">ConstructIQ AI</h3>
+
+          <p class="exp-description">
+            Selected for the Infosys Springboard Virtual Internship 7.0, where I worked on ConstructIQ AI — a
+            construction intelligence platform focused on AI-assisted project risk, safety, compliance, material
+            estimation, and rework intelligence.
+          </p>
+
+          <div class="exp-footer-tags">
+            <span>AI</span>
+            <span>·</span>
+            <span>SOFTWARE</span>
+            <span>·</span>
+            <span>CONSTRUCTION INTELLIGENCE</span>
+          </div>
+        </div>
+
+        <!-- 2. Learning & Virtual Internships (Quiet Editorial Ledger) -->
+        <div class="learning-block">
+          <div class="learning-subhead">
+            <span class="learning-subhead-dot"></span>
+            <span>LEARNING & VIRTUAL INTERNSHIPS</span>
+          </div>
+
+          <div class="learning-ledger">
+
+            <!-- Table Header (Desktop) -->
+            <div class="ledger-header" aria-hidden="true">
+              <span>ORGANIZATION</span>
+              <span>PROGRAM</span>
+              <span>PERIOD</span>
+              <span style="text-align: right;">CREDENTIAL</span>
+            </div>
+
+            <!-- Row 1: Google for Developers -->
+            <a href="assets/certificates/Google_AI_ML_Certificate.pdf" target="_blank" rel="noopener noreferrer"
+              class="ledger-row is-clickable" aria-label="Google for Developers AI-ML Virtual Internship Certificate">
+              <div class="ledger-org">Google for Developers</div>
+              <div class="ledger-program">AI–ML Virtual Internship</div>
+              <div class="ledger-period">Jul – Sep 2025</div>
+              <div class="ledger-action">
+                <span>View Certificate</span>
+                <span class="action-arrow">↗</span>
+              </div>
+            </a>
+
+            <!-- Row 2: KCT / AWS Academy -->
+            <a href="assets/certificates/AWS_Data_Engineering_Certificate.pdf" target="_blank" rel="noopener noreferrer"
+              class="ledger-row is-clickable"
+              aria-label="KCT AWS Academy Data Engineering Virtual Internship Certificate">
+              <div class="ledger-org">KCT / AWS Academy</div>
+              <div class="ledger-program">Data Engineering Virtual Internship</div>
+              <div class="ledger-period">Oct – Dec 2025</div>
+              <div class="ledger-action">
+                <span>View Certificate</span>
+                <span class="action-arrow">↗</span>
+              </div>
+            </a>
+
+            <!-- Row 3: AICTE / EduSkills -->
+            <a href="assets/certificates/Java_Full_Stack_Certificate.pdf" target="_blank" rel="noopener noreferrer"
+              class="ledger-row is-clickable"
+              aria-label="AICTE EduSkills Java Full Stack Developer Virtual Internship Certificate">
+              <div class="ledger-org">AICTE / EduSkills</div>
+              <div class="ledger-program">Java Full Stack Developer Virtual Internship</div>
+              <div class="ledger-period">Jun – Aug 2026</div>
+              <div class="ledger-action">
+                <span>View Certificate</span>
+                <span class="action-arrow">↗</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 06 — RECOGNITION -->
+    <section class="recognition-section reveal-on-scroll" id="recognition" aria-label="Recognition">
+      <div class="container">
+
+        <!-- Section Intro -->
+        <div class="section-intro">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>RECOGNITION</span>
+          </div>
+          <h2 class="section-title">A few milestones<br>worth remembering.</h2>
+        </div>
+
+        <!-- Editorial Numbered List -->
+        <div class="recognition-list">
+
+          <!-- 01: Mahatma Gandhi Academic Excellence Award -->
+          <article class="recognition-item">
+            <div class="rec-num-col">
+              <span class="rec-number">01</span>
+            </div>
+            <div class="rec-title-col">
+              <span class="rec-tag">ACADEMIC DISTINCTION</span>
+              <h3 class="rec-title">Mahatma Gandhi Academic Excellence Award</h3>
+              <span class="rec-subtitle">Merit Recognition</span>
+            </div>
+            <div class="rec-desc-col">
+              <p class="rec-description">
+                Conferred in recognition of sustained academic excellence and high scholastic standing in Computer
+                Science & Engineering at Kumaraguru College of Technology.
+              </p>
+              <div class="rec-meta">Kumaraguru College of Technology</div>
+            </div>
+          </article>
+
+          <!-- 02: ICSL–DSGA 2026 Research Paper Accepted -->
+          <article class="recognition-item">
+            <div class="rec-num-col">
+              <span class="rec-number">02</span>
+            </div>
+            <div class="rec-title-col">
+              <span class="rec-tag">PEER-REVIEWED RESEARCH</span>
+              <h3 class="rec-title">ICSL–DSGA 2026</h3>
+              <span class="rec-subtitle">Research Paper — Accepted</span>
+            </div>
+            <div class="rec-desc-col">
+              <p class="rec-description">
+                Peer-reviewed empirical research paper accepted for presentation and conference proceedings at the
+                International Conference on Smart Learning and Data Science in Global Applications (ICSL–DSGA 2026).
+              </p>
+
+              <div class="rec-paper-citation">
+                <div class="rec-paper-title">
+                  "Feature Stability Does Not Imply Completeness: An Empirical Study on Educational Datasets with
+                  Varying Financial Representation"
+                </div>
+              </div>
+
+              <div class="rec-meta">ICSL–DSGA 2026 · Paper ID #230</div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 07 — CONTACT + FINAL CTA -->
+    <section class="contact-section reveal-on-scroll" id="contact" aria-label="Contact and Connect">
+      <div class="container">
+
+        <div class="contact-card">
+          <div class="contact-grid">
+
+            <!-- Left Editorial Intro -->
+            <div class="contact-intro">
+              <div class="contact-eyebrow">
+                <span class="contact-eyebrow-dot"></span>
+                <span>LET'S CONNECT</span>
+              </div>
+              <h2 class="contact-heading">
+                Have an idea?<br>
+                <span class="contact-heading-sub">Let's build something.</span>
+              </h2>
+              <p class="contact-copy">
+                Whether it's an opportunity, a collaboration, or simply a good conversation about technology, I'd love
+                to hear from you.
+              </p>
+            </div>
+
+            <!-- Right Action Channels -->
+            <div class="contact-actions">
+
+              <!-- Direct Email Channel -->
+              <div class="contact-channel-block">
+                <span class="channel-label">DIRECT EMAIL</span>
+                <div id="contact-email-container">
+                  <a href="mailto:lakshanaganesh08@gmail.com" class="contact-email-link btn-magnetic"
+                    id="contact-email-link"
+                    aria-label="Send email to Lakshana Ganeshkumar (lakshanaganesh08@gmail.com)">
+                    <span class="email-text">Lakshana Ganeshkumar</span>
+                    <span class="contact-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Secondary Documents & Profile Links -->
+              <div class="contact-secondary-group">
+                <span class="channel-label">PROFILES &amp; RESUME</span>
+                <div class="contact-links-list" id="contact-links-container">
+                  <a href="assets/Lakshana_GS_Resume.pdf" target="_blank" rel="noopener noreferrer"
+                    class="contact-pill-link" aria-label="View Resume PDF">
+                    <span>View Resume</span>
+                    <span class="link-arrow">↗</span>
+                  </a>
+                  <a href="https://www.linkedin.com/in/lakshana-g-s-533987328" target="_blank" rel="noopener noreferrer"
+                    class="contact-pill-link" aria-label="LinkedIn Profile">
+                    <span>LinkedIn</span>
+                    <span class="link-arrow">↗</span>
+                  </a>
+                  <a href="https://github.com/lakshanaganesh08-source" target="_blank" rel="noopener noreferrer"
+                    class="contact-pill-link" aria-label="GitHub Profile">
+                    <span>GitHub</span>
+                    <span class="link-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Minimal Editorial Footer -->
+  <footer class="site-footer" id="site-footer" role="contentinfo">
+    <div class="container footer-container">
+
+      <!-- Brand & Title Metadata -->
+      <div class="footer-brand">
+        <span class="footer-name">LAKSHANA G S</span>
+        <span class="footer-role">AI & SOFTWARE DEVELOPER</span>
+      </div>
+
+      <!-- Center Curiosity Line -->
+      <div class="footer-center">
+        <span>Built with curiosity.</span>
+      </div>
+
+      <!-- Copyright & Back to Top -->
+      <div class="footer-actions">
+        <span class="footer-copyright">© 2026 Lakshana G S</span>
+        <button type="button" class="back-to-top-btn" id="back-to-top" aria-label="Scroll back to top of page">
+          <span>BACK TO TOP</span>
+          <span class="back-to-top-arrow" aria-hidden="true">↑</span>
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Data Layer & Main Script -->
+  <script src="js/projects-data.js"></script>
+  <script src="js/skills-data.js"></script>
+  <script src="js/experience-data.js"></script>
+  <script src="js/recognition-data.js"></script>
+  <script src="js/contact-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

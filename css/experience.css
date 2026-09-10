@@ -1,0 +1,249 @@
+/**
+ * EXPERIENCE & LEARNING — MODERN EDITORIAL STUDIO
+ * Lakshana G S Portfolio
+ */
+
+.experience-section {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-24);
+  border-top: 1px solid var(--color-border);
+  position: relative;
+}
+
+/* ==================================================
+   1. FEATURED INDUSTRY EXPERIENCE (High Visual Weight)
+   ================================================== */
+.featured-experience-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 4.5vw, 3.5rem);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: clamp(3.5rem, 6vw, 5rem);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.featured-experience-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.exp-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.exp-year-org {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.exp-program-tag {
+  color: var(--color-accent-lavender);
+  font-weight: 500;
+}
+
+.exp-project-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.exp-description {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: var(--line-height-relaxed);
+  color: #383834;
+  max-width: 46rem;
+  margin-bottom: var(--space-6);
+}
+
+.exp-footer-tags {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  flex-wrap: wrap;
+}
+
+.exp-footer-tags span {
+  color: var(--color-text-secondary);
+}
+
+/* ==================================================
+   2. LEARNING & VIRTUAL INTERNSHIPS (Quiet Ledger)
+   ================================================== */
+.learning-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.learning-subhead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-bottom: var(--space-6);
+}
+
+.learning-subhead-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent-lavender);
+}
+
+/* Editorial Table / Ledger */
+.learning-ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.ledger-header {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr 0.9fr 0.7fr;
+  gap: var(--space-4);
+  padding: 0 var(--space-6) var(--space-2) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.ledger-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr 0.9fr 0.7fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ledger-row.is-clickable {
+  cursor: pointer;
+}
+
+.ledger-row.is-clickable:hover {
+  transform: translateX(3px);
+  border-color: var(--color-border-hover);
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-md);
+}
+
+.ledger-org {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.ledger-program {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.ledger-period {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+.ledger-action {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-accent-lavender);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  justify-content: flex-end;
+}
+
+.ledger-action .action-arrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.ledger-row:hover .action-arrow {
+  transform: translate(2px, -2px);
+}
+
+.ledger-action.is-pending {
+  color: var(--color-text-tertiary);
+}
+
+/* ==================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================== */
+@media (max-width: 860px) {
+  .ledger-header {
+    display: none;
+  }
+
+  .ledger-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-5);
+  }
+
+  .ledger-period {
+    color: var(--color-text-tertiary);
+  }
+
+  .ledger-action {
+    justify-content: flex-start;
+    margin-top: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px dashed var(--color-border-subtle);
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-experience-card {
+    padding: var(--space-6);
+  }
+
+  .exp-project-title {
+    font-size: 1.5rem;
+  }
+
+  .exp-description {
+    font-size: 0.9375rem;
+  }
+}
