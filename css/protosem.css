@@ -1080,6 +1080,8 @@
   border: 1px solid var(--color-border);
   background-color: var(--color-surface-subtle);
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 
 .editorial-photo-card img {
@@ -1100,6 +1102,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  margin-top: auto;
 }
 
 .editorial-photo-caption::before {
@@ -1113,11 +1116,46 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-4);
   margin: var(--space-6) 0;
+  align-items: stretch;
+}
+
+.photo-split-grid .editorial-photo-card {
+  margin: 0;
+  height: 100%;
+}
+
+.photo-split-grid .editorial-photo-card img {
+  width: 100%;
+  height: 320px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  flex: 1 1 auto;
+}
+
+.photo-split-grid .editorial-photo-caption {
+  min-height: 46px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .photo-split-grid .editorial-photo-card img {
+    height: 280px;
+  }
 }
 
 @media (max-width: 768px) {
   .photo-split-grid {
     grid-template-columns: 1fr;
+  }
+
+  .photo-split-grid .editorial-photo-card img {
+    height: 250px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .photo-split-grid .editorial-photo-caption {
+    min-height: auto;
   }
 }
 
@@ -1321,21 +1359,67 @@
   }
 }
 
-/* 5 Concise Takeaways Grid */
+/* 5 Concise Takeaways Grid (3 on Top, 2 Centered Below) */
 .takeaways-5-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-4);
   margin: var(--space-8) 0;
 }
 
 .takeaway-card {
+  grid-column: span 2;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   position: relative;
   transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row 2: Center cards 4 and 5 beneath the top 3 cards */
+.takeaways-5-grid .takeaway-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.takeaways-5-grid .takeaway-card:nth-child(5) {
+  grid-column: 4 / span 2;
+}
+
+@media (max-width: 900px) {
+  .takeaways-5-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .takeaways-5-grid .takeaway-card {
+    grid-column: span 1;
+  }
+
+  .takeaways-5-grid .takeaway-card:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .takeaways-5-grid .takeaway-card:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .takeaways-5-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .takeaways-5-grid .takeaway-card,
+  .takeaways-5-grid .takeaway-card:nth-child(4),
+  .takeaways-5-grid .takeaway-card:nth-child(5) {
+    grid-column: span 1;
+    max-width: 100%;
+  }
 }
 
 .takeaway-card:hover {
