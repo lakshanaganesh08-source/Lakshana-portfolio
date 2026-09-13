@@ -15,6 +15,9 @@ const MIME_TYPES = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
+  '.mp4': 'video/mp4',
+  '.webm': 'video/webm',
+  '.mov': 'video/quicktime',
   '.pdf': 'application/pdf',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
@@ -47,6 +50,23 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
+    const range = req.headers.range;
+    if (range && stats.isFile()) {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
+      const chunksize = (end - start) + 1;
+      const file = fs.createReadStream(filePath, { start, end });
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${stats.size}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunksize,
+        'Content-Type': contentType,
+      });
+      file.pipe(res);
+      return;
+    }
+
     fs.readFile(filePath, (readErr, content) => {
       if (readErr) {
         res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -56,6 +76,8 @@ const server = http.createServer((req, res) => {
 
       res.writeHead(200, {
         'Content-Type': contentType,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': stats.size,
         'Cache-Control': 'no-cache'
       });
       res.end(content);

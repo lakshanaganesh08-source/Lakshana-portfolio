@@ -544,23 +544,35 @@ function initProtoSem() {
             `;
           }
 
-          let dayImagesHtml = '';
-          if (d.images && d.images.length === 1) {
-            dayImagesHtml = `
-              <div class="editorial-photo-card">
-                <img src="${d.images[0].src}" alt="${d.images[0].alt}" loading="lazy" />
-                <div class="editorial-photo-caption">${d.images[0].caption}</div>
+          const renderMediaItem = (item, extraCardStyle = '') => {
+            const isVideo = item.isVideo || item.type === 'video' || (typeof item.src === 'string' && (item.src.endsWith('.mp4') || item.src.endsWith('.webm') || item.src.endsWith('.mov')));
+            if (isVideo) {
+              return `
+                <div class="editorial-photo-card editorial-video-card" style="${extraCardStyle}">
+                  <div class="editorial-video-wrapper">
+                    <video src="${item.src}" autoplay loop muted playsinline controls preload="metadata" class="editorial-video-player" aria-label="${item.alt || 'Video Demonstration'}">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <div class="editorial-photo-caption video-caption">${item.caption}</div>
+                </div>
+              `;
+            }
+            return `
+              <div class="editorial-photo-card" style="${extraCardStyle}">
+                <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+                <div class="editorial-photo-caption">${item.caption}</div>
               </div>
             `;
+          };
+
+          let dayImagesHtml = '';
+          if (d.images && d.images.length === 1) {
+            dayImagesHtml = renderMediaItem(d.images[0]);
           } else if (d.images && d.images.length > 1) {
             dayImagesHtml = `
               <div class="photo-split-grid">
-                ${d.images.map(img => `
-                  <div class="editorial-photo-card" style="margin: 0;">
-                    <img src="${img.src}" alt="${img.alt}" loading="lazy" />
-                    <div class="editorial-photo-caption">${img.caption}</div>
-                  </div>
-                `).join('')}
+                ${d.images.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
               </div>
             `;
           }

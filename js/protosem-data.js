@@ -3,7 +3,7 @@
  * Lakshana G S Portfolio — Dedicated ProtoSem Experiential Fellowship Log
  * 
  * Data-driven repository for ProtoSem at Forge.
- * Week 00 is completed; Weeks 01–20 are structurally ready for future updates.
+ * Weeks 00–03 are completed; Weeks 04–20 are structurally ready for future updates.
  */
 
 const protoSemProgramData = {
@@ -611,11 +611,222 @@ const protoSemWeeks = [
     outcome: "Organized Forge workspace under 5S principles, solved algorithm flowcharts, built interactive Scratch projects, and deployed Money Tracker Pro on MIT App Inventor.",
     reflection: "Moving from problem discovery to building real mobile applications reinforces that strong logic design accelerates prototype execution.",
     links: []
+  },
+  {
+    week: 3,
+    numberFormatted: "03",
+    status: "completed",
+    title: "Linux OS, Dockerization, Cloud Deployment, Obsidian Automation & Hardware Electronics",
+    subtitle: "Linux Exploration, Docker Containers, Obsidian Automation, Computational Hardware & Circuit Soldering",
+    date: "Week 03 · 2026",
+    summary: "Installed and configured Kali Linux, developed a terminal game containerized with Docker and deployed to Vercel, automated portfolio workflows using Obsidian, explored computational hardware and electrical fundamentals, and engineered breadboard circuits with practical soldering.",
+    
+    // Day-by-Day Journey Stages (5 Concise Days)
+    days: [
+      {
+        id: "day-1",
+        dayNumber: "Day 1",
+        title: "Linux OS Installation & System Exploration",
+        focus: "Linux OS & Kali Linux Setup",
+        activities: [
+          {
+            name: "Linux OS Installation & Setup",
+            description: "Downloaded Kali Linux, configured the system environment, and explored Linux OS architecture."
+          },
+          {
+            name: "Terminal & CLI Ecosystem Exploration",
+            description: "Navigated Linux filesystem hierarchy, shell scripting commands, permissions, and package management."
+          }
+        ],
+        reflection: "Installing and exploring Kali Linux from scratch gave us deep control over operating system architecture and terminal environments.",
+        keyTakeaway: "Open-Source OS + Terminal Mastery = Computing Foundation",
+        images: [
+          {
+            src: "assets/images/protosem/week-03/day1.jpeg",
+            alt: "Kali Linux OS installation and terminal exploration",
+            caption: "Day 1: Kali Linux Installation, Environment Setup & CLI Exploration"
+          }
+        ]
+      },
+      {
+        id: "day-2",
+        dayNumber: "Day 2",
+        title: "Dockerization, Terminal Game & Vercel Cloud Deployment",
+        focus: "Docker Containers, CLI Game & Vercel",
+        activities: [
+          {
+            name: "Game Development & Terminal Execution",
+            description: "Developed an interactive game and ran it directly within the Linux terminal environment."
+          },
+          {
+            name: "Docker Containerization",
+            description: "Containerized the application using Docker to isolate dependencies and guarantee portable execution."
+          },
+          {
+            name: "Cloud Deployment on Vercel",
+            description: "Deployed the game application to the cloud via Vercel for instant live web access and scalable distribution."
+          }
+        ],
+        reflection: "Taking a game from a local Linux terminal to a containerized Docker image and deploying live on Vercel connected the full DevOps lifecycle.",
+        keyTakeaway: "CLI Game + Docker Containerization + Vercel = Full-Stack Cloud Workflow",
+        images: [
+          {
+            src: "assets/images/protosem/week-03/day2.mp4",
+            type: "video",
+            isVideo: true,
+            alt: "Video demonstration of developed game running in terminal, containerized in Docker, and deployed on Vercel",
+            caption: "Day 2: Live Video Snippet — Terminal Game Execution, Dockerization & Vercel Cloud Deployment"
+          }
+        ]
+      },
+      {
+        id: "day-3",
+        dayNumber: "Day 3",
+        title: "Obsidian Portfolio Automation & Knowledge Systems",
+        focus: "Markdown Architecture & Workflow Automation",
+        activities: [
+          {
+            name: "Obsidian Markdown Architecture",
+            description: "Structured an interconnected second-brain and documentation repository using Obsidian markdown workflows."
+          },
+          {
+            name: "Portfolio Automation Pipelines",
+            description: "Configured automated synchronization and structured note-taking pipelines for portfolio logs and documentation."
+          }
+        ],
+        reflection: "Building structured automation in Obsidian transformed raw daily updates into an organized, connected knowledge base.",
+        keyTakeaway: "Structured Markdown + Obsidian Automation = Scalable Knowledge Base",
+        images: [
+          {
+            src: "assets/images/protosem/week-03/day3.png",
+            alt: "Obsidian automation and portfolio workflow architecture",
+            caption: "Day 3: Obsidian Automation Pipelines & Structured Portfolio Knowledge Management"
+          }
+        ]
+      },
+      {
+        id: "day-4",
+        dayNumber: "Day 4",
+        title: "Computational Hardware & Electrical Fundamentals",
+        focus: "Hardware Systems & Electrical Theory",
+        activities: [
+          {
+            name: "Computational Hardware & Electricals Session",
+            description: "Attended an in-depth session exploring computing hardware architecture, electrical components, and circuit principles."
+          },
+          {
+            name: "Hardware Subsystems & Electrical Activity",
+            description: "Participated in an interactive cohort activity analyzing hardware subsystems, voltage/current dynamics, and component behaviors."
+          }
+        ],
+        reflection: "Understanding the underlying electronics and physical hardware architecture deepened our appreciation for computing beyond software abstraction.",
+        keyTakeaway: "Electrical Fundamentals + Hardware Theory = Silicon-Level Understanding",
+        images: [
+          {
+            src: "assets/images/protosem/week-03/day 4.png",
+            alt: "Computational hardware and electrical theory session",
+            caption: "Day 4: Computational Hardware & Electrical Fundamentals Theory Session"
+          },
+          {
+            src: "assets/images/protosem/week-03/day4(1).jpeg",
+            alt: "Hardware analysis and electrical cohort activity",
+            caption: "Day 4: Hardware Subsystems & Electrical Component Analysis Hands-On Activity"
+          }
+        ]
+      },
+      {
+        id: "day-5",
+        dayNumber: "Day 5",
+        title: "Breadboard Circuit Prototyping & Practical Soldering",
+        focus: "Breadboard Circuits & Soldering Practice",
+        activities: [
+          {
+            name: "Breadboard Circuit Prototyping",
+            description: "Built and tested physical circuits on breadboards, verifying component connections, resistances, and signal paths."
+          },
+          {
+            name: "Hands-on Practical Soldering",
+            description: "Learned practical soldering techniques, mastering iron handling, solder flow, safety, and component joining on circuit boards."
+          }
+        ],
+        reflection: "Wiring breadboard circuits and soldering physical joints transformed abstract circuit schematics into working hardware prototypes.",
+        keyTakeaway: "Breadboard Validation + Soldering Mastery = Tangible Hardware Engineering",
+        images: [
+          {
+            src: "assets/images/protosem/week-03/day 5 handson.jpeg",
+            alt: "Hands-on breadboard circuit prototyping session",
+            caption: "Day 5: Hands-on Circuit Prototyping & Electrical Testing on Breadboard"
+          },
+          {
+            src: "assets/images/protosem/week-03/day 5.jpeg",
+            alt: "Practical soldering session and component joining",
+            caption: "Day 5: Practical Soldering Session — Component Assembly & Board Joining"
+          }
+        ]
+      }
+    ],
+
+    // Final Takeaways Section
+    finalTakeaways: {
+      heading: "What Did We Take Away From Week 3?",
+      progression: [
+        { step: "Day 1", label: "Linux & CLI" },
+        { step: "Day 2", label: "Docker & Cloud" },
+        { step: "Day 3", label: "Obsidian Auto" },
+        { step: "Day 4", label: "Hardware Theory" },
+        { step: "Day 5", label: "Circuit Soldering" }
+      ],
+      cards: [
+        {
+          number: "01",
+          title: "OS & Terminal Mastery",
+          description: "Installed Kali Linux and built command-line fluency across system operations."
+        },
+        {
+          number: "02",
+          title: "Docker & Cloud DevOps",
+          description: "Developed a terminal game, packaged it in Docker containers, and deployed it live to Vercel."
+        },
+        {
+          number: "03",
+          title: "Knowledge Automation",
+          description: "Automated portfolio updates and structured note management using Obsidian."
+        },
+        {
+          number: "04",
+          title: "Hardware & Electricals",
+          description: "Gained foundational insights into computational hardware, voltages, and circuit logic."
+        },
+        {
+          number: "05",
+          title: "Physical Electronics",
+          description: "Prototyped circuits on breadboards and mastered practical soldering techniques for permanent builds."
+        }
+      ],
+      statement: "Week 3 spanned the entire engineering continuum — from low-level Linux operating systems and cloud containerization to Obsidian automation and physical circuit soldering."
+    },
+
+    technologies: [
+      "Linux OS (Kali Linux)",
+      "Terminal / CLI",
+      "Docker Containerization",
+      "Cloud Deployment (Vercel)",
+      "Game Development",
+      "Obsidian Automation",
+      "Computational Hardware",
+      "Electrical Fundamentals",
+      "Breadboard Prototyping",
+      "Practical Soldering"
+    ],
+    learning: "Gained comprehensive full-stack engineering exposure spanning Linux systems, Docker containerization, and cloud deployment, combined with hands-on physical electronics, breadboard testing, and soldering.",
+    outcome: "Installed Kali Linux, containerized and deployed a terminal game to Vercel, automated portfolio logs with Obsidian, built functional breadboard circuits, and executed practical soldering.",
+    reflection: "Connecting cloud containerization with tangible hardware soldering demonstrated that great innovators understand both the cloud and the silicon.",
+    links: []
   }
 ];
 
-// Generate Weeks 03 through 20 as data-driven structural upcoming entries (no fabricated content)
-for (let i = 3; i <= 20; i++) {
+// Generate Weeks 04 through 20 as data-driven structural upcoming entries (no fabricated content)
+for (let i = 4; i <= 20; i++) {
   const numStr = String(i).padStart(2, "0");
   protoSemWeeks.push({
     week: i,
