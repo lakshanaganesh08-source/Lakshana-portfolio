@@ -1084,13 +1084,23 @@
   flex-direction: column;
 }
 
-.editorial-photo-card img,
+.editorial-photo-card img {
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background-color: #121214;
+}
+
 .editorial-photo-card video,
 .editorial-video-player {
   width: 100%;
-  max-height: 480px;
-  object-fit: cover;
+  max-height: 520px;
+  object-fit: contain;
   display: block;
+  background-color: #121214;
 }
 
 .editorial-video-wrapper {
@@ -1132,10 +1142,10 @@
   font-size: 0.8125rem;
 }
 
-/* 2-Image Editorial Split Grid */
+/* Multi-Image Editorial Split Grid */
 .photo-split-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-4);
   margin: var(--space-6) 0;
   align-items: stretch;
@@ -1144,14 +1154,17 @@
 .photo-split-grid .editorial-photo-card {
   margin: 0;
   height: 100%;
+  background-color: #121214;
+  display: flex;
+  flex-direction: column;
 }
 
 .photo-split-grid .editorial-photo-card img {
   width: 100%;
-  height: 320px;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: 360px;
+  object-fit: contain;
   object-position: center;
+  background-color: #0E0E10;
   flex: 1 1 auto;
 }
 
@@ -1162,7 +1175,7 @@
 
 @media (max-width: 900px) {
   .photo-split-grid .editorial-photo-card img {
-    height: 280px;
+    height: 320px;
   }
 }
 
@@ -1172,6 +1185,16 @@
   }
 
   .photo-split-grid .editorial-photo-card img {
+    height: 300px;
+  }
+
+  .photo-split-grid .editorial-photo-caption {
+    min-height: auto;
+  }
+}
+
+  .photo-split-grid .editorial-photo-card img,
+  .photo-split-grid .editorial-photo-card:nth-child(3):last-child img {
     height: 250px;
     aspect-ratio: 16 / 10;
   }
@@ -1550,6 +1573,1438 @@
 }
 
 /* ==================================================
+   9. DIGITAL FABRICATION DUAL-TAB LAYOUT (WEEK 06)
+   ================================================== */
+.fabrication-tabs-container {
+  margin: var(--space-8) 0 var(--space-10);
+  display: flex;
+  justify-content: center;
+}
+
+.fabrication-tabs-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  padding: 6px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  max-width: 100%;
+}
+
+.fabrication-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 10px 24px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.fabrication-tab-btn:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.fabrication-tab-btn.is-active {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border-color: var(--color-accent-lavender);
+  box-shadow: 0 2px 10px rgba(124, 110, 230, 0.16);
+}
+
+.fabrication-tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  animation: fadeInFabTab 260ms ease forwards;
+}
+
+@keyframes fadeInFabTab {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fabrication-step-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+}
+
+.fabrication-step-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.fabrication-step-card.is-final-output {
+  border-color: var(--color-accent-lavender);
+  background-color: #FAF9FE;
+  box-shadow: 0 4px 18px rgba(124, 110, 230, 0.1);
+}
+
+.step-card-header {
+  margin-bottom: var(--space-4);
+}
+
+.step-number-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  background-color: var(--color-accent-lavender-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+
+.step-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.8vw, 2rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--line-height-tight);
+}
+
+.step-media-container {
+  margin: var(--space-4) 0;
+  width: 100%;
+}
+
+.step-media-container .editorial-photo-card {
+  margin: 0;
+  width: 100%;
+  background-color: #121214;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.step-media-container .editorial-photo-card img {
+  width: 100%;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background-color: #0E0E10;
+}
+
+.step-media-container .editorial-video-wrapper {
+  background-color: #0E0E10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-media-container .editorial-video-player {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
+  background-color: #0E0E10;
+}
+
+.step-card-body {
+  margin-top: var(--space-4);
+}
+
+.step-card-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: var(--line-height-relaxed);
+  color: #383834;
+}
+
+/* Fab Academy-Style Laser Cutting Track Styles */
+.fab-tab-intro-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.fab-tab-intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(1.75rem, 4vw, 3rem);
+  width: 50px;
+  height: 2px;
+  background-color: var(--color-accent-lavender);
+}
+
+.fab-intro-header {
+  margin-bottom: var(--space-3);
+}
+
+.fab-intro-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  background-color: var(--color-accent-lavender-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+
+.fab-intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+}
+
+.fab-intro-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: var(--line-height-relaxed);
+  color: #383834;
+  max-width: 54rem;
+  margin: 0;
+}
+
+.fab-sec-text {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: var(--line-height-relaxed);
+  color: #383834;
+  margin: 0 0 var(--space-4) 0;
+}
+
+/* Applications Pills (Section 01) */
+.fab-apps-container {
+  margin-top: var(--space-4);
+}
+
+.fab-apps-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.fab-apps-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.fab-app-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.fab-app-pill:hover {
+  border-color: var(--color-accent-lavender);
+  background-color: #FAF9FE;
+}
+
+.fab-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent-lavender);
+}
+
+/* Technical Placeholder (Section 01) */
+.fab-technical-placeholder {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background-color: #FAF9F6;
+  border: 1.5px dashed var(--color-border-hover);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  margin-top: var(--space-5);
+}
+
+.tech-placeholder-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-accent-lavender-subtle);
+  color: var(--color-accent-lavender);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tech-placeholder-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tech-placeholder-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.tech-placeholder-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.tech-placeholder-sub {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Numbered Steps List (Section 02) */
+.fab-numbered-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.fab-step-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition-fast);
+}
+
+.fab-step-list-item:hover {
+  border-color: var(--color-border-hover);
+}
+
+.fab-step-list-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.fab-step-list-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Flow Visual Chain (Section 02 & 08) */
+.fab-flow-wrapper,
+.fab-sequence-wrapper {
+  margin-top: var(--space-5);
+}
+
+.fab-flow-label,
+.fab-sequence-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.fab-flow-chain,
+.fab-sequence-chain {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fab-flow-node,
+.fab-sequence-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 5px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fab-flow-node.is-final,
+.fab-sequence-node.is-final {
+  border-color: var(--color-accent-lavender);
+  background-color: #FAF9FE;
+}
+
+.fab-flow-step,
+.fab-sequence-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+}
+
+.fab-flow-name,
+.fab-sequence-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+}
+
+.fab-flow-arrow,
+.fab-sequence-arrow {
+  color: var(--color-text-tertiary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Operations Grid (Section 03) */
+.fab-ops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.fab-op-card {
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--transition-fast);
+}
+
+.fab-op-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.fab-op-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fab-op-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.fab-op-desc {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: #383834;
+  margin: 0;
+}
+
+.fab-op-note {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.fab-op-note-label {
+  color: var(--color-accent-lavender);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Types of Technologies / Lasers Grid (Section 04) - 2x2 Grid (2 on top, 2 down) */
+.fab-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+#tabpanel-laser-cutting .fab-types-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 860px) {
+  #tabpanel-laser-cutting .fab-types-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .fab-types-grid,
+  #tabpanel-laser-cutting .fab-types-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fab-type-card {
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--transition-fast);
+}
+
+.fab-type-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.fab-type-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fab-type-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.fab-type-desc {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: #383834;
+  margin: 0;
+}
+
+/* Materials & Safety Alert (Section 05) */
+.fab-materials-wrapper {
+  margin-bottom: var(--space-4);
+}
+
+.fab-materials-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.fab-materials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.fab-material-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.material-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-status-active);
+}
+
+.fab-safety-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background-color: #FFF9F5;
+  border: 1px solid var(--color-accent-peach-border);
+  border-left: 4px solid var(--color-accent-peach);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  margin-top: var(--space-3);
+}
+
+.fab-safety-icon {
+  color: var(--color-accent-peach);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.fab-safety-title {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-peach);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fab-safety-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: #4A3E38;
+  margin: 0;
+}
+
+/* Advantages & Limitations Grid (Sections 06 & 07) */
+.fab-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.fab-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition-fast);
+}
+
+.fab-item-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.fab-item-bullet {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.is-advantages .fab-item-bullet {
+  color: var(--color-accent-lavender);
+}
+
+.is-limitations .fab-item-bullet {
+  color: var(--color-accent-peach);
+}
+
+.fab-item-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Practical Activity Banner */
+.fab-practical-banner {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 4vw, 3rem);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--space-6);
+  text-align: left;
+}
+
+.fab-practical-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(2rem, 4vw, 3rem);
+  width: 60px;
+  height: 2px;
+  background-image: linear-gradient(to right, var(--color-accent-lavender), var(--color-accent-peach));
+}
+
+.fab-practical-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.fab-practical-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.fab-practical-intro {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: var(--line-height-relaxed);
+  color: #383834;
+  max-width: 52rem;
+  margin: 0;
+}
+
+/* Learning Reflection Card */
+.fab-learning-card {
+  background-color: #FAF9FE;
+  border: 1px solid var(--color-accent-lavender);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 4vw, 3rem);
+  box-shadow: 0 4px 20px rgba(134, 106, 200, 0.08);
+  margin-top: var(--space-6);
+}
+
+.fab-learning-header {
+  margin-bottom: var(--space-3);
+}
+
+.fab-learning-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  background-color: var(--color-accent-lavender-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+
+.fab-learning-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+.fab-learning-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: var(--line-height-relaxed);
+  color: #333330;
+  margin: 0;
+}
+
+/* Step Action & Google Drive Button */
+.step-action-container {
+  margin-top: var(--space-5);
+  display: flex;
+  align-items: center;
+}
+
+.fab-drive-link-btn {
+  border-color: var(--color-accent-lavender);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.fab-drive-link-btn:hover {
+  background-color: #FAF9FE;
+  border-color: var(--color-accent-lavender);
+  box-shadow: 0 4px 14px rgba(124, 110, 230, 0.15);
+  transform: translateY(-2px);
+}
+
+.fab-drive-link-btn svg {
+  color: var(--color-accent-lavender);
+}
+
+/* Subheading inside Step Cards */
+.step-card-subheading {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Stages of 3D Printing Grid (Section 03) - 3 on top, 2 on bottom */
+.fab-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.fab-stages-grid .fab-stage-card:nth-child(1),
+.fab-stages-grid .fab-stage-card:nth-child(2),
+.fab-stages-grid .fab-stage-card:nth-child(3) {
+  grid-column: span 2;
+}
+
+.fab-stages-grid .fab-stage-card:nth-child(4),
+.fab-stages-grid .fab-stage-card:nth-child(5) {
+  grid-column: span 3;
+}
+
+@media (max-width: 860px) {
+  .fab-stages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fab-stages-grid .fab-stage-card:nth-child(n) {
+    grid-column: span 1;
+  }
+  .fab-stages-grid .fab-stage-card:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 540px) {
+  .fab-stages-grid {
+    grid-template-columns: 1fr;
+  }
+  .fab-stages-grid .fab-stage-card:nth-child(n) {
+    grid-column: span 1;
+  }
+}
+
+.fab-stage-card {
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.fab-stage-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.fab-stage-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.fab-stage-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+}
+
+.fab-stage-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.fab-stage-desc {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: #383834;
+  margin: 0;
+}
+
+/* Materials Cards Grid (Section 06) - 3 on top, 2 on bottom */
+.fab-mat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.fab-mat-cards-grid .fab-mat-card:nth-child(1),
+.fab-mat-cards-grid .fab-mat-card:nth-child(2),
+.fab-mat-cards-grid .fab-mat-card:nth-child(3) {
+  grid-column: span 2;
+}
+
+.fab-mat-cards-grid .fab-mat-card:nth-child(4),
+.fab-mat-cards-grid .fab-mat-card:nth-child(5) {
+  grid-column: span 3;
+}
+
+@media (max-width: 860px) {
+  .fab-mat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fab-mat-cards-grid .fab-mat-card:nth-child(n) {
+    grid-column: span 1;
+  }
+  .fab-mat-cards-grid .fab-mat-card:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 540px) {
+  .fab-mat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .fab-mat-cards-grid .fab-mat-card:nth-child(n) {
+    grid-column: span 1;
+  }
+}
+
+.fab-mat-card {
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.fab-mat-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+.fab-mat-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fab-mat-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fab-mat-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.fab-mat-desc {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  color: #383834;
+  margin: 0;
+}
+
+/* Specification Info Grid (Section 10) */
+.fab-spec-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-5) 0 var(--space-4);
+}
+
+.fab-spec-info-item {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fab-spec-info-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.fab-spec-info-value {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Characteristics Checklist (Section 10) */
+.fab-char-wrapper {
+  margin-top: var(--space-4);
+}
+
+.fab-char-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-tertiary);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.fab-char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-2);
+}
+
+.fab-char-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+}
+
+.fab-char-dot {
+  color: var(--color-accent-lavender);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.fab-char-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* ==================================================
+   PRINTER & FILAMENT SECTIONS (09 & 10) ALIGNMENT
+   ================================================== */
+#fab-sec-3d-printing-09 .step-media-container,
+#fab-sec-3d-printing-10 .step-media-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--space-4) 0;
+  width: 100%;
+}
+
+#fab-sec-laser-cutting-01 .step-media-container .editorial-photo-card,
+#fab-sec-3d-printing-01 .step-media-container .editorial-photo-card,
+#fab-sec-3d-printing-09 .step-media-container .editorial-photo-card {
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+#fab-sec-laser-cutting-01 .step-media-container .editorial-photo-card img,
+#fab-sec-3d-printing-01 .step-media-container .editorial-photo-card img,
+#fab-sec-3d-printing-09 .step-media-container .editorial-photo-card img {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  background-color: #FFFFFF;
+  display: block;
+  margin: 0 auto;
+}
+
+#fab-sec-3d-printing-10 .step-media-container .editorial-photo-card {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+#fab-sec-3d-printing-10 .step-media-container .editorial-photo-card img {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: contain;
+  background-color: #FFFFFF;
+  display: block;
+  margin: 0 auto;
+}
+
+#fab-sec-laser-cutting-01 .editorial-photo-caption,
+#fab-sec-3d-printing-01 .editorial-photo-caption,
+#fab-sec-3d-printing-09 .editorial-photo-caption,
+#fab-sec-3d-printing-10 .editorial-photo-caption {
+  background-color: #F8F9FA;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-normal);
+}
+
+#fab-sec-3d-printing-10 .fab-spec-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin: var(--space-5) 0 var(--space-4);
+}
+
+@media (max-width: 900px) {
+  #fab-sec-3d-printing-10 .fab-spec-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  #fab-sec-3d-printing-10 .fab-spec-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#fab-sec-3d-printing-10 .fab-char-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  #fab-sec-3d-printing-10 .fab-char-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Learning Reflection Takeaways List */
+.fab-learning-takeaways {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(124, 110, 230, 0.2);
+}
+
+.fab-learning-takeaways-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-lavender);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.fab-learning-takeaways-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fab-learning-takeaway-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: var(--color-surface);
+  border: 1px solid rgba(124, 110, 230, 0.15);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+}
+
+.fab-takeaway-check {
+  color: var(--color-accent-lavender);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.fab-takeaway-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ==================================================
+   INTERACTIVE 3D MODEL VIEWER COMPONENT
+   ================================================== */
+.fab-3d-model-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: var(--shadow-sm);
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fab-3d-model-card:hover {
+  border-color: var(--color-accent-lavender);
+  box-shadow: 0 4px 20px rgba(124, 110, 230, 0.1);
+}
+
+.model-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.model-viewer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.model-viewer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-accent-lavender);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.model-viewer-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.model-viewer-controls-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FAF9FE;
+  border: 1px solid rgba(124, 110, 230, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-accent-lavender);
+}
+
+.model-viewer-stage {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  min-height: 360px;
+  max-height: 540px;
+  background-color: #121214;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(124, 110, 230, 0.08) 0%, transparent 70%),
+    linear-gradient(to bottom, #161619, #0E0E10);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interactive-glb-viewer {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  --poster-color: transparent;
+  display: block;
+}
+
+.model-loading-poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: 100%;
+  background-color: #121214;
+  color: #A1A1AA;
+}
+
+.model-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(124, 110, 230, 0.2);
+  border-top-color: var(--color-accent-lavender);
+  border-radius: 50%;
+  animation: spin3dModel 0.8s linear infinite;
+}
+
+@keyframes spin3dModel {
+  to { transform: rotate(360deg); }
+}
+
+.model-loading-text {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.model-viewer-footer {
+  padding-top: var(--space-2);
+}
+
+.model-viewer-tip {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  display: block;
+}
+
+.model-viewer-tip strong {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .model-viewer-stage {
+    height: 360px;
+    min-height: 300px;
+  }
+  .model-viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .fabrication-tabs-nav {
+    width: 100%;
+    display: flex;
+  }
+  .fabrication-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 0.6875rem;
+  }
+}
+
+/* ==================================================
    8. REDUCED MOTION & ACCESSIBILITY
    ================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -1564,7 +3019,11 @@
   .week-destination-card,
   .day-activity-item,
   .takeaway-card,
-  .progression-node {
+  .progression-node,
+  .fabrication-tab-btn,
+  .fabrication-step-card,
+  .fabrication-tab-panel {
     transition: none !important;
+    animation: none !important;
   }
 }

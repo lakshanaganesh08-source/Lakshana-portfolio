@@ -24,6 +24,9 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf',
   '.eot': 'application/vnd.ms-fontobject',
   '.otf': 'font/otf',
+  '.glb': 'model/gltf-binary',
+  '.gltf': 'model/gltf+json',
+  '.bin': 'application/octet-stream',
   '.txt': 'text/plain; charset=utf-8'
 };
 

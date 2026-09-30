@@ -90,7 +90,7 @@ function initMobileMenu() {
     toggleBtn.setAttribute('aria-expanded', 'true');
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
-    
+
     if (navLinks.length > 0) {
       setTimeout(() => navLinks[0].focus(), 100);
     }
@@ -353,7 +353,7 @@ function initProtoSem() {
   const desktopMapContainer = document.getElementById('desktop-journey-map-container');
   const mobileMapContainer = document.getElementById('mobile-journey-map-container');
   const detailContainer = document.getElementById('protosem-detail-container');
-  
+
   if ((!desktopMapContainer && !mobileMapContainer) || !detailContainer || typeof protoSemWeeks === 'undefined') return;
 
   // 1. Populate Program Editorial Specifications from protoSemProgramData
@@ -380,7 +380,7 @@ function initProtoSem() {
     { week: 3, x: 650, y: 80, labelY: 118, tier: 1 },
     { week: 4, x: 830, y: 80, labelY: 118, tier: 1 },
     { week: 5, x: 1030, y: 80, labelY: 118, tier: 1 },
-    
+
     // Tier 2: Right to Left (y = 240)
     { week: 6, x: 830, y: 240, labelY: 278, tier: 2 },
     { week: 7, x: 650, y: 240, labelY: 278, tier: 2 },
@@ -408,7 +408,7 @@ function initProtoSem() {
   // 3. Render Desktop SVG Journey Canvas
   if (desktopMapContainer) {
     const svgPathString = "M 110 80 L 1030 80 C 1130 80, 1130 240, 1030 240 L 110 240 C 10 240, 10 400, 110 400 L 1030 400 C 1130 400, 1130 560, 1030 560 L 110 560";
-    
+
     let svgNodesHtml = '';
     nodeCoordinates.forEach(pos => {
       const weekData = protoSemWeeks.find(w => w.week === pos.week) || {
@@ -420,7 +420,7 @@ function initProtoSem() {
 
       const statusClass = weekData.status === 'completed' ? 'is-completed' : (weekData.status === 'current' ? 'is-current' : 'is-upcoming');
       const statusLabel = weekData.status === 'completed' ? 'COMPLETED' : (weekData.status === 'current' ? 'CURRENT' : 'UPCOMING');
-      
+
       svgNodesHtml += `
         <g class="map-station-node ${statusClass}" data-week="${pos.week}" tabindex="0" role="button" aria-label="Destination Week ${weekData.numberFormatted}: ${weekData.title} (${statusLabel})">
           <!-- Hit Area -->
@@ -471,7 +471,7 @@ function initProtoSem() {
     protoSemWeeks.forEach(w => {
       const statusClass = w.status === 'completed' ? 'is-completed' : (w.status === 'current' ? 'is-current' : 'is-upcoming');
       const statusLabel = w.status === 'completed' ? 'COMPLETED' : (w.status === 'current' ? 'CURRENT' : 'UPCOMING');
-      
+
       mobileHtml += `
         <button type="button" class="mobile-station-btn ${statusClass}" data-week="${w.week}" aria-label="Explore Week ${w.numberFormatted}: ${w.title}">
           <span class="mobile-station-dot"></span>
@@ -526,10 +526,795 @@ function initProtoSem() {
       const prevWeekNum = String(prevWeekIndex).padStart(2, '0');
       const nextWeekNum = String(nextWeekIndex).padStart(2, '0');
 
-      if (weekData.days && weekData.days.length > 0) {
-        // Full Chronological Day-by-Day Story Experience (Week 0, Week 1, etc.)
+      const isConsolidated = Boolean((weekData.sections && weekData.sections.length > 0) || weekData.isConsolidated);
+      const storyItems = weekData.sections || weekData.days || [];
+
+      const renderMediaItem = (item, extraCardStyle = '') => {
+        const isVideo = item.isVideo || item.type === 'video' || (typeof item.src === 'string' && (item.src.endsWith('.mp4') || item.src.endsWith('.webm') || item.src.endsWith('.mov')));
+        if (isVideo) {
+          return `
+            <div class="editorial-photo-card editorial-video-card" style="${extraCardStyle}">
+              <div class="editorial-video-wrapper">
+                <video src="${item.src}" autoplay loop muted playsinline controls preload="metadata" class="editorial-video-player" aria-label="${item.alt || 'Video Demonstration'}">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="editorial-photo-caption video-caption">${item.caption}</div>
+            </div>
+          `;
+        }
+        return `
+          <div class="editorial-photo-card" style="${extraCardStyle}">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+            <div class="editorial-photo-caption">${item.caption}</div>
+          </div>
+        `;
+      };
+
+      const render3DModelCard = (m3d, extraCardStyle = '') => {
+        return `
+          <div class="fab-3d-model-card" style="${extraCardStyle}">
+            <div class="model-viewer-header">
+              <div class="model-viewer-meta">
+                <span class="model-viewer-badge">
+                  <span class="status-pulse-dot"></span>
+                  <span>${m3d.tag || 'INTERACTIVE 3D CAD MODEL'}</span>
+                </span>
+                <h4 class="model-viewer-title">${m3d.title || 'Interactive 3D Model'}</h4>
+              </div>
+              <div class="model-viewer-controls-hint">
+                <span class="hint-icon">🔄</span>
+                <span class="hint-text">${m3d.instruction || 'Drag to rotate • Scroll to zoom'}</span>
+              </div>
+            </div>
+
+            <div class="model-viewer-stage">
+              <model-viewer 
+                src="${m3d.src}"
+                alt="${m3d.alt || 'Interactive 3D Model'}"
+                auto-rotate
+                auto-rotate-delay="1000"
+                rotation-per-second="25deg"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1.2"
+                shadow-softness="0.8"
+                exposure="1.05"
+                camera-orbit="0deg 75deg 105%"
+                min-camera-orbit="auto auto 40%"
+                max-camera-orbit="auto auto 250%"
+                interpolation-decay="200"
+                interaction-prompt="none"
+                loading="lazy"
+                class="interactive-glb-viewer"
+                aria-label="${m3d.alt || 'Interactive 3D Model — Drag to rotate, scroll to zoom'}">
+                
+                <!-- Loading State Slot -->
+                <div slot="poster" class="model-loading-poster">
+                  <div class="model-loading-spinner"></div>
+                  <span class="model-loading-text">Loading 3D CAD Mesh...</span>
+                </div>
+
+                <!-- Progress Bar Slot -->
+                <div slot="progress-bar" class="model-progress-bar">
+                  <div class="model-progress-fill"></div>
+                </div>
+              </model-viewer>
+            </div>
+
+            <div class="model-viewer-footer">
+              <span class="model-viewer-tip">💡 <strong>Interaction Guide:</strong> Left click &amp; drag (or 1 finger) to orbit · Right click &amp; drag (or 2 fingers) to pan · Scroll wheel (or pinch) to zoom.</span>
+            </div>
+          </div>
+        `;
+      };
+
+      if (weekData.tabs && weekData.tabs.length > 0) {
+        // Tabbed Story Experience (Week 06: Laser Cutting & 3D Printing)
+        let tabPanelsHtml = '';
+        weekData.tabs.forEach((tab, tabIdx) => {
+          let panelContentHtml = '';
+
+          // 1. Tab Overview / Intro Banner
+          if (tab.intro || (tab.title && tab.educationalSections)) {
+            panelContentHtml += `
+              <div class="fab-tab-intro-card">
+                <div class="fab-intro-header">
+                  <span class="fab-intro-badge">${tab.badge || 'DIGITAL FABRICATION TRACK 01'}</span>
+                  <h3 class="fab-intro-title">${tab.title || tab.label}</h3>
+                </div>
+                ${tab.intro ? `<p class="fab-intro-text">${tab.intro}</p>` : ''}
+              </div>
+            `;
+          }
+
+          // 2. Fab Academy-Style Educational Sections (01 — 10)
+          if (tab.educationalSections && tab.educationalSections.length > 0) {
+            tab.educationalSections.forEach(sec => {
+              let secBodyHtml = '';
+
+              // Text content
+              if (sec.content) {
+                secBodyHtml += `<p class="fab-sec-text">${sec.content}</p>`;
+              }
+
+              // Concept Flow (What is 3D Printing: Digital Model -> Slicing -> Layer-by-Layer -> Physical)
+              if (sec.conceptFlow && sec.conceptFlow.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-flow-wrapper">
+                    <span class="fab-flow-label">CORE ADDITIVE MANUFACTURING CONCEPT</span>
+                    <div class="fab-flow-chain">
+                      ${sec.conceptFlow.map((cf, cfIdx) => `
+                        <div class="fab-flow-node ${cfIdx === sec.conceptFlow.length - 1 ? 'is-final' : ''}">
+                          <span class="fab-flow-step">${String(cfIdx + 1).padStart(2, '0')}</span>
+                          <span class="fab-flow-name">${cf.label}</span>
+                        </div>
+                        ${cfIdx < sec.conceptFlow.length - 1 ? '<span class="fab-flow-arrow">→</span>' : ''}
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Applications pills (Section 01)
+              if (sec.applications && sec.applications.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-apps-container">
+                    <span class="fab-apps-label">COMMON FABRICATION APPLICATIONS</span>
+                    <div class="fab-apps-grid">
+                      ${sec.applications.map(app => `
+                        <div class="fab-app-pill">
+                          <span class="fab-pill-dot"></span>
+                          <span>${app}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Technical illustration placeholder (Section 01)
+              if (sec.illustrationPlaceholder) {
+                secBodyHtml += `
+                  <div class="fab-technical-placeholder">
+                    <div class="tech-placeholder-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                      </svg>
+                    </div>
+                    <div class="tech-placeholder-meta">
+                      <span class="tech-placeholder-tag">TECHNICAL ILLUSTRATION</span>
+                      <h4 class="tech-placeholder-title">${sec.illustrationPlaceholder.title}</h4>
+                      <p class="tech-placeholder-sub">${sec.illustrationPlaceholder.subtitle}</p>
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Numbered Steps List (Section 02)
+              if (sec.steps && sec.steps.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-numbered-steps-list">
+                    ${sec.steps.map((st, sIdx) => `
+                      <div class="fab-step-list-item">
+                        <span class="fab-step-list-num">${String(sIdx + 1).padStart(2, '0')}</span>
+                        <p class="fab-step-list-text">${st}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Process Flow Visual (Section 02)
+              if (sec.processFlow && sec.processFlow.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-flow-wrapper">
+                    <span class="fab-flow-label">WORKFLOW PROCESS FLOW</span>
+                    <div class="fab-flow-chain">
+                      ${sec.processFlow.map((pf, pfIdx) => `
+                        <div class="fab-flow-node ${pfIdx === sec.processFlow.length - 1 ? 'is-final' : ''}">
+                          <span class="fab-flow-step">${String(pfIdx + 1).padStart(2, '0')}</span>
+                          <span class="fab-flow-name">${pf.label}</span>
+                        </div>
+                        ${pfIdx < sec.processFlow.length - 1 ? '<span class="fab-flow-arrow">↓</span>' : ''}
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Stages of 3D Printing Grid (Section 03)
+              if (sec.stages && sec.stages.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-stages-grid">
+                    ${sec.stages.map(st => `
+                      <div class="fab-stage-card">
+                        <div class="fab-stage-header">
+                          <span class="fab-stage-num">${st.stageNumber}</span>
+                          <h4 class="fab-stage-title">${st.title}</h4>
+                        </div>
+                        <p class="fab-stage-desc">${st.description}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Operations Comparison (Section 03 Laser Track)
+              if (sec.operations && sec.operations.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-ops-grid">
+                    ${sec.operations.map(op => `
+                      <div class="fab-op-card">
+                        <div class="fab-op-header">
+                          <span class="fab-op-tag">${op.tag}</span>
+                          <h4 class="fab-op-title">${op.type}</h4>
+                        </div>
+                        <p class="fab-op-desc">${op.description}</p>
+                        ${op.softwareNote ? `
+                          <div class="fab-op-note">
+                            <span class="fab-op-note-label">RDWorks Toolpath:</span>
+                            <span>${op.softwareNote}</span>
+                          </div>
+                        ` : ''}
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Types Grid (Section 04 Technologies / Lasers)
+              if (sec.types && sec.types.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-types-grid">
+                    ${sec.types.map(t => `
+                      <div class="fab-type-card">
+                        <div class="fab-type-header">
+                          <span class="fab-type-tag">${t.tag}</span>
+                          <h4 class="fab-type-title">${t.name}</h4>
+                        </div>
+                        <p class="fab-type-desc">${t.description}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Materials Cards Grid (Section 06 3D Printing Materials)
+              if (sec.materialsCards && sec.materialsCards.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-mat-cards-grid">
+                    ${sec.materialsCards.map(mat => `
+                      <div class="fab-mat-card">
+                        <div class="fab-mat-header">
+                          <span class="fab-mat-tag">${mat.type}</span>
+                          <h4 class="fab-mat-title">${mat.name}</h4>
+                        </div>
+                        <p class="fab-mat-desc">${mat.description}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Common Materials Pills (Section 05 Laser Cutting Materials)
+              if (sec.materials && sec.materials.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-materials-wrapper">
+                    <span class="fab-materials-label">COMMON LASER-CUTTING MATERIALS</span>
+                    <div class="fab-materials-grid">
+                      ${sec.materials.map(m => `
+                        <div class="fab-material-pill">
+                          <span class="material-dot"></span>
+                          <span>${m}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              if (sec.safetyNote) {
+                secBodyHtml += `
+                  <div class="fab-safety-alert">
+                    <div class="fab-safety-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                      </svg>
+                    </div>
+                    <div class="fab-safety-content">
+                      <span class="fab-safety-title">MATERIAL & PROCESS OVERVIEW</span>
+                      <p class="fab-safety-text">${sec.safetyNote}</p>
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Advantages & Limitations Items (Sections 07 & 08 / 06 & 07)
+              if (sec.items && sec.items.length > 0) {
+                const isLimitation = sec.heading.toLowerCase().includes('limitation');
+                secBodyHtml += `
+                  <div class="fab-items-grid ${isLimitation ? 'is-limitations' : 'is-advantages'}">
+                    ${sec.items.map(item => `
+                      <div class="fab-item-card">
+                        <span class="fab-item-bullet">${isLimitation ? '—' : '✓'}</span>
+                        <span class="fab-item-text">${item}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Workflow Sequence (Section 08 Laser Cutting Track)
+              if (sec.workflowSequence && sec.workflowSequence.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-sequence-wrapper">
+                    <span class="fab-sequence-label">DIGITAL-TO-PHYSICAL SEQUENCE</span>
+                    <div class="fab-sequence-chain">
+                      ${sec.workflowSequence.map((ws, wsIdx) => `
+                        <div class="fab-sequence-node ${wsIdx === sec.workflowSequence.length - 1 ? 'is-final' : ''}">
+                          <span class="fab-sequence-num">${String(wsIdx + 1).padStart(2, '0')}</span>
+                          <span class="fab-sequence-text">${ws.label}</span>
+                        </div>
+                        ${wsIdx < sec.workflowSequence.length - 1 ? '<span class="fab-sequence-arrow">→</span>' : ''}
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Interactive 3D Model Viewer (if configured in educational sections)
+              if (sec.model3d) {
+                secBodyHtml += render3DModelCard(sec.model3d);
+              }
+
+              // Dedicated Media Image (Section 09 Printer & Section 10 Filament)
+              if (sec.media) {
+                secBodyHtml += `
+                  <div class="step-media-container" style="margin-top: var(--space-4);">
+                    ${renderMediaItem(sec.media, 'margin: 0;')}
+                  </div>
+                `;
+              } else if (sec.images && sec.images.length > 0) {
+                secBodyHtml += `
+                  <div class="step-media-container" style="margin-top: var(--space-4);">
+                    <div class="photo-split-grid">
+                      ${sec.images.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
+                    </div>
+                  </div>
+                `;
+              } else if (sec.mediaPlaceholder) {
+                secBodyHtml += `
+                  <div class="fab-technical-placeholder fab-hardware-placeholder">
+                    <div class="tech-placeholder-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                      </svg>
+                    </div>
+                    <div class="tech-placeholder-meta">
+                      <span class="tech-placeholder-tag">${sec.mediaPlaceholder.tag || 'SPECIFICATION'}</span>
+                      <h4 class="tech-placeholder-title">${sec.mediaPlaceholder.title}</h4>
+                      <p class="tech-placeholder-sub">${sec.mediaPlaceholder.subtitle}</p>
+                    </div>
+                  </div>
+                `;
+              }
+
+              // Specification Info Grid (Section 10 Filament)
+              if (sec.specGrid && sec.specGrid.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-spec-info-grid">
+                    ${sec.specGrid.map(sg => `
+                      <div class="fab-spec-info-item">
+                        <span class="fab-spec-info-label">${sg.label}</span>
+                        <span class="fab-spec-info-value">${sg.value}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              // Key Characteristics Checklist (Section 10 Filament)
+              if (sec.characteristics && sec.characteristics.length > 0) {
+                secBodyHtml += `
+                  <div class="fab-char-wrapper">
+                    <span class="fab-char-label">KEY CHARACTERISTICS</span>
+                    <div class="fab-char-grid">
+                      ${sec.characteristics.map(ch => `
+                        <div class="fab-char-item">
+                          <span class="fab-char-dot">✓</span>
+                          <span class="fab-char-text">${ch}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+
+              panelContentHtml += `
+                <div class="fabrication-step-card fab-educational-card" id="fab-sec-${tab.id}-${sec.sectionNumber}">
+                  <div class="step-card-header">
+                    <span class="step-number-badge">${sec.sectionLabel || ('SECTION ' + sec.sectionNumber)}</span>
+                    <h3 class="step-card-title">${sec.heading}</h3>
+                    ${sec.subheading ? `<div class="step-card-subheading">${sec.subheading}</div>` : ''}
+                  </div>
+                  <div class="step-card-body">
+                    ${secBodyHtml}
+                  </div>
+                </div>
+              `;
+            });
+          }
+
+          // 3. Student Practical Documentation (Steps)
+          if (tab.practicalSection) {
+            const ps = tab.practicalSection;
+            panelContentHtml += `
+              <div class="fab-practical-banner" id="fab-practical-${tab.id}">
+                <div class="fab-practical-badge">
+                  <span class="status-pulse-dot"></span>
+                  <span>${ps.eyebrow || 'HANDS-ON WORKFLOW'}</span>
+                </div>
+                <h3 class="fab-practical-title">${ps.heading}</h3>
+                <p class="fab-practical-intro">${ps.intro}</p>
+              </div>
+            `;
+
+            if (ps.steps && ps.steps.length > 0) {
+              ps.steps.forEach(s => {
+                let mediaHtml = '';
+                if (s.model3d) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      ${render3DModelCard(s.model3d, 'margin: 0;')}
+                    </div>
+                  `;
+                } else if (s.images && s.images.length > 1) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      <div class="photo-split-grid">
+                        ${s.images.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
+                      </div>
+                    </div>
+                  `;
+                } else if (s.images && s.images.length === 1) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      ${renderMediaItem(s.images[0], 'margin: 0;')}
+                    </div>
+                  `;
+                } else if (s.media) {
+                  if (Array.isArray(s.media) && s.media.length > 1) {
+                    mediaHtml = `
+                      <div class="step-media-container">
+                        <div class="photo-split-grid">
+                          ${s.media.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
+                        </div>
+                      </div>
+                    `;
+                  } else {
+                    const singleMedia = Array.isArray(s.media) ? s.media[0] : s.media;
+                    mediaHtml = `
+                      <div class="step-media-container">
+                        ${renderMediaItem(singleMedia, 'margin: 0;')}
+                      </div>
+                    `;
+                  }
+                }
+
+                let linkHtml = '';
+                if (s.driveLink || s.link) {
+                  const targetLink = s.driveLink || s.link;
+                  const label = s.driveLinkLabel || s.linkLabel || 'View Outcome on Google Drive';
+                  linkHtml = `
+                    <div class="step-action-container" style="margin-top: var(--space-5);">
+                      <a href="${targetLink}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-magnetic fab-drive-link-btn" aria-label="${label}">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        <span>${label}</span>
+                        <span class="btn-arrow">↗</span>
+                      </a>
+                    </div>
+                  `;
+                }
+
+                panelContentHtml += `
+                  <div class="fabrication-step-card ${s.isFinal ? 'is-final-output' : ''}" id="step-${tab.id}-${s.stepNumber}">
+                    <div class="step-card-header">
+                      <span class="step-number-badge">${s.stepLabel || ('STEP ' + s.stepNumber)}</span>
+                      <h3 class="step-card-title">${s.title}</h3>
+                    </div>
+                    ${mediaHtml}
+                    <div class="step-card-body">
+                      <p class="step-card-desc">${s.description}</p>
+                      ${linkHtml}
+                    </div>
+                  </div>
+                `;
+              });
+            }
+          } else if (tab.steps && tab.steps.length > 0) {
+            // Fallback for flat step tabs
+            tab.steps.forEach((s) => {
+              let mediaHtml = '';
+              if (s.model3d) {
+                mediaHtml = `
+                  <div class="step-media-container">
+                    ${render3DModelCard(s.model3d, 'margin: 0;')}
+                  </div>
+                `;
+              } else if (s.images && s.images.length > 1) {
+                mediaHtml = `
+                  <div class="step-media-container">
+                    <div class="photo-split-grid">
+                      ${s.images.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
+                    </div>
+                  </div>
+                `;
+              } else if (s.images && s.images.length === 1) {
+                mediaHtml = `
+                  <div class="step-media-container">
+                    ${renderMediaItem(s.images[0], 'margin: 0;')}
+                  </div>
+                `;
+              } else if (s.media) {
+                if (Array.isArray(s.media) && s.media.length > 1) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      <div class="photo-split-grid">
+                        ${s.media.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
+                      </div>
+                    </div>
+                  `;
+                } else {
+                  const singleMedia = Array.isArray(s.media) ? s.media[0] : s.media;
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      ${renderMediaItem(singleMedia, 'margin: 0;')}
+                    </div>
+                  `;
+                }
+              }
+
+              let linkHtml = '';
+              if (s.driveLink || s.link) {
+                const targetLink = s.driveLink || s.link;
+                const label = s.driveLinkLabel || s.linkLabel || 'View Outcome on Google Drive';
+                linkHtml = `
+                  <div class="step-action-container" style="margin-top: var(--space-5);">
+                    <a href="${targetLink}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-magnetic fab-drive-link-btn" aria-label="${label}">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                      <span>${label}</span>
+                      <span class="btn-arrow">↗</span>
+                    </a>
+                  </div>
+                `;
+              }
+
+              panelContentHtml += `
+                <div class="fabrication-step-card ${s.isFinal ? 'is-final-output' : ''}" id="step-${tab.id}-${s.stepNumber}">
+                  <div class="step-card-header">
+                    <span class="step-number-badge">${s.stepLabel || ('STEP ' + s.stepNumber)}</span>
+                    <h3 class="step-card-title">${s.title}</h3>
+                  </div>
+                  ${mediaHtml}
+                  <div class="step-card-body">
+                    <p class="step-card-desc">${s.description}</p>
+                    ${linkHtml}
+                  </div>
+                </div>
+              `;
+            });
+          }
+
+          // 4. Learning & Reflection Card
+          if (tab.learningReflection) {
+            const lr = tab.learningReflection;
+            let takeawaysHtml = '';
+            if (lr.takeaways && lr.takeaways.length > 0) {
+              takeawaysHtml = `
+                <div class="fab-learning-takeaways">
+                  <span class="fab-learning-takeaways-label">CORE LEARNING TAKEAWAYS</span>
+                  <div class="fab-learning-takeaways-list">
+                    ${lr.takeaways.map(t => `
+                      <div class="fab-learning-takeaway-item">
+                        <span class="fab-takeaway-check">✓</span>
+                        <span class="fab-takeaway-text">${t}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            panelContentHtml += `
+              <div class="fab-learning-card" id="fab-reflection-${tab.id}">
+                <div class="fab-learning-header">
+                  <span class="fab-learning-badge">${lr.badge || 'SYNTHESIS & REFLECTION'}</span>
+                  <h3 class="fab-learning-title">${lr.heading}</h3>
+                </div>
+                <div class="fab-learning-body">
+                  <p class="fab-learning-text">${lr.narrative}</p>
+                  ${takeawaysHtml}
+                </div>
+              </div>
+            `;
+          }
+
+          tabPanelsHtml += `
+            <div class="fabrication-tab-panel ${tabIdx === 0 ? 'is-active' : ''}" 
+                 id="tabpanel-${tab.id}" 
+                 data-tab-id="${tab.id}" 
+                 role="tabpanel" 
+                 aria-labelledby="tab-${tab.id}" 
+                 ${tabIdx !== 0 ? 'style="display: none;"' : ''}>
+              ${panelContentHtml}
+            </div>
+          `;
+        });
+
+        // Final Takeaways Section
+        let takeawaysHtml = '';
+        if (weekData.finalTakeaways) {
+          const ft = weekData.finalTakeaways;
+
+          let progressionHtml = '';
+          if (ft.progression && ft.progression.length > 0) {
+            const progLabel = ft.progressionLabel || `${ft.progression.length}-STAGE FABRICATION CONTINUUM`;
+            progressionHtml = `
+              <div class="progression-chain-wrapper">
+                <span class="progression-chain-label">${progLabel}</span>
+                <div class="progression-chain">
+                  ${ft.progression.map((p, idx) => `
+                    <div class="progression-node ${idx === ft.progression.length - 1 ? 'is-final' : ''}">
+                      <span class="progression-step">${p.step}</span>
+                      <span class="progression-name">${p.label}</span>
+                    </div>
+                    ${idx < ft.progression.length - 1 ? '<span class="progression-arrow">→</span>' : ''}
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          let cardsHtml = '';
+          if (ft.cards && ft.cards.length > 0) {
+            cardsHtml = `
+              <div class="takeaways-5-grid">
+                ${ft.cards.map(c => `
+                  <div class="takeaway-card">
+                    <span class="takeaway-card-num">${c.number}</span>
+                    <h4 class="takeaway-card-title">${c.title}</h4>
+                    <p class="takeaway-card-desc">${c.description}</p>
+                  </div>
+                `).join('')}
+              </div>
+            `;
+          }
+
+          takeawaysHtml = `
+            <div class="week-takeaways-section" id="story-block-takeaways" data-stage-id="takeaways">
+              <div class="week-takeaways-header">
+                <span class="week-takeaways-eyebrow">WEEK ${weekData.numberFormatted} SYNTHESIS</span>
+                <h3 class="week-takeaways-title">${ft.heading}</h3>
+              </div>
+
+              ${progressionHtml}
+              ${cardsHtml}
+
+              <div class="final-statement-banner">
+                <p>"${ft.statement}"</p>
+              </div>
+            </div>
+          `;
+        }
+
+        detailContainer.innerHTML = `
+          <!-- Top Navigation Header -->
+          <div class="destination-nav-bar">
+            <button type="button" class="btn-back-to-map" id="btn-back-map" aria-label="Return to 20-Week Journey Map">
+              <span>←</span>
+              <span>Back to Journey Map</span>
+            </button>
+            <span class="destination-breadcrumbs">JOURNEY MAP / DESTINATION · WEEK ${weekData.numberFormatted}</span>
+            <div class="destination-step-controls">
+              <button type="button" class="btn-step-nav" data-target-week="${prevWeekIndex}" aria-label="Navigate to Week ${prevWeekNum}">
+                ← Week ${prevWeekNum}
+              </button>
+              <button type="button" class="btn-step-nav" data-target-week="${nextWeekIndex}" aria-label="Navigate to Week ${nextWeekNum}">
+                Week ${nextWeekNum} →
+              </button>
+            </div>
+          </div>
+
+          <!-- Destination Header -->
+          <div class="destination-header">
+            <div class="destination-status-badge">
+              <span class="status-pulse-dot"></span>
+              <span>WEEK ${weekData.numberFormatted} · ${weekData.status === 'completed' ? 'COMPLETED DESTINATION' : 'DESTINATION'}</span>
+            </div>
+            <h2 class="destination-title">${weekData.title}</h2>
+            <div class="destination-date">${weekData.date}</div>
+            <p class="destination-summary">${weekData.summary}</p>
+          </div>
+
+          <!-- Dual Selectable Fabrication Tabs -->
+          <div class="fabrication-tabs-container">
+            <div class="fabrication-tabs-nav" role="tablist" aria-label="Digital Fabrication Track Selector">
+              ${weekData.tabs.map((tab, idx) => `
+                <button type="button" 
+                        class="fabrication-tab-btn ${idx === 0 ? 'is-active' : ''}" 
+                        role="tab" 
+                        id="tab-${tab.id}" 
+                        aria-controls="tabpanel-${tab.id}" 
+                        aria-selected="${idx === 0 ? 'true' : 'false'}" 
+                        data-tab-target="${tab.id}">
+                  <span>${tab.label.toUpperCase()}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Tab Content Panels -->
+          <div class="fabrication-content-container">
+            ${tabPanelsHtml}
+            ${takeawaysHtml}
+          </div>
+
+          <!-- Footer Actions -->
+          <div class="destination-footer-actions">
+            <button type="button" class="btn-back-to-map" id="btn-back-map-bottom">
+              <span>←</span>
+              <span>Back to 20-Week Journey Map</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-magnetic" id="btn-next-destination" data-target-week="${nextWeekIndex}">
+              <span>NEXT DESTINATION (WEEK ${nextWeekNum})</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        `;
+
+        // Wire Tab Switcher
+        const tabButtons = detailContainer.querySelectorAll('.fabrication-tab-btn');
+        const tabPanels = detailContainer.querySelectorAll('.fabrication-tab-panel');
+        tabButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            tabButtons.forEach(b => {
+              b.classList.remove('is-active');
+              b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-selected', 'true');
+
+            const targetId = btn.getAttribute('data-tab-target');
+            tabPanels.forEach(panel => {
+              if (panel.getAttribute('data-tab-id') === targetId) {
+                panel.style.display = 'flex';
+                panel.classList.add('is-active');
+              } else {
+                panel.style.display = 'none';
+                panel.classList.remove('is-active');
+              }
+            });
+          });
+        });
+
+      } else if (storyItems && storyItems.length > 0) {
+        // Full Story Experience (Supports both Day-by-Day Weeks 0–4 and Consolidated Experience Week 05+)
         let daysHtml = '';
-        weekData.days.forEach(d => {
+        storyItems.forEach((d, idx) => {
           let dayActivitiesHtml = '';
           if (d.activities && d.activities.length > 0) {
             dayActivitiesHtml = `
@@ -544,28 +1329,6 @@ function initProtoSem() {
             `;
           }
 
-          const renderMediaItem = (item, extraCardStyle = '') => {
-            const isVideo = item.isVideo || item.type === 'video' || (typeof item.src === 'string' && (item.src.endsWith('.mp4') || item.src.endsWith('.webm') || item.src.endsWith('.mov')));
-            if (isVideo) {
-              return `
-                <div class="editorial-photo-card editorial-video-card" style="${extraCardStyle}">
-                  <div class="editorial-video-wrapper">
-                    <video src="${item.src}" autoplay loop muted playsinline controls preload="metadata" class="editorial-video-player" aria-label="${item.alt || 'Video Demonstration'}">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                  <div class="editorial-photo-caption video-caption">${item.caption}</div>
-                </div>
-              `;
-            }
-            return `
-              <div class="editorial-photo-card" style="${extraCardStyle}">
-                <img src="${item.src}" alt="${item.alt}" loading="lazy" />
-                <div class="editorial-photo-caption">${item.caption}</div>
-              </div>
-            `;
-          };
-
           let dayImagesHtml = '';
           if (d.images && d.images.length === 1) {
             dayImagesHtml = renderMediaItem(d.images[0]);
@@ -577,11 +1340,20 @@ function initProtoSem() {
             `;
           }
 
+          let dayLeadDescHtml = '';
+          if (d.description) {
+            dayLeadDescHtml = `
+              <div class="day-story-lead-desc" style="font-family: var(--font-body); font-size: 1.0625rem; line-height: var(--line-height-relaxed); color: #383834; margin: var(--space-4) 0 var(--space-5);">
+                <p>${d.description}</p>
+              </div>
+            `;
+          }
+
           let dayReflectionHtml = '';
           if (d.reflection) {
             dayReflectionHtml = `
               <div class="day-reflection-box">
-                <span class="day-reflection-label">DAILY REFLECTION</span>
+                <span class="day-reflection-label">${isConsolidated ? 'SECTION REFLECTION' : 'DAILY REFLECTION'}</span>
                 <p>"${d.reflection}"</p>
               </div>
             `;
@@ -604,18 +1376,22 @@ function initProtoSem() {
             `;
           }
 
+          const badgeText = d.dayNumber || d.sectionBadge || `SECTION ${String(idx + 1).padStart(2, '0')}`;
+          const focusBadgeHtml = d.focus ? `<span class="day-focus-badge">FOCUS: ${d.focus}</span>` : '';
+
           daysHtml += `
             <div class="day-story-block" id="story-block-${d.id}" data-stage-id="${d.id}">
               <div class="day-story-header">
                 <div>
                   <div class="day-story-eyebrow-group">
-                    <span class="day-number-badge">${d.dayNumber}</span>
-                    <span class="day-focus-badge">FOCUS: ${d.focus}</span>
+                    <span class="day-number-badge">${badgeText}</span>
+                    ${focusBadgeHtml}
                   </div>
                   <h3 class="day-story-title">${d.title}</h3>
                 </div>
               </div>
 
+              ${dayLeadDescHtml}
               ${dayActivitiesHtml}
               ${dayImagesHtml}
               ${dayReflectionHtml}
@@ -628,12 +1404,13 @@ function initProtoSem() {
         let takeawaysHtml = '';
         if (weekData.finalTakeaways) {
           const ft = weekData.finalTakeaways;
-          
+
           let progressionHtml = '';
           if (ft.progression && ft.progression.length > 0) {
+            const progLabel = ft.progressionLabel || `${storyItems.length}-STAGE ${isConsolidated ? 'LEARNING PROCESS' : 'COHORT EVOLUTION'}`;
             progressionHtml = `
               <div class="progression-chain-wrapper">
-                <span class="progression-chain-label">${weekData.days.length}-STAGE COHORT EVOLUTION</span>
+                <span class="progression-chain-label">${progLabel}</span>
                 <div class="progression-chain">
                   ${ft.progression.map((p, idx) => `
                     <div class="progression-node ${idx === ft.progression.length - 1 ? 'is-final' : ''}">
@@ -690,6 +1467,13 @@ function initProtoSem() {
           `;
         }
 
+        const filterAllLabel = isConsolidated ? 'ALL SECTIONS' : 'ALL DAYS';
+        const filterNavItems = storyItems.map(s => {
+          const navLabel = s.navLabel || s.dayNumber || s.sectionBadge || s.title;
+          return `<button type="button" class="story-stage-btn" data-stage="${s.id}">${navLabel.toUpperCase()}</button>`;
+        }).join('');
+        const filterSummaryLabel = isConsolidated ? 'SUMMARY' : 'TAKEAWAYS';
+
         detailContainer.innerHTML = `
           <!-- Top Navigation Header -->
           <div class="destination-nav-bar">
@@ -720,15 +1504,13 @@ function initProtoSem() {
           </div>
 
           <!-- Interactive Stage Timeline Filter Bar -->
-          <div class="week-story-timeline-nav" role="tablist" aria-label="Week ${weekData.numberFormatted} Day Filter">
-            <button type="button" class="story-stage-btn is-active" data-stage="all">ALL DAYS</button>
-            ${weekData.days.map(d => `
-              <button type="button" class="story-stage-btn" data-stage="${d.id}">${d.dayNumber.toUpperCase()}</button>
-            `).join('')}
-            ${weekData.finalTakeaways ? '<button type="button" class="story-stage-btn" data-stage="takeaways">TAKEAWAYS</button>' : ''}
+          <div class="week-story-timeline-nav" role="tablist" aria-label="Week ${weekData.numberFormatted} Stage Filter">
+            <button type="button" class="story-stage-btn is-active" data-stage="all">${filterAllLabel}</button>
+            ${filterNavItems}
+            ${weekData.finalTakeaways ? `<button type="button" class="story-stage-btn" data-stage="takeaways">${filterSummaryLabel}</button>` : ''}
           </div>
 
-          <!-- Day-by-Day Chronological Story Blocks -->
+          <!-- Chronological Story Blocks -->
           <div class="week-story-content-container">
             ${daysHtml}
             ${takeawaysHtml}
@@ -756,7 +1538,7 @@ function initProtoSem() {
 
             const stageId = btn.getAttribute('data-stage');
             const allBlocks = detailContainer.querySelectorAll('.day-story-block, .week-takeaways-section');
-            
+
             if (stageId === 'all') {
               allBlocks.forEach(b => b.style.display = 'block');
             } else {
@@ -1004,7 +1786,7 @@ function initProtoSem() {
 function initContact() {
   const emailContainer = document.getElementById('contact-email-container');
   const linksContainer = document.getElementById('contact-links-container');
-  
+
   if (emailContainer && typeof contactData !== 'undefined') {
     if (contactData.email) {
       const displayText = contactData.emailDisplay || contactData.email;
@@ -1072,7 +1854,7 @@ function initBackToTop() {
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.desktop-nav .nav-link:not([target="_blank"])');
-  
+
   if (!sections.length || !navLinks.length) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -1104,7 +1886,7 @@ function initSkillsInteraction() {
   const skillCards = document.querySelectorAll('.skill-group-card');
   const skillChips = document.querySelectorAll('.skill-chip');
   const contextText = document.getElementById('skills-context-text');
-  
+
   if (!skillCards.length) return;
 
   const defaultContext = "Hover or focus any technology chip above to see its real-world implementation across my projects & fellowships.";
