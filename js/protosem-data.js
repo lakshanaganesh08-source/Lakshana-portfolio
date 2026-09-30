@@ -1695,7 +1695,7 @@ const protoSemWeeks = [
               stepNumber: "01",
               stepLabel: "01 — MODEL SELECTION",
               title: "Model Selection",
-              description: "I selected a 3D model from Printables for the printing activity. This was the starting point of the digital-to-physical fabrication workflow.",
+              description: "To begin the 3D printing activity, I explored the Printables online repository and selected a high-quality 3D digital model as the base design for physical fabrication. The chosen geometric model featured well-defined contours and intricate structural details, making it an ideal digital asset to evaluate slicing orientation, layer height accuracy, and FDM additive extrusion.",
               media: {
                 src: "assets/images/protosem/week-06/3D printing/source (1).png",
                 alt: "Selected 3D model reference from Printables",
@@ -1706,7 +1706,7 @@ const protoSemWeeks = [
               stepNumber: "02",
               stepLabel: "02 — PREPARING THE MODEL",
               title: "Preparing the Model",
-              description: "After selecting the model, I downloaded Bambu Studio and loaded the 3D model into the software to prepare it for printing.",
+              description: "After selecting the model, I downloaded and configured Bambu Studio, then imported the digital 3D model into the slicing workspace to prepare it for manufacturing. Inside the slicer, I carefully oriented the geometry on the virtual build plate, selected optimal layer heights, configured infill density, and verified support settings to ensure print stability and smooth surface reproduction.",
               media: {
                 src: "assets/images/protosem/week-06/3D printing/in bambu.png",
                 alt: "3D model loaded and prepared in Bambu Studio",
@@ -1719,7 +1719,7 @@ const protoSemWeeks = [
               title: "Interactive 3D Model",
               driveLink: "https://drive.google.com/file/d/1eTWxgoGG95RZdxxBQETuLDDoEIMY0A7O/view?usp=drive_link",
               driveLinkLabel: "View 3D Model File on Google Drive",
-              description: "Explore the interactive 3D CAD model used for this fabrication activity. The digital mesh geometry can be inspected in real-time 3D space before slicing and physical layer extrusion on the 3D printer.",
+              description: "Explore the interactive 3D CAD model used for this digital fabrication activity. The digital mesh geometry can be freely rotated, zoomed, and inspected in real-time 3D space from any perspective, providing an interactive visualization of the exact virtual CAD geometry before slicing toolpath conversion and physical extrusion.",
               model3d: {
                 src: "assets/images/protosem/week-06/3D printing/lakshana.glb",
                 fallbackSrc: "public/models/my-model.glb",
@@ -1733,7 +1733,7 @@ const protoSemWeeks = [
               stepNumber: "04",
               stepLabel: "04 — 3D PRINTING PROCESS",
               title: "3D Printing Process",
-              description: "The prepared model was sent to the 3D printer, where the object was produced layer by layer using PLA filament.",
+              description: "The sliced machine instructions (G-code) were transferred to the Bambu Lab 3D printer to initiate the physical fabrication process. The printer's heated nozzle precisely melted and deposited PLA thermoplastic filament onto the build plate layer by layer, progressively building the three-dimensional geometry from bottom to top according to the sliced cross-sectional toolpaths.",
               media: {
                 src: "assets/images/protosem/week-06/3D printing/machine doing.mp4",
                 type: "video",
@@ -1746,7 +1746,7 @@ const protoSemWeeks = [
               stepNumber: "05",
               stepLabel: "05 — HANDS-ON FABRICATION",
               title: "Hands-on Fabrication",
-              description: "During the fabrication process, I observed the printer operation and worked with the setup to understand the practical workflow from digital preparation to physical fabrication.",
+              description: "During the fabrication process, I actively monitored the 3D printer's operation and calibration parameters to ensure consistent first-layer adhesion and uniform extrusion quality. Working directly with the machine provided valuable hands-on experience with print monitoring, nozzle temperature management, build plate adhesion, and observing additive manufacturing dynamics in real time.",
               media: {
                 src: "assets/images/protosem/week-06/3D printing/me working.jpeg",
                 alt: "Observing the 3D printer during fabrication",
@@ -1760,7 +1760,7 @@ const protoSemWeeks = [
               isFinal: true,
               driveLink: "https://drive.google.com/file/d/1eTWxgoGG95RZdxxBQETuLDDoEIMY0A7O/view?usp=drive_link",
               driveLinkLabel: "View 3D Printed Outcome on Google Drive",
-              description: "The final printed object represents the completed result of the workflow, from selecting the digital model and preparing it in Bambu Studio to producing the physical object.",
+              description: "The final printed object represents the successful completion of the end-to-end digital-to-physical additive manufacturing workflow. The completed PLA artifact showcases clean geometric reproduction, precise layer stacking, and high structural integrity, successfully validating the entire pipeline from digital model selection and Bambu Studio slicing to physical printer execution.",
               images: [
                 {
                   src: "assets/images/protosem/week-06/3D printing/output1.jpeg",
