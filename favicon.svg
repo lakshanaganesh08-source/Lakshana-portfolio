@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181B"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Container -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#27272A" stroke-width="1.5"/>
+
+  <!-- Sleek Geometric Monogram "L" -->
+  <path d="M22 15 C22 13.895 22.895 13 24 13 L28 13 C29.105 13 30 13.895 30 15 L30 40 L43 40 C44.105 40 45 40.895 45 42 L45 46 C45 47.105 44.105 48 43 48 L24 C22.895 48 22 47.105 22 46 Z" 
+        fill="url(#accentGrad)"/>
+        
+  <!-- Subtle Tech Sparkle Accent -->
+  <circle cx="44" cy="19" r="3.5" fill="#38BDF8"/>
+</svg>
