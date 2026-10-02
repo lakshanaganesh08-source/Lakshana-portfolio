@@ -1,24 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#18181B"/>
-      <stop offset="100%" stop-color="#09090B"/>
+    <linearGradient id="sparkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="25%" stop-color="#FDE047"/>
+      <stop offset="70%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8B5CF6"/>
-      <stop offset="50%" stop-color="#6366F1"/>
-      <stop offset="100%" stop-color="#38BDF8"/>
+    <linearGradient id="sparkMini" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
     </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
   
-  <!-- Outer Rounded Container -->
-  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
-  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#27272A" stroke-width="1.5"/>
-
-  <!-- Sleek Geometric Monogram "L" -->
-  <path d="M22 15 C22 13.895 22.895 13 24 13 L28 13 C29.105 13 30 13.895 30 15 L30 40 L43 40 C44.105 40 45 40.895 45 42 L45 46 C45 47.105 44.105 48 43 48 L24 C22.895 48 22 47.105 22 46 Z" 
-        fill="url(#accentGrad)"/>
-        
-  <!-- Subtle Tech Sparkle Accent -->
-  <circle cx="44" cy="19" r="3.5" fill="#38BDF8"/>
+  <!-- Main Sparkle Star (4-point curved diamond) -->
+  <path d="M36 6 Q36 28 58 28 Q36 28 36 50 Q36 28 14 28 Q36 28 36 6 Z" fill="url(#sparkGold)" filter="url(#glow)"/>
+  
+  <!-- Secondary Bottom-Left Mini Sparkle -->
+  <path d="M16 34 Q16 43 25 43 Q16 43 16 52 Q16 43 7 43 Q16 43 16 34 Z" fill="url(#sparkMini)"/>
+  
+  <!-- Small Top-Right Micro Sparkle -->
+  <path d="M50 10 Q50 15 55 15 Q50 15 50 20 Q50 15 45 15 Q50 15 50 10 Z" fill="url(#sparkMini)"/>
 </svg>
