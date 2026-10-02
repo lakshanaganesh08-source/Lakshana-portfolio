@@ -3005,6 +3005,1003 @@
 }
 
 /* ==================================================
+   7. FABRICATION & DIGITAL FABRICATION COMPONENTS
+   ================================================== */
+
+/* Editorial Photo / Asset Placeholder Card */
+.fab-photo-placeholder-card {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1.5px dashed rgba(124, 110, 230, 0.35);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  transition: border-color var(--transition-base, 0.2s ease), box-shadow var(--transition-base, 0.2s ease);
+}
+
+.fab-photo-placeholder-card:hover {
+  border-color: var(--color-accent-lavender, #7C6EE6);
+  box-shadow: 0 4px 20px rgba(124, 110, 230, 0.08);
+}
+
+.fab-placeholder-body {
+  padding: var(--space-6, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+}
+
+.fab-placeholder-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent-lavender, #7C6EE6);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  text-transform: uppercase;
+}
+
+.fab-placeholder-icon-badge svg {
+  stroke: var(--color-accent-lavender, #7C6EE6);
+  flex-shrink: 0;
+}
+
+.fab-placeholder-tag {
+  background: rgba(124, 110, 230, 0.1);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm, 4px);
+  border: 1px solid rgba(124, 110, 230, 0.25);
+}
+
+.fab-placeholder-title {
+  font-family: var(--font-heading, inherit);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 600;
+  color: var(--color-text-primary, #1A1A1A);
+  margin: 0;
+}
+
+.fab-placeholder-desc {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.placeholder-caption {
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px dashed rgba(124, 110, 230, 0.25) !important;
+}
+
+.caption-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-accent-lavender, #7C6EE6);
+  margin-right: 4px;
+}
+
+/* Safety Topics Grid (Step 06) */
+.fab-safety-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4, 16px);
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-safety-topic-card {
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  transition: border-color var(--transition-base, 0.2s ease), transform var(--transition-base, 0.2s ease);
+}
+
+.fab-safety-topic-card:hover {
+  border-color: rgba(124, 110, 230, 0.4);
+  transform: translateY(-2px);
+}
+
+.fab-safety-topic-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fab-safety-topic-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  color: var(--color-accent-lavender, #7C6EE6);
+  background: rgba(124, 110, 230, 0.08);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.fab-safety-topic-title {
+  font-family: var(--font-heading, inherit);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 700;
+  color: var(--color-text-primary, #1A1A1A);
+  margin: 0;
+}
+
+.fab-safety-topic-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fab-safety-topic-bullets li {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 14px;
+}
+
+.fab-safety-topic-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent-lavender, #7C6EE6);
+  font-weight: bold;
+}
+
+.fab-safety-topic-desc {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Visual Checklist (Steps 06, 11) */
+.fab-checklist-container {
+  margin-top: var(--space-4, 16px);
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+}
+
+.fab-checklist-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3, 12px);
+}
+
+.fab-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 16px;
+}
+
+.fab-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fab-checklist-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  font-size: 11px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.fab-checklist-text {
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 500;
+  color: var(--color-text-primary, #222222);
+}
+
+/* Specification / Key-Value Tables (Steps 07, 08) */
+.fab-spec-table-container {
+  margin-top: var(--space-3, 12px);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background: var(--color-bg-primary, #FFFFFF);
+}
+
+.fab-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.fab-spec-table thead tr {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border-bottom: 1px solid var(--color-border, #E5E5E0);
+}
+
+.fab-spec-table th {
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #666666);
+}
+
+.fab-spec-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border-light, #F0F0EC);
+  color: var(--color-text-primary, #1A1A1A);
+  line-height: 1.45;
+}
+
+.fab-spec-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fab-spec-table tbody tr:hover td {
+  background: rgba(124, 110, 230, 0.03);
+}
+
+.spec-param-col {
+  width: 32%;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.spec-value-col {
+  color: var(--color-text-secondary, #444444);
+}
+
+/* Design Intent Callout Box (Step 09) */
+.fab-design-intent-box {
+  margin-top: var(--space-4, 16px);
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid rgba(124, 110, 230, 0.25);
+  border-left: 3px solid var(--color-accent-lavender, #7C6EE6);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-5, 20px);
+}
+
+.fab-intent-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.fab-intent-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  background: rgba(124, 110, 230, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.fab-intent-title {
+  font-family: var(--font-heading, inherit);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 700;
+  color: var(--color-text-primary, #1A1A1A);
+  margin: 0;
+}
+
+.fab-intent-intro {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.5;
+  margin-bottom: var(--space-3, 12px);
+}
+
+.fab-intent-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.fab-intent-item-card {
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-sm, 6px);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.fab-intent-item-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  color: var(--color-accent-lavender, #7C6EE6);
+  background: rgba(124, 110, 230, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.fab-intent-item-title {
+  display: block;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #1A1A1A);
+  margin-bottom: 2px;
+}
+
+.fab-intent-item-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.fab-intent-note {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.5;
+  margin: var(--space-2, 8px) 0 0;
+  font-style: italic;
+}
+
+/* Process Steps & Tool Badges (Step 10) */
+.fab-process-steps-container {
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-process-steps-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3, 12px);
+}
+
+.fab-tool-badge-box {
+  margin-top: var(--space-3, 12px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  padding: 6px 14px;
+  border-radius: var(--radius-md, 6px);
+  font-size: var(--font-size-xs, 0.75rem);
+}
+
+.fab-tool-badge-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-text-secondary, #666666);
+}
+
+.fab-tool-badge-val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-accent-lavender, #7C6EE6);
+}
+
+.fab-tech-note-box {
+  margin-top: var(--space-3, 12px);
+  background: rgba(124, 110, 230, 0.06);
+  border: 1px solid rgba(124, 110, 230, 0.2);
+  border-radius: var(--radius-md, 6px);
+  padding: 10px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.fab-tech-note-icon {
+  color: var(--color-accent-lavender, #7C6EE6);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fab-tech-note-text {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #2A2A2A);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* File Prep Cards Grid (Step 11) */
+.fab-prep-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-prep-card {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 6px);
+  padding: 12px 14px;
+}
+
+.fab-prep-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  margin-bottom: 4px;
+}
+
+.fab-prep-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* RDWorks Layout Topics & Layer Legend (Step 12) */
+.fab-layout-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-layout-topic-card {
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 6px);
+  padding: 12px 16px;
+}
+
+.fab-layout-topic-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-text-primary, #1A1A1A);
+  margin-bottom: 4px;
+}
+
+.fab-layout-topic-text {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.fab-layer-legend-box {
+  margin-top: var(--space-4, 16px);
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+}
+
+.fab-layer-legend-title {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3, 12px);
+}
+
+.fab-layer-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+}
+
+.fab-layer-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.fab-layer-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  color: var(--color-text-primary, #1A1A1A);
+  flex-shrink: 0;
+}
+
+.fab-layer-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.fab-layer-mode {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.fab-layer-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666666);
+}
+
+/* Machine Settings Table (Step 13) */
+.fab-settings-table-container {
+  margin-top: var(--space-4, 16px);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  overflow-x: auto;
+  background: var(--color-bg-primary, #FFFFFF);
+}
+
+.fab-settings-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-size-xs, 0.75rem);
+  white-space: nowrap;
+}
+
+.fab-settings-table thead tr {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border-bottom: 1px solid var(--color-border, #E5E5E0);
+}
+
+.fab-settings-table th {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #666666);
+}
+
+.fab-settings-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border-light, #F0F0EC);
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.fab-settings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.fab-settings-table td.is-operation-cell {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-accent-lavender, #7C6EE6);
+}
+
+.fab-settings-table td.is-param-num {
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary, #555555);
+}
+
+/* Chronological Process Sequence (Step 14) */
+.fab-process-seq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-process-seq-card {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 6px);
+  padding: 12px 14px;
+}
+
+.fab-process-seq-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.fab-process-seq-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  color: var(--color-accent-lavender, #7C6EE6);
+  background: rgba(124, 110, 230, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.fab-process-seq-title {
+  font-family: var(--font-heading, inherit);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  color: var(--color-text-primary, #1A1A1A);
+  margin: 0;
+}
+
+.fab-process-seq-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #555555);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Final Result Observations (Step 15) */
+.fab-observations-box {
+  margin-top: var(--space-4, 16px);
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+}
+
+.fab-obs-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.fab-obs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fab-obs-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fab-obs-dot {
+  color: var(--color-accent-lavender, #7C6EE6);
+  font-weight: bold;
+}
+
+.fab-obs-text {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #222222);
+  line-height: 1.5;
+}
+
+/* Troubleshooting Table (Step 16) */
+.fab-trouble-table-container {
+  margin-top: var(--space-4, 16px);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  overflow-x: auto;
+  background: var(--color-bg-primary, #FFFFFF);
+}
+
+.fab-trouble-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-size-xs, 0.75rem);
+}
+
+.fab-trouble-table thead tr {
+  background: var(--color-bg-secondary, #F9F9F7);
+  border-bottom: 1px solid var(--color-border, #E5E5E0);
+}
+
+.fab-trouble-table th {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #666666);
+}
+
+.fab-trouble-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border-light, #F0F0EC);
+  color: var(--color-text-primary, #1A1A1A);
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.fab-trouble-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.trouble-problem-col {
+  width: 22%;
+  font-family: var(--font-mono);
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.trouble-cause-col {
+  width: 26%;
+  color: var(--color-text-secondary, #555555);
+}
+
+.trouble-solution-col {
+  width: 26%;
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.trouble-outcome-col {
+  width: 26%;
+  color: #10B981;
+}
+
+/* Structured Reflection Subsections (Step 17) */
+.fab-structured-reflection-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-reflection-section-card {
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+}
+
+.fab-reflection-section-header {
+  margin-bottom: var(--space-2, 8px);
+}
+
+.fab-reflection-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  background: rgba(124, 110, 230, 0.08);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm, 4px);
+  text-transform: uppercase;
+}
+
+.fab-reflection-text {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-text-secondary, #444444);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.fab-reflection-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 16px;
+}
+
+.fab-reflection-bullet-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #222222);
+}
+
+.ref-check {
+  color: var(--color-accent-lavender, #7C6EE6);
+  font-weight: bold;
+}
+
+/* Source Files Download Grid (Step 18) */
+.fab-source-files-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: var(--space-4, 16px);
+}
+
+.fab-source-file-card {
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-5, 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  transition: border-color var(--transition-base, 0.2s ease), box-shadow var(--transition-base, 0.2s ease);
+}
+
+.fab-source-file-card:hover {
+  border-color: rgba(124, 110, 230, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.fab-source-file-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fab-file-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md, 8px);
+  background: rgba(124, 110, 230, 0.08);
+  color: var(--color-accent-lavender, #7C6EE6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fab-file-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.fab-file-ext {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+}
+
+.fab-file-title {
+  font-family: var(--font-heading, inherit);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 700;
+  color: var(--color-text-primary, #1A1A1A);
+  margin: 0;
+}
+
+.fab-file-desc {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.fab-file-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: var(--space-2, 8px);
+  border-top: 1px solid var(--color-border-light, #F0F0EC);
+}
+
+.fab-file-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary, #666666);
+}
+
+.fab-file-status-badge .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+}
+
+.fab-file-status-badge.is-available .status-dot {
+  background: #10B981;
+}
+
+.fab-download-btn {
+  padding: 6px 14px;
+  font-size: var(--font-size-xs, 0.75rem);
+}
+
+.fab-download-btn.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Additional Links (Step 18) */
+.fab-additional-links-box {
+  margin-top: var(--space-4, 16px);
+  background: var(--color-bg-secondary, #F9F9F7);
+  border: 1px solid var(--color-border, #E5E5E0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 16px) var(--space-5, 20px);
+}
+
+.fab-add-links-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider, 0.05em);
+  color: var(--color-accent-lavender, #7C6EE6);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2, 8px);
+}
+
+.fab-add-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fab-add-link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-bg-primary, #FFFFFF);
+  border: 1px solid var(--color-border, #E5E5E0);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 6px);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-primary, #1A1A1A);
+  text-decoration: none;
+  font-weight: 500;
+  transition: border-color var(--transition-base, 0.2s ease), color var(--transition-base, 0.2s ease);
+}
+
+.fab-add-link-item:hover {
+  border-color: var(--color-accent-lavender, #7C6EE6);
+  color: var(--color-accent-lavender, #7C6EE6);
+}
+
+.fab-add-link-icon {
+  color: var(--color-accent-lavender, #7C6EE6);
+  font-weight: bold;
+}
+
+/* Responsive Rules for Fabrication Components */
+@media (max-width: 900px) {
+  .fab-safety-topics-grid,
+  .fab-prep-cards-grid,
+  .fab-process-seq-grid,
+  .fab-source-files-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .fab-checklist-grid,
+  .fab-intent-items-grid,
+  .fab-layout-topics-grid,
+  .fab-layer-legend-grid,
+  .fab-reflection-bullet-list {
+    grid-template-columns: 1fr;
+  }
+  .fab-file-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==================================================
    8. REDUCED MOTION & ACCESSIBILITY
    ================================================== */
 @media (prefers-reduced-motion: reduce) {

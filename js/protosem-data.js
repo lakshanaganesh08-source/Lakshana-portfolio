@@ -1241,7 +1241,7 @@ const protoSemWeeks = [
         title: "Laser Cutting",
         intro: "Laser cutting is a digital fabrication process that uses a focused laser beam to cut, engrave, or mark materials according to a digitally prepared design. It enables precise and repeatable fabrication directly from digital files.",
 
-        // Fab Academy-Style Educational Sections (01 — 08)
+        // SECTION 01 — 05: TECHNICAL BACKGROUND & FOUNDATIONS
         educationalSections: [
           {
             sectionNumber: "01",
@@ -1266,57 +1266,53 @@ const protoSemWeeks = [
             sectionNumber: "02",
             sectionLabel: "02 — HOW DOES LASER CUTTING WORK?",
             heading: "How Laser Cutting Works",
+            content: "Laser cutting relies on a systematic workflow that translates digital geometry into physical machine toolpaths. The focused optical energy interacts with the substrate material across two primary operational modes: vector cutting (full-depth penetration along perimeter curves) and raster scanning (surface vaporization and shading across filled artwork areas).",
             steps: [
-              "A digital design is created or selected.",
-              "The design is converted into a suitable vector format such as DXF.",
-              "The design is imported into laser-control software.",
-              "Different operations such as cutting or engraving are assigned.",
-              "Machine parameters are configured according to the material and operation.",
-              "The laser follows the programmed path.",
-              "Material is removed or marked to produce the required design."
+              "A digital design is created or selected as a reference vector artwork.",
+              "The design is converted into a suitable vector format such as DXF with closed path verification.",
+              "The geometry is imported into laser-control software (RDWorks) and aligned to the material stock.",
+              "Different fabrication operations such as vector cutting or raster scanning are assigned to dedicated color layers.",
+              "Machine parameters (speed, min/max power, frequency, passes) are configured according to material properties.",
+              "The laser machine executes the programmed toolpaths under active exhaust and air assist.",
+              "The finished physical artifact is inspected for cut quality, surface definition, and dimensional fidelity."
             ],
             processFlow: [
-              { label: "Digital Design" },
-              { label: "File Preparation" },
-              { label: "Laser Software" },
-              { label: "Cut / Engrave Settings" },
-              { label: "Laser Machine" },
-              { label: "Physical Output" }
-            ]
-          },
-          {
-            sectionNumber: "03",
-            sectionLabel: "03 — LASER CUTTING PROCESS",
-            heading: "Laser Cutting Process",
-            content: "Laser fabrication begins with a digital design and ends with a physical component. The design is prepared as a vector file, imported into machine-control software, assigned the required operations, and then sent to the laser cutter for fabrication.",
+              { label: "01 Digital Design" },
+              { label: "02 File Preparation" },
+              { label: "03 Laser Software" },
+              { label: "04 Cut / Engrave Settings" },
+              { label: "05 Laser Machine" },
+              { label: "06 Physical Output" }
+            ],
             operations: [
               {
-                type: "CUTTING",
-                tag: "Vector Through-Cut",
-                description: "The laser passes through the material to separate a section.",
-                softwareNote: "Configured as boundary vector cutlines in RDWorks."
+                type: "VECTOR THROUGH-CUT",
+                tag: "Full Penetration Toolpath",
+                description: "The laser beam follows continuous vector paths at lower speed and higher power to melt/vaporize completely through the substrate, separating finished parts with precise kerf control.",
+                softwareNote: "Assigned as boundary vector cutlines with dedicated power settings in RDWorks."
               },
               {
-                type: "ENGRAVING / SCANNING",
-                tag: "Raster Surface Mark",
-                description: "The laser marks or removes material from the surface without completely cutting through it.",
-                softwareNote: "Configured as raster scan layers for surface artwork & lettering in RDWorks."
+                type: "RASTER ENGRAVING / SCANNING",
+                tag: "Surface Shading & Texture",
+                description: "The laser head scans rapidly back and forth in high-density horizontal rows, pulsing at microsecond intervals to remove material from the top surface without full penetration.",
+                softwareNote: "Assigned as scan mode layers in RDWorks for surface artwork, typography, and detail fills."
               }
             ]
           },
           {
-            sectionNumber: "04",
-            sectionLabel: "04 — TYPES OF LASERS USED IN FABRICATION",
-            heading: "Types of Lasers",
+            sectionNumber: "03",
+            sectionLabel: "03 — TYPES OF LASERS",
+            heading: "Types of Lasers Used in Digital Fabrication",
+            content: "Different laser technologies utilize specific active gain media and emission wavelengths, determining their cutting efficiency, focal spot size, and material compatibility across fabrication laboratories.",
             types: [
               {
                 name: "CO₂ Laser",
-                tag: "Non-Metallic Materials",
-                description: "CO₂ lasers are widely used for cutting and engraving non-metallic materials such as wood, acrylic, cardboard, and some plastics."
+                tag: "10.6 µm Wavelength · Non-Metallic Materials",
+                description: "CO₂ gas lasers are the primary workhorse for digital fabrication laboratories, offering high absorption in organic and non-metallic substrates including acrylic, MDF, plywood, paper, cardboard, textiles, and leather."
               },
               {
                 name: "Fiber Laser",
-                tag: "Metal Marking & Cutting",
+                tag: "1.064 µm Wavelength · Metal Fabrication",
                 description: "Fiber lasers are commonly used for marking and cutting metals because of their ability to interact efficiently with metal surfaces."
               },
               {
@@ -1327,73 +1323,218 @@ const protoSemWeeks = [
             ]
           },
           {
-            sectionNumber: "05",
-            sectionLabel: "05 — MATERIALS USED",
-            heading: "Common Laser-Cutting Materials",
+            sectionNumber: "04",
+            sectionLabel: "04 — COMMON MATERIALS",
+            heading: "Common Laser-Cutting Materials & Process Safety",
+            content: "Laser processing behavior depends directly on the optical absorption, thermal conductivity, and chemical composition of the substrate. Selecting verified materials prevents equipment damage and hazardous gas emission.",
             materials: [
-              "Wood",
-              "Plywood",
-              "Acrylic",
-              "Cardboard",
-              "Paper",
-              "Certain plastics",
+              "Wood & MDF",
+              "Plywood Sheets",
+              "Cast & Extruded Acrylic",
+              "Cardboard & Chipboard",
+              "Paper & Kraftboard",
+              "Certain plastics (Laser-safe)",
               "Metals with suitable laser systems"
             ],
-            safetyNote: "Material compatibility depends on the laser type, machine specifications, thickness, and safety requirements. Some materials should not be laser processed because they can produce hazardous fumes or damage the equipment."
+            safetyNote: "CRITICAL MATERIAL SAFETY: Never process materials containing chlorine or halogen compounds (such as PVC, vinyl, or certain synthetics) or toxic binders. Laser vaporization of PVC produces hazardous hydrogen chloride (HCl) gas and toxic chlorine fumes, which cause severe respiratory injury and irreversible machine corrosion."
           },
           {
-            sectionNumber: "06",
-            sectionLabel: "06 — ADVANTAGES",
-            heading: "Advantages of Laser Cutting",
-            items: [
-              "High precision",
-              "Fast prototyping",
-              "Repeatable results",
-              "Complex designs can be fabricated",
-              "Minimal physical contact with the material",
-              "Suitable for both cutting and engraving"
-            ]
-          },
-          {
-            sectionNumber: "07",
-            sectionLabel: "07 — LIMITATIONS",
-            heading: "Limitations of Laser Cutting",
-            items: [
-              "Material thickness can limit cutting capability",
-              "Different materials require different machine settings",
-              "Heat can affect the cut edge or surrounding material",
+            sectionNumber: "05",
+            sectionLabel: "05 — ADVANTAGES & LIMITATIONS",
+            heading: "Advantages & Technical Limitations of Laser Cutting",
+            content: "Understanding the technological trade-offs of laser fabrication is essential for selecting appropriate manufacturing processes and optimizing part designs for physical production.",
+            advantages: [
+              "High precision & fine feature resolution with narrow kerf widths",
+              "Fast prototyping from digital vector CAD/artwork directly to physical parts",
+              "Repeatable results for multi-part batch prototyping without physical tooling",
+              "Complex designs and intricate contours can be fabricated with ease",
+              "Minimal physical contact with the material eliminates tool wear and clamping distortion",
+              "Suitable for both deep raster engraving and vector perimeter cutting"
+            ],
+            limitations: [
+              "Material thickness can limit cutting capability based on laser tube wattage",
+              "Different materials require dedicated machine speed and power calibration",
+              "Heat can affect the cut edge or surrounding material (Heat-Affected Zone)",
               "Some materials are unsuitable because of safety risks or harmful fumes",
-              "Large or complex jobs can require significant processing time",
-              "Proper ventilation and safety precautions are required"
-            ]
-          },
-          {
-            sectionNumber: "08",
-            sectionLabel: "08 — DIGITAL FABRICATION WORKFLOW",
-            heading: "From Digital Design to Physical Output",
-            content: "After understanding the fundamentals of laser cutting, I applied the workflow to a hands-on fabrication activity. The process involved selecting a design, preparing the digital file, configuring the operations in RDWorks, running the laser machine, and evaluating the final physical output.",
-            workflowSequence: [
-              { label: "Design Selection" },
-              { label: "DXF Preparation" },
-              { label: "RDWorks" },
-              { label: "Scan / Engrave + Cut" },
-              { label: "Laser Machine" },
-              { label: "Final Output" }
+              "Large or complex raster engraving jobs can require significant processing time",
+              "Proper ventilation, active fume extraction, and safety precautions are required"
             ]
           }
         ],
 
-        // Student Practical Documentation (01 — 07 in exact order)
+        // SECTION 06 — 18: STUDENT PRACTICAL FABRICATION DOCUMENTATION
         practicalSection: {
-          eyebrow: "HANDS-ON WORKFLOW",
+          eyebrow: "FABRICATION EVIDENCE & CASE STUDY",
           heading: "My Laser Cutting Activity",
-          intro: "For the practical activity, I followed the complete digital-fabrication workflow and produced a physical design using the laser-cutting machine.",
+          intro: "A comprehensive digital-fabrication case study documenting the complete end-to-end workflow: from lab safety verification, machine inspection, and vector DXF preparation to RDWorks layer configuration, parameter execution, physical inspection, and academic reflection.",
           steps: [
             {
-              stepNumber: "01",
-              stepLabel: "01 — DESIGN SELECTION",
-              title: "Design Selection",
-              description: "To begin the activity, I explored various design references online and selected an intricate ship illustration from Pinterest as the base aesthetic for fabrication. The selected artwork features a dynamic composition of outer contours, fine rigging lines, and wave ripples, making it an ideal digital asset to test both high-speed surface raster engraving and clean perimeter vector cutting.",
+              stepNumber: "06",
+              stepLabel: "06 — LAB SAFETY",
+              title: "Lab Safety & Safety Rules",
+              subheading: "Laser Cutting Safety Protocols",
+              description: "Laser cutting involves high-energy optical radiation, concentrated thermal heat, airborne particulate fumes, high-voltage electrical supplies, and automated CNC motion systems. Safe operation in the digital fabrication laboratory requires strict adherence to standardized safety protocols, pre-run verification checklists, and continuous active supervision.",
+              safetyTopics: [
+                {
+                  num: "01",
+                  title: "Laser Safety",
+                  bullets: [
+                    "Never look directly into the laser beam path or reflected optical scatter.",
+                    "Keep the protective machine enclosure cover fully closed during all active cutting and engraving cycles.",
+                    "Do not tamper with, disable, or bypass machine safety interlock switches.",
+                    "Operate equipment strictly under authorized laboratory supervision and documented safety training.",
+                    "Maintain an unobstructed perimeter around the laser and keep combustible materials away from the work envelope.",
+                    "Immediately press the Emergency Stop (E-Stop) if abnormal flaming, smoke buildup, or machine malfunction occurs."
+                  ]
+                },
+                {
+                  num: "02",
+                  title: "Exhaust System",
+                  description: "High-volume exhaust ventilation actively evacuates smoke, vaporized particulate matter, and organic fumes generated during thermal cutting and raster scanning. The exhaust blower must be energized and verified before initiating toolpaths, ensuring clean air in the operator zone and preventing smoke residue from degrading optical mirrors."
+                },
+                {
+                  num: "03",
+                  title: "Chiller / Cooling System",
+                  description: "Industrial water chillers circulate conditioned deionized water through the laser tube jacket to dissipate high thermal loads. Stable operating temperatures prevent beam mode distortion and premature tube degradation. Chiller circulation flow and temperature thresholds must be confirmed before energizing the high-voltage supply."
+                },
+                {
+                  num: "04",
+                  title: "Earthing",
+                  description: "Dedicated low-impedance electrical grounding is mandatory for the machine chassis and power sub-assemblies. Proper earthing dissipates static charges, prevents EMI interference on the DSP motion controller, and provides a safe fault path to eliminate electrical shock hazards."
+                },
+                {
+                  num: "05",
+                  title: "Air Assist",
+                  description: "Pressurized air assist continuously directs an air stream through the laser nozzle coaxial with the beam. This prevents combustible vapors from igniting at the focal point, blows vaporized slag/debris out of the cut kerf, cools the substrate edge, and protects the optical focusing lens from smoke deposits."
+                },
+                {
+                  num: "06",
+                  title: "General Machine Safety",
+                  bullets: [
+                    "Verify material placement, flatness, and secure bed alignment before starting.",
+                    "Inspect the machine bed for unwanted scraps, offcuts, or foreign objects.",
+                    "Confirm optical focal height calibration and verify software workpiece origin.",
+                    "Maintain continuous visual supervision; NEVER leave an operating laser cutter unattended.",
+                    "Wait for exhaust ventilation to clear internal smoke completely before opening the hood.",
+                    "Strictly comply with all institutional digital fabrication laboratory Standard Operating Procedures (SOPs)."
+                  ]
+                }
+              ],
+              checklistLabel: "PRE-FABRICATION SAFETY VERIFICATION CHECKLIST",
+              checklist: [
+                "Laser enclosure interlock verified operational",
+                "Fume exhaust blower active and verified flowing",
+                "Water chiller temperature within operational range",
+                "Electrical chassis earthing confirmed",
+                "Coaxial air assist compressor active",
+                "Material safety compatibility checked (Zero PVC/Halogens)",
+                "Focal height calibrated with focus spacer",
+                "Work area clear and continuous supervision maintained"
+              ],
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Laser Cutting Safety Setup Photograph",
+                  description: "Safety setup documentation showing the closed machine enclosure, active ventilation/exhaust ducting, and laboratory safety arrangement.",
+                  caption: "Laser cutting safety setup showing the machine enclosure, ventilation/exhaust, and laboratory safety arrangement."
+                }
+              ]
+            },
+            {
+              stepNumber: "07",
+              stepLabel: "07 — MACHINE DETAILS",
+              title: "Machine Details",
+              subheading: "Laser Cutting Machine Specifications",
+              description: "The physical fabrication was executed on a laboratory CNC laser cutting and engraving platform equipped with an RDWorks-compatible digital signal processor (DSP) controller, precision stepper axes, and integrated auxiliary fluid support subsystems.",
+              specTable: {
+                columns: ["Parameter", "Specification"],
+                rows: [
+                  ["Make", "Specification to be verified"],
+                  ["Model", "Specification to be verified"],
+                  ["Laser Type", "CO₂ Laser (Gas Discharge)"],
+                  ["Laser Tube Power", "Specification to be verified (Wattage to be confirmed from machine tube record)"],
+                  ["Bed Size", "Specification to be verified (Working envelope X × Y mm)"],
+                  ["Control Software", "RDWorks (Ruida DSP Motion Controller)"],
+                  ["Cooling System", "Industrial Chiller / Closed-Loop Water Cooling [To be verified]"],
+                  ["Air Assist", "Coaxial Compressed Air Assist [To be verified]"],
+                  ["Exhaust", "High-Velocity Fume Extraction / Blower System [To be verified]"]
+                ]
+              },
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Full Laser Cutting Machine Photograph",
+                  description: "Overall photographic documentation of the complete CNC laser cutting machine used in the digital fabrication laboratory.",
+                  caption: "Laser cutting machine used for the fabrication activity."
+                },
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Machine Nameplate / Specification Label Photograph",
+                  description: "Close-up photograph of the manufacturer identification plate, serial number, electrical ratings, and tube power label.",
+                  caption: "Machine identification and technical specification label."
+                }
+              ]
+            },
+            {
+              stepNumber: "08",
+              stepLabel: "08 — MATERIALS USED",
+              title: "Materials Used",
+              subheading: "Fabrication Material Specifications",
+              description: "The digital design was physically fabricated into a flat substrate sheet prepared specifically for laser engraving and precision vector profiling.",
+              specTable: {
+                columns: ["Material Parameter", "Specification / Laboratory Record"],
+                rows: [
+                  ["Material Type", "To be verified from the actual material/workshop record (e.g., MDF / Plywood / Acrylic)"],
+                  ["Thickness", "To be verified from the actual material measurement (e.g., 3.0 mm / 4.0 mm)"],
+                  ["Source", "Lab Stock / Workshop Material Supply"],
+                  ["Color / Surface Finish", "Natural / Plain Substrate [To be verified]"],
+                  ["Fabrication Operations", "Dual-Operation: Surface Raster Engraving + Perimeter Vector Through-Cutting"]
+                ]
+              },
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Material Sheet Before Cutting Photograph",
+                  description: "Photograph of the raw material sheet positioned, leveled, and aligned on the machine honey-comb/knife bed before toolpath execution.",
+                  caption: "Material sheet prepared for the laser-cutting operation."
+                },
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Material Thickness Measurement Photograph",
+                  description: "Close-up measurement photograph of the stock sheet thickness using digital vernier calipers before cutting.",
+                  caption: "Material thickness reference measured before fabrication."
+                }
+              ]
+            },
+            {
+              stepNumber: "09",
+              stepLabel: "09 — SELECTED DESIGN",
+              title: "Selected Design / Image",
+              subheading: "Design Selection & Fabrication Intent",
+              description: "For this digital fabrication task, an intricate ship illustration was chosen as a reference design from Pinterest. The visual composition features an ornate sailing vessel with dynamic multi-tiered masts, fine rigging lines, billowing sail geometry, wave ripples, and framed 'ODYSSEY' typography. This artwork provided an ideal benchmark to evaluate both high-resolution surface raster marking and clean outer perimeter through-cutting within a single integrated workpiece.",
+              designIntent: {
+                tag: "FABRICATION DESIGN INTENT",
+                title: "Dual-Operation Digital Fabrication Strategy",
+                intro: "The selected ship illustration was chosen specifically to test and evaluate two fundamental digital fabrication operations within one unified design:",
+                items: [
+                  {
+                    num: "01",
+                    title: "Surface Engraving / Scanning",
+                    desc: "Testing fine line resolution, text legibility, wave detail reproduction, and surface shading depth across intricate interior vectors."
+                  },
+                  {
+                    num: "02",
+                    title: "Perimeter Vector Cutting",
+                    desc: "Testing through-cut separation along the continuous outer contour, evaluating kerf tolerance, clean edge geometry, and part release."
+                  }
+                ],
+                note: "Design Attribution: Selected external illustration curated from Pinterest as a digital-to-physical fabrication reference study (not an original illustration by author)."
+              },
               media: {
                 src: "assets/images/protosem/week-06/laser/laser ref img.jpeg",
                 alt: "Selected ship design reference from Pinterest",
@@ -1401,80 +1542,401 @@ const protoSemWeeks = [
               }
             },
             {
-              stepNumber: "02",
-              stepLabel: "02 — PREPARING THE DESIGN",
-              title: "Preparing the Design",
-              description: "I prepared the chosen ship artwork for physical fabrication by converting the graphic into a standardized DXF vector file and importing it into the RDWorks environment. Converting the design into clean geometric vector paths ensured mathematical precision, allowing the laser-control software to correctly interpret closed boundaries and path segments for toolpath generation.",
-              media: {
-                src: "assets/images/protosem/week-06/laser/rdworks.png",
-                alt: "RDWorks application interface showing DXF conversion and import",
-                caption: "Step 02: Converting Selected Design into DXF Format & Importing into RDWorks"
-              }
+              stepNumber: "10",
+              stepLabel: "10 — IMAGE → DXF CONVERSION",
+              title: "Image-to-DXF Conversion",
+              subheading: "Vectorizing Artwork for CNC Toolpaths",
+              description: "Laser cutting machines cannot directly execute raster bitmap images for precision vector pathing; CNC controllers require mathematical vector paths defined by coordinates, curves, and nodes. To bridge this requirement, the reference artwork was converted into a Drawing Exchange Format (DXF) vector geometry dataset.",
+              conversionTool: "Conversion software/tool to be verified (e.g., Vectorizer / CorelDRAW / Adobe Illustrator / Inkscape / RDWorks Built-in Trace)",
+              processSteps: [
+                "Select and import the high-resolution ship illustration reference.",
+                "Pre-process image contrast, brightness, and threshold to isolate distinct artwork features.",
+                "Execute vector tracing to convert raster pixel edges into continuous geometric bezier paths.",
+                "Export the generated vector paths into the standardized AutoCAD DXF interchange format.",
+                "Import the generated DXF file directly into the RDWorks laser CAD/CAM environment.",
+                "Inspect the imported vector geometry to verify path continuity, curve smoothness, and node integrity."
+              ],
+              techNote: "Why DXF? Drawing Exchange Format (DXF) is a universal CAD data interchange standard that encodes explicit geometric primitives (lines, polylines, arcs, splines) necessary for the Ruida DSP motion controller to compute velocity profiles and laser firing timings.",
+              images: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Original Reference Image Before Conversion",
+                  description: "High-resolution view of the original bitmap artwork prior to vector path generation.",
+                  caption: "Original selected artwork before vector conversion."
+                },
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Image-to-DXF Conversion Software Interface",
+                  description: "Screenshot of the vectorization software showing curve tracing thresholds and node generation.",
+                  caption: "Artwork being converted/prepared as vector geometry."
+                },
+                {
+                  src: "assets/images/protosem/week-06/laser/rdworks.png",
+                  alt: "Converted DXF geometry imported into RDWorks interface",
+                  caption: "Converted DXF geometry imported into RDWorks."
+                }
+              ]
             },
             {
-              stepNumber: "03",
-              stepLabel: "03 — RDWORKS CONFIGURATION",
-              title: "RDWorks Configuration",
-              description: "In RDWorks, I configured the fabrication workspace and assigned the required operations across distinct color-coded layers according to the desired outcome. I designated the internal graphic details, 'ODYSSEY' typography, and water ripples for surface scanning/engraving, while mapping the outer hull perimeter as a dedicated cutting layer to achieve clean part separation.",
-              media: {
-                src: "assets/images/protosem/week-06/laser/in rdworks.png",
-                alt: "RDWorks toolpath configuration showing scan and cut layers",
-                caption: "Step 03: RDWorks Configuration — Assigning Scan/Engrave and Cut Operations"
-              }
+              stepNumber: "11",
+              stepLabel: "11 — FILE PREPARATION",
+              title: "File Preparation",
+              subheading: "Vector Cleaning & CAD Pre-Flight Verification",
+              description: "Before transmitting CAD geometry to machine control software, rigorous vector pre-flight verification was performed. Raw vectorized artwork often contains hidden defects—such as open contours, overlapping duplicate segments, and stray anchor points—which can lead to failed cuts, excessive charring, or distorted geometry.",
+              checklistCards: [
+                {
+                  title: "VECTOR CLEANING",
+                  desc: "Inspected and smoothed vector paths, eliminating microscopic rogue nodes and ensuring smooth acceleration curves for the laser carriage."
+                },
+                {
+                  title: "SCALING & DIMENSIONS",
+                  desc: "Verified global dimensional scale in millimeters to match the intended physical prototype footprint within the machine envelope."
+                },
+                {
+                  title: "CLOSED PATH VERIFICATION",
+                  desc: "Verified that all perimeter cut boundaries formed 100% closed polylines, ensuring complete part release upon vector pass completion."
+                },
+                {
+                  title: "DUPLICATE REMOVAL",
+                  desc: "Ran automated overlap detection to delete coincident vectors, preventing the laser from making unintended repeated passes over identical paths."
+                },
+                {
+                  title: "UNWANTED GEOMETRY CLEANUP",
+                  desc: "Purged hidden construction guidelines, stray anchor points, and extraneous bounding boxes that should not be physically fabricated."
+                },
+                {
+                  title: "LAYER SEPARATION",
+                  desc: "Isolated interior artistic detail vectors from outer perimeter cutlines into distinct groups for independent RDWorks layer mapping."
+                }
+              ],
+              checklistLabel: "FILE PREPARATION & GEOMETRY VERIFICATION CHECKLIST",
+              checklist: [
+                "Geometry cleaned and nodes smoothed",
+                "Scale and millimeter dimensions verified",
+                "Cutting perimeter closed paths checked",
+                "Duplicate / overlapping geometry removed",
+                "Unwanted construction guidelines purged",
+                "Final DXF file validated for RDWorks import"
+              ],
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Cleaned Vector / DXF CAD Geometry View",
+                  description: "Screenshot showing cleaned, verified vector paths and layer groupings in the CAD editor before RDWorks nesting.",
+                  caption: "Cleaned and verified vector geometry prepared for RDWorks."
+                }
+              ]
             },
             {
-              stepNumber: "04",
-              stepLabel: "04 — LASER CUTTING PROCESS",
-              title: "Laser Cutting Process",
-              description: "The prepared toolpath instructions were transferred to the CNC laser-cutting machine, which sequentially executed the programmed paths across the stock material. The focused laser beam first performed high-speed raster scanning to etch the intricate surface artwork before transitioning to full-power vector cutting along the outer boundary to release the finished part.",
-              media: {
-                src: "assets/images/protosem/week-06/laser/laser mchine cutting.mp4",
-                type: "video",
-                isVideo: true,
-                alt: "CNC laser cutting machine actively engraving and cutting the board",
-                caption: "Step 04: Laser Cutting Machine Following Configured Engrave & Cut Paths"
-              }
+              stepNumber: "12",
+              stepLabel: "12 — NESTING & RDWORKS LAYOUT",
+              title: "Nesting & RDWorks Layout",
+              subheading: "Workpiece Nesting, Layer Strategy & RDWorks CAM",
+              description: "In the RDWorks digital CAM environment, the verified DXF geometry was arranged relative to the usable material sheet area. Separate color-coded layers were assigned to distinguish high-speed surface raster scanning from perimeter through-cutting, establishing the correct execution order.",
+              layoutTopics: [
+                {
+                  label: "DESIGN PLACEMENT & NESTING",
+                  text: "The ship design was positioned within the safe working envelope of the material stock, leaving sufficient margin from clamps and edges to optimize material yield."
+                },
+                {
+                  label: "CUTTING VS ENGRAVING LAYERS",
+                  text: "Internal artwork details, text, and wave lines were assigned to Scan/Engrave mode, while the continuous outer boundary was assigned to Cut mode."
+                },
+                {
+                  label: "RDWORKS LAYER COLORS",
+                  text: "Color-coded processing layers were utilized to visually identify and isolate operational parameters (speed, power, sequence) across different features."
+                },
+                {
+                  label: "EXECUTION SEQUENCE",
+                  text: "RDWorks was ordered to execute interior engraving first, followed by perimeter vector cutting, preventing workpiece movement before detail etching."
+                }
+              ],
+              layerLegend: {
+                title: "RDWORKS LAYER CONFIGURATION LEGEND",
+                items: [
+                  {
+                    colorName: "Scan Layer [Verify Color]",
+                    mode: "Raster Scan / Engrave",
+                    desc: "Internal artwork, sails, rigging detail, text & wave patterns"
+                  },
+                  {
+                    colorName: "Cut Layer [Verify Color]",
+                    mode: "Vector Through-Cut",
+                    desc: "Outer hull perimeter and final bounding contour"
+                  }
+                ]
+              },
+              images: [
+                {
+                  src: "assets/images/protosem/week-06/laser/in rdworks.png",
+                  alt: "RDWorks workspace showing design layout, scan layers, and cut boundaries",
+                  caption: "Final RDWorks layout showing design placement, operation layers, and cutting/engraving configuration."
+                },
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Full RDWorks Layout with Material Sheet Boundary",
+                  description: "Expanded workspace view showing the complete workpiece nested inside the material stock boundary and origin point.",
+                  caption: "Final nesting and material layout before sending the job to the laser cutter."
+                }
+              ]
             },
             {
-              stepNumber: "05",
-              stepLabel: "05 — MACHINE CONTROL PANEL",
-              title: "Machine Control Panel",
-              description: "The machine's digital control panel was used to operate, calibrate, and monitor the entire laser-cutting process during fabrication. It allowed precise manual jogging of the laser head to establish the workpiece origin, verifying laser focus distance relative to the material surface, and monitoring real-time execution while ensuring active exhaust ventilation.",
-              media: {
-                src: "assets/images/protosem/week-06/laser/laser control panel.jpeg",
-                alt: "Machine control panel used to operate and monitor laser cutting",
-                caption: "Step 05: Laser Machine Digital Control Panel Interface"
-              }
+              stepNumber: "13",
+              stepLabel: "13 — FINAL MACHINE SETTINGS",
+              title: "Final Machine Settings",
+              subheading: "RDWorks Process Parameters",
+              description: "Laser fabrication requires configuring distinct kinematic speeds, optical power percentages, and repetition frequencies tailored to material properties. In accordance with strict factual documentation standards, actual machine parameter values are recorded below directly from the fabrication run.",
+              settingsTable: {
+                columns: ["Material", "Thickness (mm)", "Operation", "Speed (mm/s)", "Min Power (%)", "Max Power (%)", "Passes", "Frequency (Hz)"],
+                rows: [
+                  [
+                    "[Actual Material]",
+                    "[Actual mm]",
+                    "Engraving / Scan",
+                    "[To be verified from machine record]",
+                    "[To be verified]",
+                    "[To be verified]",
+                    "1",
+                    "[To be verified]"
+                  ],
+                  [
+                    "[Actual Material]",
+                    "[Actual mm]",
+                    "Vector Cutting",
+                    "[To be verified from machine record]",
+                    "[To be verified]",
+                    "[To be verified]",
+                    "1",
+                    "[To be verified]"
+                  ]
+                ]
+              },
+              techNote: "Factual Documentation Policy: Exact speeds, powers, and frequency values are subject to verification from the physical RDWorks layer settings file and laboratory logbook. No guessed or fictitious settings are published in this portfolio.",
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "RDWorks Parameter Settings Dialog Screenshot",
+                  description: "Screenshot of the RDWorks Layer Parameter dialog window showing exact Speed, Min/Max Power, and Interval settings used for the cut.",
+                  caption: "Actual RDWorks machine parameters used for the fabrication process."
+                }
+              ]
             },
             {
-              stepNumber: "06",
-              stepLabel: "06 — HANDS-ON FABRICATION",
-              title: "Hands-on Fabrication",
-              description: "This hands-on fabrication activity provided practical insight into how a digital 2D vector file is physically translated into a tangible engineering artifact. Working directly with the laser machine reinforced critical digital fabrication principles, including focal height alignment, kerf tolerance considerations, material safety supervision, and post-cut inspection.",
-              media: {
-                src: "assets/images/protosem/week-06/laser/me doing laser.jpeg",
-                alt: "Working hands-on near the laser machine during fabrication",
-                caption: "Step 06: Hands-on Experience Operating the Laser Machine"
-              }
+              stepNumber: "14",
+              stepLabel: "14 — CUTTING PROCESS",
+              title: "Cutting Process",
+              subheading: "Chronological Fabrication Execution",
+              description: "The programmed toolpaths were executed on the CNC laser cutting machine following a structured operational sequence to ensure safety, precision, and part quality.",
+              processSequence: [
+                {
+                  step: "01",
+                  title: "Machine Setup & Alignment",
+                  desc: "Secured material sheet flat on honeycomb bed, jogged laser head to set origin point, and verified focal distance using focal spacer tool."
+                },
+                {
+                  step: "02",
+                  title: "Auxiliary System Activation",
+                  desc: "Energized fume exhaust blower, verified water chiller cooling flow/temperature, and engaged coaxial air assist compressor."
+                },
+                {
+                  step: "03",
+                  title: "Framing & Toolpath Download",
+                  desc: "Transferred RDWorks file via USB/Ethernet and ran a dry 'Frame' boundary preview to verify physical material clearance."
+                },
+                {
+                  step: "04",
+                  title: "Raster Engraving Execution",
+                  desc: "Machine executed high-speed horizontal scanning strokes to engrave internal ship artwork, rigging, and 'ODYSSEY' lettering."
+                },
+                {
+                  step: "05",
+                  title: "Vector Perimeter Cutting",
+                  desc: "Upon completion of raster passes, the laser immediately switched to full-depth vector cutting along the outer perimeter contour."
+                },
+                {
+                  step: "06",
+                  title: "Inspection & Part Removal",
+                  desc: "Allowed exhaust to evacuate residual smoke for 30 seconds before opening enclosure hood to remove the completed physical piece."
+                }
+              ],
+              images: [
+                {
+                  src: "assets/images/protosem/week-06/laser/laser mchine cutting.mp4",
+                  type: "video",
+                  isVideo: true,
+                  alt: "Laser cutter actively executing toolpaths",
+                  caption: "Laser cutter executing the configured engraving and cutting toolpaths."
+                },
+                {
+                  src: "assets/images/protosem/week-06/laser/laser control panel.jpeg",
+                  alt: "Laser machine digital control panel during operation",
+                  caption: "Machine control panel used to operate and monitor the laser-cutting process."
+                },
+                {
+                  src: "assets/images/protosem/week-06/laser/me doing laser.jpeg",
+                  alt: "Hands-on supervision and operation during fabrication",
+                  caption: "Hands-on observation and operation during the laser fabrication process."
+                }
+              ]
             },
             {
-              stepNumber: "07",
-              stepLabel: "07 — FINAL OUTPUT",
-              title: "Final Output",
+              stepNumber: "15",
+              stepLabel: "15 — FINAL RESULT",
+              title: "Final Result — Hero Shot",
+              subheading: "Physical Fabricated Artifact Evaluation",
               isFinal: true,
               driveLink: "https://drive.google.com/file/d/1chX9dWIYWD4TF9-AlQS-h4x14N2pT8GC/view",
-              driveLinkLabel: "View Final Laser Outcome on Google Drive",
-              description: "The completed laser-cut piece produced from the selected digital design, showcasing clean raster surface engraving on the ship artwork and crisp through-cut outer edges. The finished physical artifact demonstrates the end-to-end digital-to-physical workflow from vector preparation in RDWorks to machine fabrication and final quality assessment.",
+              driveLinkLabel: "View Verified High-Resolution Final Output on Google Drive",
+              description: "The completed laser-cut and engraved ship artifact produced through the verified digital-to-physical workflow. The physical result demonstrates crisp raster surface definition across the ship artwork combined with clean, perpendicular vector through-cut boundaries.",
+              observations: [
+                "Surface raster engraving is evenly rendered across internal ship artwork, rigging lines, and 'ODYSSEY' typography.",
+                "Outer vector boundary provides clean dimensional separation from the parent material sheet with sharp corner transitions.",
+                "Process successfully validates the integrated workflow: digital reference selection → vector conversion → RDWorks layer setup → CNC laser fabrication."
+              ],
               media: {
                 src: "assets/images/protosem/week-06/laser/laser output.jpeg",
-                alt: "Completed physical laser-cut and engraved ship output",
-                caption: "Step 07: Final Completed Laser-Cut and Engraved Output"
-              }
+                alt: "Final laser-cut and engraved ship artifact produced from the prepared digital design",
+                caption: "Final laser-cut and engraved ship artifact produced from the prepared digital design."
+              },
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Top / Front Detail View Photograph",
+                  description: "High-magnification detail photograph showing the sharpness of engraved lines, text contrast, and wood/substrate surface texture.",
+                  caption: "Detailed view of the completed laser-cut and engraved surface."
+                },
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Side View / Cut Edge Quality Photograph",
+                  description: "Orthogonal photograph of the cut edge profile showing kerf taper, striations, and material thickness.",
+                  caption: "Side view showing the resulting cut edge and material thickness."
+                }
+              ]
+            },
+            {
+              stepNumber: "16",
+              stepLabel: "16 — PROBLEMS & SOLUTIONS",
+              title: "Problems Faced & Solutions",
+              subheading: "Troubleshooting & Engineering Solutions",
+              description: "Digital fabrication processes frequently encounter technical challenges across vector conversion, material flatness, and machine parameter calibration. The table below outlines key engineering problems, root causes, implemented corrective actions, and verified final outcomes.",
+              troubleTable: {
+                columns: ["Problem Encountered", "Identified Root Cause", "Corrective Action Implemented", "Verified Final Outcome"],
+                rows: [
+                  [
+                    "Vector Node Redundancy in DXF",
+                    "Automated bitmap vectorization created dense overlapping nodes and split bezier segments.",
+                    "Cleaned vector paths in CAD, applied curve smoothing, and welded coincident vertices prior to RDWorks import.",
+                    "Smooth motion controller acceleration, zero stuttering, and crisp line definition."
+                  ],
+                  [
+                    "Layer Assignment & Order Conflict",
+                    "Initial DXF import mapped cutting lines before internal detail engraving in toolpath queue.",
+                    "Re-ordered layers in RDWorks to mandate Scan/Engrave execution prior to outer perimeter Vector Cut.",
+                    "Workpiece remained fully stabilized by parent sheet during detailed surface engraving."
+                  ],
+                  [
+                    "Material Surface Height Variance [To be verified]",
+                    "Slight sheet warping on honeycomb bed causing minor focal deviation across the envelope.",
+                    "Secured sheet edges with low-profile hold-down pins and recalibrated focal distance to the central workpiece plane.",
+                    "Uniform focal spot diameter, consistent line depth, and even engraving contrast throughout."
+                  ]
+                ]
+              },
+              placeholders: [
+                {
+                  isPlaceholder: true,
+                  tag: "PHOTO TO ADD",
+                  title: "Troubleshooting / Iteration Test Photograph",
+                  description: "Photograph documenting any initial trial, parameter test piece, or corrected geometry iteration during the lab session.",
+                  caption: "Example of the issue observed during fabrication before correction."
+                }
+              ]
+            },
+            {
+              stepNumber: "17",
+              stepLabel: "17 — REFLECTION",
+              title: "Reflection",
+              subheading: "Technical Synthesis & Key Learnings",
+              description: "A structured engineering reflection synthesizing technical insights, operational challenges, practical competencies gained, and opportunities for future fabrication optimization.",
+              reflectionSections: [
+                {
+                  title: "WHAT I LEARNED",
+                  content: "I learned how a digital design can be translated into a physical object through a complete laser-cutting workflow, from vector preparation and DXF handling to RDWorks configuration and machine fabrication."
+                },
+                {
+                  title: "CHALLENGES FACED",
+                  content: "[Insert actual challenge(s) encountered during the activity.]"
+                },
+                {
+                  title: "SKILLS GAINED",
+                  items: [
+                    "DXF/vector file handling",
+                    "RDWorks workflow",
+                    "Laser cutting and engraving concepts",
+                    "Digital fabrication",
+                    "Machine setup awareness",
+                    "Material-process understanding",
+                    "Physical output inspection"
+                  ]
+                },
+                {
+                  title: "IMPROVEMENTS MADE",
+                  content: "[Insert actual improvements made during the activity.]"
+                },
+                {
+                  title: "WHAT I WOULD DO DIFFERENTLY",
+                  content: "In future fabrication tasks, I would spend more time validating the vector geometry, documenting machine parameters, testing critical settings on scrap material where appropriate, and recording the complete fabrication process for better repeatability."
+                }
+              ]
+            },
+            {
+              stepNumber: "18",
+              stepLabel: "18 — SOURCE FILES",
+              title: "Source Files",
+              subheading: "Project Design & CAM Assets",
+              description: "Access the design and CAD/CAM source files associated with this digital fabrication project. In accordance with portfolio verification standards, file links are updated as verified assets are staged in the project repository.",
+              sourceFiles: [
+                {
+                  format: "DXF",
+                  name: "Laser Cut Ship Vector Geometry",
+                  description: "Cleaned 2D CAD vector interchange file containing isolated engraving paths and closed perimeter cutlines.",
+                  status: "Source file to be uploaded",
+                  url: null,
+                  filename: "laser-cutting-ship.dxf"
+                },
+                {
+                  format: "AI",
+                  name: "Original Vector Artwork File",
+                  description: "Master vector source file with editable layers, stroke styles, and vector groupings.",
+                  status: "Source file to be uploaded",
+                  url: null,
+                  filename: "laser-cutting-ship.ai"
+                }
+              ],
+              additionalLinks: [
+                {
+                  label: "Pinterest Ship Design Reference Source",
+                  url: "https://in.pinterest.com/pin/211106363776993189/",
+                  isExternal: true
+                },
+                {
+                  label: "High-Resolution Final Output on Google Drive",
+                  url: "https://drive.google.com/file/d/1chX9dWIYWD4TF9-AlQS-h4x14N2pT8GC/view",
+                  isExternal: true
+                }
+              ]
             }
           ]
         },
 
-        // Reflection & Learning
+        // Tab Reflection & Learning Synthesis
         learningReflection: {
           badge: "SYNTHESIS & REFLECTION",
           heading: "What I Learned",
