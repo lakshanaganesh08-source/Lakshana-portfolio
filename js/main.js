@@ -584,10 +584,6 @@ function initProtoSem() {
                 </span>
                 <h4 class="model-viewer-title">${m3d.title || 'Interactive 3D Model'}</h4>
               </div>
-              <div class="model-viewer-controls-hint">
-                <span class="hint-icon">🔄</span>
-                <span class="hint-text">${m3d.instruction || 'Drag to rotate • Scroll to zoom'}</span>
-              </div>
             </div>
 
             <div class="model-viewer-stage">
@@ -625,7 +621,7 @@ function initProtoSem() {
             </div>
 
             <div class="model-viewer-footer">
-              <span class="model-viewer-tip">💡 <strong>Interaction Guide:</strong> Left click &amp; drag (or 1 finger) to orbit · Right click &amp; drag (or 2 fingers) to pan · Scroll wheel (or pinch) to zoom.</span>
+              <span class="model-viewer-tip">${m3d.caption || 'Interactive 3D mesh preview of the selected Baby Groot model.'}</span>
             </div>
           </div>
         `;
@@ -650,357 +646,623 @@ function initProtoSem() {
             `;
           }
 
-          // 2. Fab Academy-Style Educational Sections (01 — 10)
-          if (tab.educationalSections && tab.educationalSections.length > 0) {
-            tab.educationalSections.forEach(sec => {
-              let secBodyHtml = '';
+          // Helper to render any educational / technical / synthesis section card
+          const renderEducationalSection = (sec) => {
+            let secBodyHtml = '';
 
-              // Text content
-              if (sec.content) {
-                secBodyHtml += `<p class="fab-sec-text">${sec.content}</p>`;
-              }
+            // Text content
+            if (sec.content) {
+              secBodyHtml += `<p class="fab-sec-text">${sec.content}</p>`;
+            }
 
-              // Concept Flow (What is 3D Printing: Digital Model -> Slicing -> Layer-by-Layer -> Physical)
-              if (sec.conceptFlow && sec.conceptFlow.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-flow-wrapper">
-                    <span class="fab-flow-label">CORE ADDITIVE MANUFACTURING CONCEPT</span>
-                    <div class="fab-flow-chain">
-                      ${sec.conceptFlow.map((cf, cfIdx) => `
-                        <div class="fab-flow-node ${cfIdx === sec.conceptFlow.length - 1 ? 'is-final' : ''}">
+            // Concept Flow (What is 3D Printing: Digital Model -> Slicing -> Layer-by-Layer -> Physical)
+            if (sec.conceptFlow && sec.conceptFlow.length > 0) {
+              secBodyHtml += `
+                <div class="fab-flow-wrapper">
+                  <span class="fab-flow-label">CORE ADDITIVE MANUFACTURING CONCEPT</span>
+                  <div class="fab-flow-chain" style="--flow-cols: ${sec.conceptFlow.length};">
+                    ${sec.conceptFlow.map((cf, cfIdx) => `
+                      <div class="fab-flow-node ${cfIdx === sec.conceptFlow.length - 1 ? 'is-final' : ''}">
+                        <div class="fab-flow-node-top">
                           <span class="fab-flow-step">${String(cfIdx + 1).padStart(2, '0')}</span>
-                          <span class="fab-flow-name">${cf.label}</span>
+                          ${cfIdx < sec.conceptFlow.length - 1 ? '<span class="fab-flow-arrow">→</span>' : '<span class="fab-flow-final-pill">Result</span>'}
                         </div>
-                        ${cfIdx < sec.conceptFlow.length - 1 ? '<span class="fab-flow-arrow">→</span>' : ''}
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Applications pills (Section 01)
-              if (sec.applications && sec.applications.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-apps-container">
-                    <span class="fab-apps-label">COMMON FABRICATION APPLICATIONS</span>
-                    <div class="fab-apps-grid">
-                      ${sec.applications.map(app => `
-                        <div class="fab-app-pill">
-                          <span class="fab-pill-dot"></span>
-                          <span>${app}</span>
-                        </div>
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Technical illustration placeholder (Section 01)
-              if (sec.illustrationPlaceholder) {
-                secBodyHtml += `
-                  <div class="fab-technical-placeholder">
-                    <div class="tech-placeholder-icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                      </svg>
-                    </div>
-                    <div class="tech-placeholder-meta">
-                      <span class="tech-placeholder-tag">TECHNICAL ILLUSTRATION</span>
-                      <h4 class="tech-placeholder-title">${sec.illustrationPlaceholder.title}</h4>
-                      <p class="tech-placeholder-sub">${sec.illustrationPlaceholder.subtitle}</p>
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Numbered Steps List (Section 02)
-              if (sec.steps && sec.steps.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-numbered-steps-list">
-                    ${sec.steps.map((st, sIdx) => `
-                      <div class="fab-step-list-item">
-                        <span class="fab-step-list-num">${String(sIdx + 1).padStart(2, '0')}</span>
-                        <p class="fab-step-list-text">${st}</p>
+                        <span class="fab-flow-name">${cf.label}</span>
                       </div>
                     `).join('')}
-                  </div>
-                `;
-              }
-
-              // Process Flow Visual (Section 02)
-              if (sec.processFlow && sec.processFlow.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-flow-wrapper">
-                    <span class="fab-flow-label">WORKFLOW PROCESS FLOW</span>
-                    <div class="fab-flow-chain">
-                      ${sec.processFlow.map((pf, pfIdx) => `
-                        <div class="fab-flow-node ${pfIdx === sec.processFlow.length - 1 ? 'is-final' : ''}">
-                          <span class="fab-flow-step">${String(pfIdx + 1).padStart(2, '0')}</span>
-                          <span class="fab-flow-name">${pf.label}</span>
-                        </div>
-                        ${pfIdx < sec.processFlow.length - 1 ? '<span class="fab-flow-arrow">↓</span>' : ''}
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Stages of 3D Printing Grid (Section 03)
-              if (sec.stages && sec.stages.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-stages-grid">
-                    ${sec.stages.map(st => `
-                      <div class="fab-stage-card">
-                        <div class="fab-stage-header">
-                          <span class="fab-stage-num">${st.stageNumber}</span>
-                          <h4 class="fab-stage-title">${st.title}</h4>
-                        </div>
-                        <p class="fab-stage-desc">${st.description}</p>
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Operations Comparison (Section 03 Laser Track)
-              if (sec.operations && sec.operations.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-ops-grid">
-                    ${sec.operations.map(op => `
-                      <div class="fab-op-card">
-                        <div class="fab-op-header">
-                          <span class="fab-op-tag">${op.tag}</span>
-                          <h4 class="fab-op-title">${op.type}</h4>
-                        </div>
-                        <p class="fab-op-desc">${op.description}</p>
-                        ${op.softwareNote ? `
-                          <div class="fab-op-note">
-                            <span class="fab-op-note-label">RDWorks Toolpath:</span>
-                            <span>${op.softwareNote}</span>
-                          </div>
-                        ` : ''}
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Types Grid (Section 04 Technologies / Lasers)
-              if (sec.types && sec.types.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-types-grid">
-                    ${sec.types.map(t => `
-                      <div class="fab-type-card">
-                        <div class="fab-type-header">
-                          <span class="fab-type-tag">${t.tag}</span>
-                          <h4 class="fab-type-title">${t.name}</h4>
-                        </div>
-                        <p class="fab-type-desc">${t.description}</p>
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Materials Cards Grid (Section 06 3D Printing Materials)
-              if (sec.materialsCards && sec.materialsCards.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-mat-cards-grid">
-                    ${sec.materialsCards.map(mat => `
-                      <div class="fab-mat-card">
-                        <div class="fab-mat-header">
-                          <span class="fab-mat-tag">${mat.type}</span>
-                          <h4 class="fab-mat-title">${mat.name}</h4>
-                        </div>
-                        <p class="fab-mat-desc">${mat.description}</p>
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Common Materials Pills (Section 05 Laser Cutting Materials)
-              if (sec.materials && sec.materials.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-materials-wrapper">
-                    <span class="fab-materials-label">COMMON LASER-CUTTING MATERIALS</span>
-                    <div class="fab-materials-grid">
-                      ${sec.materials.map(m => `
-                        <div class="fab-material-pill">
-                          <span class="material-dot"></span>
-                          <span>${m}</span>
-                        </div>
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              if (sec.safetyNote) {
-                secBodyHtml += `
-                  <div class="fab-safety-alert">
-                    <div class="fab-safety-icon">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                        <line x1="12" y1="9" x2="12" y2="13"></line>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                      </svg>
-                    </div>
-                    <div class="fab-safety-content">
-                      <span class="fab-safety-title">MATERIAL & PROCESS OVERVIEW</span>
-                      <p class="fab-safety-text">${sec.safetyNote}</p>
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Advantages & Limitations (Combined / Structured)
-              if (sec.advantages || sec.limitations) {
-                secBodyHtml += `
-                  <div class="fab-pros-cons-grid">
-                    ${sec.advantages && sec.advantages.length > 0 ? `
-                      <div class="fab-pros-column">
-                        <span class="fab-pros-label">✓ KEY ADVANTAGES</span>
-                        <div class="fab-items-grid is-advantages">
-                          ${sec.advantages.map(adv => `
-                            <div class="fab-item-card">
-                              <span class="fab-item-bullet">✓</span>
-                              <span class="fab-item-text">${adv}</span>
-                            </div>
-                          `).join('')}
-                        </div>
-                      </div>
-                    ` : ''}
-                    ${sec.limitations && sec.limitations.length > 0 ? `
-                      <div class="fab-cons-column">
-                        <span class="fab-cons-label">— TECHNICAL LIMITATIONS</span>
-                        <div class="fab-items-grid is-limitations">
-                          ${sec.limitations.map(lim => `
-                            <div class="fab-item-card">
-                              <span class="fab-item-bullet">—</span>
-                              <span class="fab-item-text">${lim}</span>
-                            </div>
-                          `).join('')}
-                        </div>
-                      </div>
-                    ` : ''}
-                  </div>
-                `;
-              } else if (sec.items && sec.items.length > 0) {
-                const isLimitation = sec.heading.toLowerCase().includes('limitation');
-                secBodyHtml += `
-                  <div class="fab-items-grid ${isLimitation ? 'is-limitations' : 'is-advantages'}">
-                    ${sec.items.map(item => `
-                      <div class="fab-item-card">
-                        <span class="fab-item-bullet">${isLimitation ? '—' : '✓'}</span>
-                        <span class="fab-item-text">${item}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Workflow Sequence (Section 08 Laser Cutting Track)
-              if (sec.workflowSequence && sec.workflowSequence.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-sequence-wrapper">
-                    <span class="fab-sequence-label">DIGITAL-TO-PHYSICAL SEQUENCE</span>
-                    <div class="fab-sequence-chain">
-                      ${sec.workflowSequence.map((ws, wsIdx) => `
-                        <div class="fab-sequence-node ${wsIdx === sec.workflowSequence.length - 1 ? 'is-final' : ''}">
-                          <span class="fab-sequence-num">${String(wsIdx + 1).padStart(2, '0')}</span>
-                          <span class="fab-sequence-text">${ws.label}</span>
-                        </div>
-                        ${wsIdx < sec.workflowSequence.length - 1 ? '<span class="fab-sequence-arrow">→</span>' : ''}
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Interactive 3D Model Viewer (if configured in educational sections)
-              if (sec.model3d) {
-                secBodyHtml += render3DModelCard(sec.model3d);
-              }
-
-              // Dedicated Media Image (Section 09 Printer & Section 10 Filament)
-              if (sec.media) {
-                secBodyHtml += `
-                  <div class="step-media-container" style="margin-top: var(--space-4);">
-                    ${renderMediaItem(sec.media, 'margin: 0;')}
-                  </div>
-                `;
-              } else if (sec.images && sec.images.length > 0) {
-                secBodyHtml += `
-                  <div class="step-media-container" style="margin-top: var(--space-4);">
-                    <div class="photo-split-grid">
-                      ${sec.images.map(img => renderMediaItem(img, 'margin: 0;')).join('')}
-                    </div>
-                  </div>
-                `;
-              } else if (sec.mediaPlaceholder) {
-                secBodyHtml += `
-                  <div class="fab-technical-placeholder fab-hardware-placeholder">
-                    <div class="tech-placeholder-icon">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                      </svg>
-                    </div>
-                    <div class="tech-placeholder-meta">
-                      <span class="tech-placeholder-tag">${sec.mediaPlaceholder.tag || 'SPECIFICATION'}</span>
-                      <h4 class="tech-placeholder-title">${sec.mediaPlaceholder.title}</h4>
-                      <p class="tech-placeholder-sub">${sec.mediaPlaceholder.subtitle}</p>
-                    </div>
-                  </div>
-                `;
-              }
-
-              // Specification Info Grid (Section 10 Filament)
-              if (sec.specGrid && sec.specGrid.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-spec-info-grid">
-                    ${sec.specGrid.map(sg => `
-                      <div class="fab-spec-info-item">
-                        <span class="fab-spec-info-label">${sg.label}</span>
-                        <span class="fab-spec-info-value">${sg.value}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                `;
-              }
-
-              // Key Characteristics Checklist (Section 10 Filament)
-              if (sec.characteristics && sec.characteristics.length > 0) {
-                secBodyHtml += `
-                  <div class="fab-char-wrapper">
-                    <span class="fab-char-label">KEY CHARACTERISTICS</span>
-                    <div class="fab-char-grid">
-                      ${sec.characteristics.map(ch => `
-                        <div class="fab-char-item">
-                          <span class="fab-char-dot">✓</span>
-                          <span class="fab-char-text">${ch}</span>
-                        </div>
-                      `).join('')}
-                    </div>
-                  </div>
-                `;
-              }
-
-              panelContentHtml += `
-                <div class="fabrication-step-card fab-educational-card" id="fab-sec-${tab.id}-${sec.sectionNumber}">
-                  <div class="step-card-header">
-                    <span class="step-number-badge">${sec.sectionLabel || ('SECTION ' + sec.sectionNumber)}</span>
-                    <h3 class="step-card-title">${sec.heading}</h3>
-                    ${sec.subheading ? `<div class="step-card-subheading">${sec.subheading}</div>` : ''}
-                  </div>
-                  <div class="step-card-body">
-                    ${secBodyHtml}
                   </div>
                 </div>
               `;
+            }
+
+            // Applications pills (Section 01)
+            if (sec.applications && sec.applications.length > 0) {
+              secBodyHtml += `
+                <div class="fab-apps-container">
+                  <span class="fab-apps-label">COMMON FABRICATION APPLICATIONS</span>
+                  <div class="fab-apps-grid">
+                    ${sec.applications.map(app => `
+                      <div class="fab-app-pill">
+                        <span class="fab-pill-dot"></span>
+                        <span>${app}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            // Technical illustration placeholder (Section 01)
+            if (sec.illustrationPlaceholder) {
+              secBodyHtml += `
+                <div class="fab-technical-placeholder">
+                  <div class="tech-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </div>
+                  <div class="tech-placeholder-meta">
+                    <span class="tech-placeholder-tag">TECHNICAL ILLUSTRATION</span>
+                    <h4 class="tech-placeholder-title">${sec.illustrationPlaceholder.title}</h4>
+                    <p class="tech-placeholder-sub">${sec.illustrationPlaceholder.subtitle}</p>
+                  </div>
+                </div>
+              `;
+            }
+
+            // Numbered Steps List (Section 02)
+            if (sec.steps && sec.steps.length > 0) {
+              secBodyHtml += `
+                <div class="fab-numbered-steps-list">
+                  ${sec.steps.map((st, sIdx) => `
+                    <div class="fab-step-list-item">
+                      <span class="fab-step-list-num">${String(sIdx + 1).padStart(2, '0')}</span>
+                      <p class="fab-step-list-text">${st}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Process Flow Visual (Section 02)
+            if (sec.processFlow && sec.processFlow.length > 0) {
+              secBodyHtml += `
+                <div class="fab-flow-wrapper">
+                  <span class="fab-flow-label">WORKFLOW PROCESS FLOW</span>
+                  <div class="fab-flow-chain" style="--flow-cols: ${sec.processFlow.length};">
+                    ${sec.processFlow.map((pf, pfIdx) => `
+                      <div class="fab-flow-node ${pfIdx === sec.processFlow.length - 1 ? 'is-final' : ''}">
+                        <div class="fab-flow-node-top">
+                          <span class="fab-flow-step">${String(pfIdx + 1).padStart(2, '0')}</span>
+                          ${pfIdx < sec.processFlow.length - 1 ? '<span class="fab-flow-arrow">→</span>' : '<span class="fab-flow-final-pill">Result</span>'}
+                        </div>
+                        <span class="fab-flow-name">${pf.label}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            // Stages of 3D Printing Grid (Section 03)
+            if (sec.stages && sec.stages.length > 0) {
+              secBodyHtml += `
+                <div class="fab-stages-grid">
+                  ${sec.stages.map(st => `
+                    <div class="fab-stage-card">
+                      <div class="fab-stage-header">
+                        <span class="fab-stage-num">${st.stageNumber}</span>
+                        <h4 class="fab-stage-title">${st.title}</h4>
+                      </div>
+                      <p class="fab-stage-desc">${st.description}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Operations Comparison (Section 02 / 03 Laser Track)
+            if (sec.operations && sec.operations.length > 0) {
+              secBodyHtml += `
+                <div class="fab-ops-grid">
+                  ${sec.operations.map(op => `
+                    <div class="fab-op-card">
+                      <div class="fab-op-header">
+                        <h4 class="fab-op-title">${op.type}</h4>
+                        <span class="fab-op-tag">${op.tag}</span>
+                      </div>
+                      <p class="fab-op-desc">${op.description}</p>
+                      ${op.softwareNote ? `
+                        <div class="fab-op-note">
+                          <span class="fab-op-note-dot"></span>
+                          <span class="fab-op-note-label">RDWorks Parameter:</span>
+                          <span class="fab-op-note-val">${op.softwareNote}</span>
+                        </div>
+                      ` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Types Grid (Section 04 Technologies / Lasers)
+            if (sec.types && sec.types.length > 0) {
+              secBodyHtml += `
+                <div class="fab-types-grid">
+                  ${sec.types.map(t => `
+                    <div class="fab-type-card">
+                      <div class="fab-type-header">
+                        <span class="fab-type-tag">${t.tag}</span>
+                        <h4 class="fab-type-title">${t.name}</h4>
+                      </div>
+                      <p class="fab-type-desc">${t.description}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Materials Cards Grid (Section 06 3D Printing Materials)
+            if (sec.materialsCards && sec.materialsCards.length > 0) {
+              secBodyHtml += `
+                <div class="fab-mat-cards-grid">
+                  ${sec.materialsCards.map(mat => `
+                    <div class="fab-mat-card">
+                      <div class="fab-mat-header">
+                        <span class="fab-mat-tag">${mat.type}</span>
+                        <h4 class="fab-mat-title">${mat.name}</h4>
+                      </div>
+                      <p class="fab-mat-desc">${mat.description}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Common Materials Pills (Section 05 Laser Cutting Materials)
+            if (sec.materials && sec.materials.length > 0) {
+              secBodyHtml += `
+                <div class="fab-materials-wrapper">
+                  <span class="fab-materials-label">COMMON LASER-CUTTING MATERIALS</span>
+                  <div class="fab-materials-grid">
+                    ${sec.materials.map(m => `
+                      <div class="fab-material-pill">
+                        <span class="material-dot"></span>
+                        <span>${m}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            if (sec.safetyNote) {
+              secBodyHtml += `
+                <div class="fab-safety-alert">
+                  <div class="fab-safety-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                      <line x1="12" y1="9" x2="12" y2="13"></line>
+                      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                  </div>
+                  <div class="fab-safety-content">
+                    <span class="fab-safety-title">MATERIAL & PROCESS OVERVIEW</span>
+                    <p class="fab-safety-text">${sec.safetyNote}</p>
+                  </div>
+                </div>
+              `;
+            }
+
+            // Advantages & Limitations (Combined / Structured Comparison)
+            if (sec.advantages || sec.limitations) {
+              secBodyHtml += `
+                <div class="fab-pros-cons-grid">
+                  ${sec.advantages && sec.advantages.length > 0 ? `
+                    <div class="fab-pros-column">
+                      <div class="fab-column-header is-advantages">
+                        <span class="fab-column-badge">
+                          <span class="fab-badge-icon">✓</span>
+                          <span>KEY ADVANTAGES</span>
+                        </span>
+                      </div>
+                      <div class="fab-items-list is-advantages">
+                        ${sec.advantages.map(adv => `
+                          <div class="fab-item-card is-advantage">
+                            <span class="fab-item-bullet-icon">✓</span>
+                            <span class="fab-item-text">${adv}</span>
+                          </div>
+                        `).join('')}
+                      </div>
+                    </div>
+                  ` : ''}
+                  ${sec.limitations && sec.limitations.length > 0 ? `
+                    <div class="fab-cons-column">
+                      <div class="fab-column-header is-limitations">
+                        <span class="fab-column-badge">
+                          <span class="fab-badge-icon">—</span>
+                          <span>TECHNICAL LIMITATIONS</span>
+                        </span>
+                      </div>
+                      <div class="fab-items-list is-limitations">
+                        ${sec.limitations.map(lim => `
+                          <div class="fab-item-card is-limitation">
+                            <span class="fab-item-bullet-icon">—</span>
+                            <span class="fab-item-text">${lim}</span>
+                          </div>
+                        `).join('')}
+                      </div>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            } else if (sec.items && sec.items.length > 0) {
+              const isLimitation = sec.heading.toLowerCase().includes('limitation');
+              secBodyHtml += `
+                <div class="fab-items-list ${isLimitation ? 'is-limitations' : 'is-advantages'}">
+                  ${sec.items.map(item => `
+                    <div class="fab-item-card ${isLimitation ? 'is-limitation' : 'is-advantage'}">
+                      <span class="fab-item-bullet-icon">${isLimitation ? '—' : '✓'}</span>
+                      <span class="fab-item-text">${item}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Workflow Sequence (Section 08 Laser Cutting Track)
+            if (sec.workflowSequence && sec.workflowSequence.length > 0) {
+              secBodyHtml += `
+                <div class="fab-sequence-wrapper">
+                  <span class="fab-sequence-label">DIGITAL-TO-PHYSICAL SEQUENCE</span>
+                  <div class="fab-sequence-chain" style="--flow-cols: ${sec.workflowSequence.length};">
+                    ${sec.workflowSequence.map((ws, wsIdx) => `
+                      <div class="fab-flow-node ${wsIdx === sec.workflowSequence.length - 1 ? 'is-final' : ''}">
+                        <div class="fab-flow-node-top">
+                          <span class="fab-sequence-num">${String(wsIdx + 1).padStart(2, '0')}</span>
+                          ${wsIdx < sec.workflowSequence.length - 1 ? '<span class="fab-sequence-arrow">→</span>' : '<span class="fab-flow-final-pill">Result</span>'}
+                        </div>
+                        <span class="fab-sequence-text">${ws.label}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            // Interactive 3D Model Viewer (if configured in educational sections)
+            if (sec.model3d) {
+              secBodyHtml += render3DModelCard(sec.model3d);
+            }
+
+            // Safety Topics Grid
+            if (sec.safetyTopics && sec.safetyTopics.length > 0) {
+              secBodyHtml += `
+                <div class="fab-safety-topics-grid">
+                  ${sec.safetyTopics.map(st => `
+                    <div class="fab-safety-topic-card">
+                      <div class="fab-safety-topic-header">
+                        <span class="fab-safety-topic-num">${st.num || ''}</span>
+                        <h4 class="fab-safety-topic-title">${st.title}</h4>
+                      </div>
+                      ${st.bullets && st.bullets.length > 0 ? `
+                        <ul class="fab-safety-topic-bullets">
+                          ${st.bullets.map(b => `<li>${b}</li>`).join('')}
+                        </ul>
+                      ` : ''}
+                      ${st.description ? `<p class="fab-safety-topic-desc">${st.description}</p>` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Visual Checklist
+            if (sec.checklist && sec.checklist.length > 0) {
+              secBodyHtml += `
+                <div class="fab-checklist-container">
+                  <span class="fab-checklist-label">${sec.checklistLabel || 'VERIFICATION CHECKLIST'}</span>
+                  <div class="fab-checklist-grid">
+                    ${sec.checklist.map(item => `
+                      <div class="fab-checklist-item">
+                        <span class="fab-checklist-icon">✓</span>
+                        <span class="fab-checklist-text">${item}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            // File Prep Checklist Cards
+            if (sec.checklistCards && sec.checklistCards.length > 0) {
+              secBodyHtml += `
+                <div class="fab-prep-cards-grid">
+                  ${sec.checklistCards.map(cc => `
+                    <div class="fab-prep-card">
+                      <span class="fab-prep-tag">${cc.title}</span>
+                      <p class="fab-prep-desc">${cc.desc}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Specification Table
+            if (sec.specTable && sec.specTable.rows && sec.specTable.rows.length > 0) {
+              secBodyHtml += `
+                <div class="fab-spec-table-container">
+                  <table class="fab-spec-table">
+                    ${sec.specTable.columns ? `
+                      <thead>
+                        <tr>
+                          ${sec.specTable.columns.map(col => `<th>${col}</th>`).join('')}
+                        </tr>
+                      </thead>
+                    ` : ''}
+                    <tbody>
+                      ${sec.specTable.rows.map(row => `
+                        <tr>
+                          ${row.map((cell, cIdx) => `
+                            <td class="${cIdx === 0 ? 'spec-param-col' : 'spec-value-col'}">${cIdx === 0 ? `<strong>${cell}</strong>` : cell}</td>
+                          `).join('')}
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            }
+
+            // Conversion Tool Badge & Process Steps
+            if (sec.conversionTool) {
+              secBodyHtml += `
+                <div class="fab-tool-badge-box">
+                  <span class="fab-tool-badge-label">CONVERSION TOOL / SOFTWARE:</span>
+                  <span class="fab-tool-badge-val">${sec.conversionTool}</span>
+                </div>
+              `;
+            }
+
+            if (sec.processSteps && sec.processSteps.length > 0) {
+              secBodyHtml += `
+                <div class="fab-process-steps-container">
+                  <span class="fab-process-steps-label">STEP-BY-STEP CONVERSION WORKFLOW</span>
+                  <div class="fab-numbered-steps-list">
+                    ${sec.processSteps.map((pst, pIdx) => `
+                      <div class="fab-step-list-item">
+                        <span class="fab-step-list-num">${String(pIdx + 1).padStart(2, '0')}</span>
+                        <p class="fab-step-list-text">${pst}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            // Technical Note
+            if (sec.techNote) {
+              secBodyHtml += `
+                <div class="fab-tech-note-box">
+                  <div class="fab-tech-note-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                  </div>
+                  <p class="fab-tech-note-text">${sec.techNote}</p>
+                </div>
+              `;
+            }
+
+            // Settings Table
+            if (sec.settingsTable && sec.settingsTable.rows && sec.settingsTable.rows.length > 0) {
+              secBodyHtml += `
+                <div class="fab-settings-table-container">
+                  <table class="fab-settings-table">
+                    <thead>
+                      <tr>
+                        ${sec.settingsTable.columns.map(col => `<th>${col}</th>`).join('')}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sec.settingsTable.rows.map(row => `
+                        <tr>
+                          ${row.map((cell, cIdx) => `
+                            <td class="${cIdx === 2 ? 'is-operation-cell' : (cIdx >= 3 ? 'is-param-num' : '')}">${cell}</td>
+                          `).join('')}
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            }
+
+            // Troubleshooting Table
+            if (sec.troubleTable && sec.troubleTable.rows && sec.troubleTable.rows.length > 0) {
+              secBodyHtml += `
+                <div class="fab-trouble-table-container">
+                  <table class="fab-trouble-table">
+                    <thead>
+                      <tr>
+                        ${sec.troubleTable.columns.map(col => `<th>${col}</th>`).join('')}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sec.troubleTable.rows.map(row => `
+                        <tr>
+                          <td class="trouble-problem-col"><strong>${row[0]}</strong></td>
+                          <td class="trouble-cause-col">${row[1]}</td>
+                          <td class="trouble-solution-col">${row[2]}</td>
+                          <td class="trouble-outcome-col">${row[3]}</td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            }
+
+            // Structured Reflection Subsections
+            if (sec.reflectionSections && sec.reflectionSections.length > 0) {
+              secBodyHtml += `
+                <div class="fab-structured-reflection-grid">
+                  ${sec.reflectionSections.map(rs => `
+                    <div class="fab-reflection-section-card">
+                      <div class="fab-reflection-section-header">
+                        <span class="fab-reflection-tag">${rs.title}</span>
+                      </div>
+                      ${rs.content ? `<p class="fab-reflection-text">${rs.content}</p>` : ''}
+                      ${rs.items && rs.items.length > 0 ? `
+                        <ul class="fab-reflection-bullet-list">
+                          ${rs.items.map(it => `<li><span class="ref-check">✓</span><span>${it}</span></li>`).join('')}
+                        </ul>
+                      ` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Source Files Download Grid
+            if (sec.sourceFiles && sec.sourceFiles.length > 0) {
+              secBodyHtml += `
+                <div class="fab-source-files-grid">
+                  ${sec.sourceFiles.map(sf => `
+                    <div class="fab-source-file-card">
+                      <div class="fab-source-file-header">
+                        <div class="fab-file-icon-box">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            <polyline points="13 2 13 9 20 9"></polyline>
+                          </svg>
+                        </div>
+                        <div class="fab-file-meta">
+                          <span class="fab-file-ext">${sf.format}</span>
+                          <h4 class="fab-file-title">${sf.name}</h4>
+                        </div>
+                      </div>
+                      <p class="fab-file-desc">${sf.description}</p>
+                      <div class="fab-file-footer">
+                        <span class="fab-file-status-badge ${sf.url ? 'is-available' : 'is-pending'}">
+                          <span class="status-dot"></span>
+                          <span>${sf.status || (sf.url ? 'Available for Download' : 'Source file to be added')}</span>
+                        </span>
+                        ${sf.url ? `
+                          <a href="${sf.url}" download="${sf.filename || ''}" class="btn btn-secondary btn-magnetic fab-download-btn">
+                            <span>Download ${sf.format}</span>
+                            <span class="btn-arrow">↓</span>
+                          </a>
+                        ` : `
+                          <button class="btn btn-secondary fab-download-btn is-disabled" disabled aria-disabled="true">
+                            <span>Download ${sf.format}</span>
+                            <span class="btn-arrow">⏳</span>
+                          </button>
+                        `}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Dedicated Media Images / Placeholders
+            let secMediaHtml = '';
+            let secMediaItems = [];
+            if (sec.media) {
+              if (Array.isArray(sec.media)) secMediaItems.push(...sec.media);
+              else secMediaItems.push(sec.media);
+            }
+            if (sec.images && Array.isArray(sec.images)) secMediaItems.push(...sec.images);
+            if (sec.placeholders && Array.isArray(sec.placeholders)) secMediaItems.push(...sec.placeholders);
+            if (sec.placeholder) secMediaItems.push(sec.placeholder);
+
+            if (secMediaItems.length > 1) {
+              secMediaHtml = `
+                <div class="step-media-container" style="margin-top: var(--space-4);">
+                  <div class="photo-split-grid">
+                    ${secMediaItems.map(item => renderMediaItem(item, 'margin: 0;')).join('')}
+                  </div>
+                </div>
+              `;
+            } else if (secMediaItems.length === 1) {
+              secMediaHtml = `
+                <div class="step-media-container" style="margin-top: var(--space-4);">
+                  ${renderMediaItem(secMediaItems[0], 'margin: 0 auto;')}
+                </div>
+              `;
+            } else if (sec.mediaPlaceholder) {
+              secMediaHtml = `
+                <div class="fab-technical-placeholder fab-hardware-placeholder">
+                  <div class="tech-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                      <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                      <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                      <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="tech-placeholder-meta">
+                    <span class="tech-placeholder-tag">${sec.mediaPlaceholder.tag || 'SPECIFICATION'}</span>
+                    <h4 class="tech-placeholder-title">${sec.mediaPlaceholder.title}</h4>
+                    <p class="tech-placeholder-sub">${sec.mediaPlaceholder.subtitle}</p>
+                  </div>
+                </div>
+              `;
+            }
+
+            // Specification Info Grid (Section 10 Filament)
+            if (sec.specGrid && sec.specGrid.length > 0) {
+              secBodyHtml += `
+                <div class="fab-spec-info-grid">
+                  ${sec.specGrid.map(sg => `
+                    <div class="fab-spec-info-item">
+                      <span class="fab-spec-info-label">${sg.label}</span>
+                      <span class="fab-spec-info-value">${sg.value}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              `;
+            }
+
+            // Key Characteristics Checklist (Section 10 Filament)
+            if (sec.characteristics && sec.characteristics.length > 0) {
+              secBodyHtml += `
+                <div class="fab-char-wrapper">
+                  <span class="fab-char-label">KEY CHARACTERISTICS</span>
+                  <div class="fab-char-grid">
+                    ${sec.characteristics.map(ch => `
+                      <div class="fab-char-item">
+                        <span class="fab-char-dot">✓</span>
+                        <span class="fab-char-text">${ch}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            return `
+              <div class="fabrication-step-card fab-educational-card" id="fab-sec-${tab.id}-${sec.sectionNumber}">
+                <div class="step-card-header">
+                  <span class="step-number-badge">${sec.sectionLabel || ('SECTION ' + sec.sectionNumber)}</span>
+                  <h3 class="step-card-title">${sec.heading}</h3>
+                  ${sec.subheading ? `<div class="step-card-subheading">${sec.subheading}</div>` : ''}
+                </div>
+                ${secMediaHtml}
+                <div class="step-card-body">
+                  ${secBodyHtml}
+                </div>
+              </div>
+            `;
+          };
+
+          // 2. Fab Academy-Style Educational / Technical Sections
+          if (tab.educationalSections && tab.educationalSections.length > 0) {
+            tab.educationalSections.forEach(sec => {
+              panelContentHtml += renderEducationalSection(sec);
             });
           }
 
@@ -1023,50 +1285,161 @@ function initProtoSem() {
                 let mediaHtml = '';
                 let allMediaItems = [];
 
-                if (s.model3d) {
+                if (s.media) {
+                  if (Array.isArray(s.media)) {
+                    allMediaItems.push(...s.media);
+                  } else {
+                    allMediaItems.push(s.media);
+                  }
+                }
+                if (s.images && Array.isArray(s.images)) {
+                  allMediaItems.push(...s.images);
+                }
+                if (s.placeholders && Array.isArray(s.placeholders)) {
+                  allMediaItems.push(...s.placeholders);
+                }
+                if (s.placeholder) {
+                  allMediaItems.push(s.placeholder);
+                }
+
+                if (allMediaItems.length > 1) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      <div class="photo-split-grid">
+                        ${allMediaItems.map(item => renderMediaItem(item, 'margin: 0;')).join('')}
+                      </div>
+                    </div>
+                  `;
+                } else if (allMediaItems.length === 1) {
+                  mediaHtml = `
+                    <div class="step-media-container">
+                      ${renderMediaItem(allMediaItems[0], 'margin: 0;')}
+                    </div>
+                  `;
+                } else if (s.model3d) {
                   mediaHtml = `
                     <div class="step-media-container">
                       ${render3DModelCard(s.model3d, 'margin: 0;')}
                     </div>
                   `;
-                } else {
-                  if (s.media) {
-                    if (Array.isArray(s.media)) {
-                      allMediaItems.push(...s.media);
-                    } else {
-                      allMediaItems.push(s.media);
-                    }
-                  }
-                  if (s.images && Array.isArray(s.images)) {
-                    allMediaItems.push(...s.images);
-                  }
-                  if (s.placeholders && Array.isArray(s.placeholders)) {
-                    allMediaItems.push(...s.placeholders);
-                  }
-                  if (s.placeholder) {
-                    allMediaItems.push(s.placeholder);
-                  }
-
-                  if (allMediaItems.length > 1) {
-                    mediaHtml = `
-                      <div class="step-media-container">
-                        <div class="photo-split-grid">
-                          ${allMediaItems.map(item => renderMediaItem(item, 'margin: 0;')).join('')}
-                        </div>
-                      </div>
-                    `;
-                  } else if (allMediaItems.length === 1) {
-                    mediaHtml = `
-                      <div class="step-media-container">
-                        ${renderMediaItem(allMediaItems[0], 'margin: 0;')}
-                      </div>
-                    `;
-                  }
                 }
 
                 let extraBodyHtml = '';
 
-                // Safety Topics Grid (Step 06)
+                // If both media/images AND model3d are provided, render model3d in body
+                if (s.model3d && allMediaItems.length > 0) {
+                  extraBodyHtml += `
+                    <div class="fab-model3d-wrapper">
+                      ${render3DModelCard(s.model3d, 'margin: 0;')}
+                    </div>
+                  `;
+                }
+
+                // Capabilities & Limitations / Advantages & Limitations 2-column grid
+                if ((s.capabilities && s.capabilities.length > 0) || (s.limitations && s.limitations.length > 0) || (s.advantages && s.advantages.length > 0)) {
+                  const caps = s.capabilities || s.advantages || [];
+                  const lims = s.limitations || [];
+                  const capHeader = s.capabilitiesHeader || 'CAPABILITIES';
+                  const limHeader = s.limitationsHeader || 'PRACTICAL LIMITATIONS';
+                  extraBodyHtml += `
+                    <div class="fab-pros-cons-grid">
+                      ${caps.length > 0 ? `
+                        <div class="fab-pros-column">
+                          <div class="fab-column-header is-advantages">
+                            <span class="fab-column-badge">
+                              <span class="fab-badge-icon">✓</span>
+                              <span>${capHeader}</span>
+                            </span>
+                          </div>
+                          <div class="fab-items-list is-advantages">
+                            ${caps.map(cap => `
+                              <div class="fab-item-card is-advantage">
+                                <span class="fab-item-bullet-icon">✓</span>
+                                <span class="fab-item-text">${cap}</span>
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+                      ` : ''}
+                      ${lims.length > 0 ? `
+                        <div class="fab-cons-column">
+                          <div class="fab-column-header is-limitations">
+                            <span class="fab-column-badge">
+                              <span class="fab-badge-icon">—</span>
+                              <span>${limHeader}</span>
+                            </span>
+                          </div>
+                          <div class="fab-items-list is-limitations">
+                            ${lims.map(lim => `
+                              <div class="fab-item-card is-limitation">
+                                <span class="fab-item-bullet-icon">—</span>
+                                <span class="fab-item-text">${lim}</span>
+                              </div>
+                            `).join('')}
+                          </div>
+                        </div>
+                      ` : ''}
+                    </div>
+                  `;
+                }
+
+                // Manufacturing Method Comparison (Subtractive vs Additive - Step 04)
+                if (s.manufacturingComparison) {
+                  const mc = s.manufacturingComparison;
+                  extraBodyHtml += `
+                    <div class="fab-method-comparison-grid">
+                      <div class="fab-method-card is-subtractive">
+                        <div class="fab-method-header">
+                          <span class="fab-method-badge is-subtractive">SUBTRACTIVE CNC MILLING</span>
+                          <h4 class="fab-method-title">${mc.subtractive.title}</h4>
+                        </div>
+                        <ul class="fab-method-points">
+                          ${mc.subtractive.points.map(pt => `
+                            <li>
+                              <span class="fab-point-icon is-cross">✕</span>
+                              <div class="fab-point-content">
+                                <strong>${pt.title}:</strong> <span>${pt.desc}</span>
+                              </div>
+                            </li>
+                          `).join('')}
+                        </ul>
+                      </div>
+
+                      <div class="fab-method-card is-additive">
+                        <div class="fab-method-header">
+                          <span class="fab-method-badge is-additive">ADDITIVE 3D PRINTING</span>
+                          <h4 class="fab-method-title">${mc.additive.title}</h4>
+                        </div>
+                        <ul class="fab-method-points">
+                          ${mc.additive.points.map(pt => `
+                            <li>
+                              <span class="fab-point-icon is-check">✓</span>
+                              <div class="fab-point-content">
+                                <strong>${pt.title}:</strong> <span>${pt.desc}</span>
+                              </div>
+                            </li>
+                          `).join('')}
+                        </ul>
+                      </div>
+                    </div>
+                  `;
+                }
+
+                // DFAM Engineering Principle Callout
+                if (s.dfamCallout) {
+                  const df = s.dfamCallout;
+                  extraBodyHtml += `
+                    <div class="fab-dfam-callout-box">
+                      <div class="fab-dfam-header">
+                        <span class="fab-dfam-badge">${df.badge || 'DFAM ENGINEERING PRINCIPLE'}</span>
+                        <h4 class="fab-dfam-title">${df.title}</h4>
+                      </div>
+                      <p class="fab-dfam-text">${df.text}</p>
+                    </div>
+                  `;
+                }
+
+                // Safety Topics Grid (if used in practical steps)
                 if (s.safetyTopics && s.safetyTopics.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-safety-topics-grid">
@@ -1088,7 +1461,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Visual Checklist (Steps 06, 11)
+                // Visual Checklist
                 if (s.checklist && s.checklist.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-checklist-container">
@@ -1105,7 +1478,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Specification / Key-Value Table (Steps 07, 08)
+                // Specification Table
                 if (s.specTable && s.specTable.rows && s.specTable.rows.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-spec-table-container">
@@ -1120,8 +1493,9 @@ function initProtoSem() {
                         <tbody>
                           ${s.specTable.rows.map(row => `
                             <tr>
-                              <td class="spec-param-col"><strong>${row[0]}</strong></td>
-                              <td class="spec-value-col">${row[1]}</td>
+                              ${row.map((cell, cIdx) => `
+                                <td class="${cIdx === 0 ? 'spec-param-col' : 'spec-value-col'}">${cIdx === 0 ? `<strong>${cell}</strong>` : cell}</td>
+                              `).join('')}
                             </tr>
                           `).join('')}
                         </tbody>
@@ -1130,7 +1504,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Design Intent Box (Step 09)
+                // Design Intent Box
                 if (s.designIntent) {
                   extraBodyHtml += `
                     <div class="fab-design-intent-box">
@@ -1157,7 +1531,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Numbered Process Steps (Step 10)
+                // Numbered Process Steps
                 if (s.processSteps && s.processSteps.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-process-steps-container">
@@ -1174,7 +1548,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Conversion Tool Badge (Step 10)
+                // Conversion Tool Badge
                 if (s.conversionTool) {
                   extraBodyHtml += `
                     <div class="fab-tool-badge-box">
@@ -1184,7 +1558,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Technical Note Callout (Steps 10, 13)
+                // Technical Note Callout
                 if (s.techNote) {
                   extraBodyHtml += `
                     <div class="fab-tech-note-box">
@@ -1200,7 +1574,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // File Preparation Checklist Cards (Step 11)
+                // File Preparation Checklist Cards
                 if (s.checklistCards && s.checklistCards.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-prep-cards-grid">
@@ -1214,7 +1588,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // RDWorks Nesting Topics (Step 12)
+                // RDWorks Nesting Topics
                 if (s.layoutTopics && s.layoutTopics.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-layout-topics-grid">
@@ -1228,7 +1602,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Layer Legend (Step 12)
+                // Layer Legend
                 if (s.layerLegend) {
                   extraBodyHtml += `
                     <div class="fab-layer-legend-box">
@@ -1248,7 +1622,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Machine Settings Parameter Table (Step 13)
+                // Machine Settings Parameter Table
                 if (s.settingsTable && s.settingsTable.rows && s.settingsTable.rows.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-settings-table-container">
@@ -1281,7 +1655,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Chronological Process Sequence Cards (Step 14)
+                // Chronological Process Sequence Cards
                 if (s.processSequence && s.processSequence.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-process-seq-grid">
@@ -1298,7 +1672,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Final Output Observations (Step 15)
+                // Final Output Observations
                 if (s.observations && s.observations.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-observations-box">
@@ -1315,7 +1689,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Troubleshooting Table (Step 16)
+                // Troubleshooting Table
                 if (s.troubleTable && s.troubleTable.rows && s.troubleTable.rows.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-trouble-table-container">
@@ -1340,7 +1714,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Structured Reflection Subsections (Step 17)
+                // Structured Reflection Subsections
                 if (s.reflectionSections && s.reflectionSections.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-structured-reflection-grid">
@@ -1361,7 +1735,7 @@ function initProtoSem() {
                   `;
                 }
 
-                // Source Files Download Grid (Step 18)
+                // Source Files Download Grid
                 if (s.sourceFiles && s.sourceFiles.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-source-files-grid">
@@ -1383,7 +1757,7 @@ function initProtoSem() {
                           <div class="fab-file-footer">
                             <span class="fab-file-status-badge ${sf.url ? 'is-available' : 'is-pending'}">
                               <span class="status-dot"></span>
-                              <span>${sf.status || (sf.url ? 'Available for Download' : 'Source file to be uploaded')}</span>
+                              <span>${sf.status || (sf.url ? 'Available for Download' : 'Source file to be added')}</span>
                             </span>
                             ${sf.url ? `
                               <a href="${sf.url}" download="${sf.filename || ''}" class="btn btn-secondary btn-magnetic fab-download-btn">
@@ -1403,7 +1777,35 @@ function initProtoSem() {
                   `;
                 }
 
-                // Additional Links (Step 18)
+                // Observation Note Box
+                if (s.observation) {
+                  extraBodyHtml += `
+                    <div class="fab-tech-note-box" style="margin-top: var(--space-4);">
+                      <div class="fab-tech-note-icon">🔍</div>
+                      <p class="fab-tech-note-text"><strong>Observation:</strong> ${s.observation}</p>
+                    </div>
+                  `;
+                }
+
+                // References & Credits Grid
+                if (s.references && s.references.length > 0) {
+                  extraBodyHtml += `
+                    <div class="fab-references-grid">
+                      ${s.references.map(ref => `
+                        <div class="fab-reference-card">
+                          <div class="fab-reference-header">
+                            <span class="fab-reference-category">${ref.category || 'REFERENCE'}</span>
+                            ${ref.url ? `<a href="${ref.url}" target="_blank" rel="noopener noreferrer" class="fab-reference-link">Visit Resource ↗</a>` : ''}
+                          </div>
+                          <h4 class="fab-reference-title">${ref.title}</h4>
+                          ${ref.description ? `<p class="fab-reference-desc">${ref.description}</p>` : ''}
+                        </div>
+                      `).join('')}
+                    </div>
+                  `;
+                }
+
+                // Additional Links
                 if (s.additionalLinks && s.additionalLinks.length > 0) {
                   extraBodyHtml += `
                     <div class="fab-additional-links-box">
@@ -1456,6 +1858,15 @@ function initProtoSem() {
                 `;
               });
             }
+          }
+
+          // 4. Post-Practical Faculty Synthesis Sections (Problems, Reflection, Source Files)
+          if (tab.postPracticalSections && tab.postPracticalSections.length > 0) {
+            tab.postPracticalSections.forEach(sec => {
+              panelContentHtml += renderEducationalSection(sec);
+            });
+          } else if (tab.steps && tab.steps.length > 0) {
+            // Fallback for flat step tabs       }
           } else if (tab.steps && tab.steps.length > 0) {
             // Fallback for flat step tabs
             tab.steps.forEach((s) => {

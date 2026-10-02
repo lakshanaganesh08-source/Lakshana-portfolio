@@ -1241,13 +1241,13 @@ const protoSemWeeks = [
         title: "Laser Cutting",
         intro: "Laser cutting is a digital fabrication process that uses a focused laser beam to cut, engrave, or mark materials according to a digitally prepared design. It enables precise and repeatable fabrication directly from digital files.",
 
-        // SECTION 01 — 05: TECHNICAL BACKGROUND & FOUNDATIONS
+        // 01 — 08: TECHNICAL BACKGROUND, SAFETY & SPECIFICATIONS
         educationalSections: [
           {
             sectionNumber: "01",
             sectionLabel: "01 — WHAT IS LASER CUTTING?",
             heading: "What is Laser Cutting?",
-            content: "Laser cutting is a non-contact manufacturing process in which a focused laser beam is directed onto a material to remove, melt, burn, or vaporize the material along a programmed path. The process can be used for both cutting through a material and creating engraved or marked patterns on its surface.",
+            content: "Laser cutting is a non-contact manufacturing process in which a focused laser beam is directed onto a material to cut through it or create engraved patterns on its surface with high precision.",
             applications: [
               "Prototyping",
               "Product design",
@@ -1258,44 +1258,34 @@ const protoSemWeeks = [
             ],
             media: {
               src: "assets/images/protosem/week-06/laser/laser.png",
-              alt: "Laser Cutting Technical Illustration — Optical Path & Material Vaporization",
-              caption: "Technical Illustration: Laser Source → Focusing Optics → Laser Beam → Focal Point → Material Vaporization & Kerf"
+              alt: "Laser Cutting Technical Illustration",
+              caption: "Technical Illustration: Optical Path, Focused Beam & Material Interaction"
             }
           },
           {
             sectionNumber: "02",
             sectionLabel: "02 — HOW DOES LASER CUTTING WORK?",
             heading: "How Laser Cutting Works",
-            content: "Laser cutting relies on a systematic workflow that translates digital geometry into physical machine toolpaths. The focused optical energy interacts with the substrate material across two primary operational modes: vector cutting (full-depth penetration along perimeter curves) and raster scanning (surface vaporization and shading across filled artwork areas).",
-            steps: [
-              "A digital design is created or selected as a reference vector artwork.",
-              "The design is converted into a suitable vector format such as DXF with closed path verification.",
-              "The geometry is imported into laser-control software (RDWorks) and aligned to the material stock.",
-              "Different fabrication operations such as vector cutting or raster scanning are assigned to dedicated color layers.",
-              "Machine parameters (speed, min/max power, frequency, passes) are configured according to material properties.",
-              "The laser machine executes the programmed toolpaths under active exhaust and air assist.",
-              "The finished physical artifact is inspected for cut quality, surface definition, and dimensional fidelity."
-            ],
+            content: "Laser cutting converts digital CAD vectors into machine toolpaths. The focused laser beam interacts with the workpiece through two fundamental operations: vector cutting and raster engraving.",
             processFlow: [
-              { label: "01 Digital Design" },
-              { label: "02 File Preparation" },
-              { label: "03 Laser Software" },
-              { label: "04 Cut / Engrave Settings" },
-              { label: "05 Laser Machine" },
-              { label: "06 Physical Output" }
+              { label: "Vector Design" },
+              { label: "File Preparation" },
+              { label: "RDWorks CAM" },
+              { label: "Laser Machining" },
+              { label: "Physical Artifact" }
             ],
             operations: [
               {
-                type: "VECTOR THROUGH-CUT",
-                tag: "Full Penetration Toolpath",
-                description: "The laser beam follows continuous vector paths at lower speed and higher power to melt/vaporize completely through the substrate, separating finished parts with precise kerf control.",
-                softwareNote: "Assigned as boundary vector cutlines with dedicated power settings in RDWorks."
+                type: "Vector Cutting",
+                tag: "Through-Cut",
+                description: "The laser beam traces continuous vector toolpaths to cut completely through the sheet stock along defined part contours.",
+                softwareNote: "Cut Layer · High power & controlled speed"
               },
               {
-                type: "RASTER ENGRAVING / SCANNING",
-                tag: "Surface Shading & Texture",
-                description: "The laser head scans rapidly back and forth in high-density horizontal rows, pulsing at microsecond intervals to remove material from the top surface without full penetration.",
-                softwareNote: "Assigned as scan mode layers in RDWorks for surface artwork, typography, and detail fills."
+                type: "Raster Engraving",
+                tag: "Surface Scan",
+                description: "The laser head rapidly scans back and forth in rows, pulsing to vaporize surface material for detailed textures, text, and artwork.",
+                softwareNote: "Scan Layer · Lower power & high scanning speed"
               }
             ]
           },
@@ -1303,645 +1293,378 @@ const protoSemWeeks = [
             sectionNumber: "03",
             sectionLabel: "03 — TYPES OF LASERS",
             heading: "Types of Lasers Used in Digital Fabrication",
-            content: "Different laser technologies utilize specific active gain media and emission wavelengths, determining their cutting efficiency, focal spot size, and material compatibility across fabrication laboratories.",
+            content: "Different laser types use specific wavelengths and gain media to cut or engrave various materials efficiently.",
             types: [
               {
                 name: "CO₂ Laser",
-                tag: "10.6 µm Wavelength · Non-Metallic Materials",
-                description: "CO₂ gas lasers are the primary workhorse for digital fabrication laboratories, offering high absorption in organic and non-metallic substrates including acrylic, MDF, plywood, paper, cardboard, textiles, and leather."
+                tag: "Non-Metallic Materials",
+                description: "The standard laser for fab labs, highly effective for wood, MDF, acrylic, paper, leather, and cardboard."
               },
               {
                 name: "Fiber Laser",
-                tag: "1.064 µm Wavelength · Metal Fabrication",
-                description: "Fiber lasers are commonly used for marking and cutting metals because of their ability to interact efficiently with metal surfaces."
+                tag: "Metal Fabrication",
+                description: "Commonly used for high-precision marking, etching, and cutting of metals and engineered alloys."
               },
               {
                 name: "Diode Laser",
-                tag: "Desktop / Low-Power Fabrication",
-                description: "Diode lasers are generally used for lower-power engraving and cutting applications and are common in compact desktop fabrication machines."
+                tag: "Desktop Systems",
+                description: "Used in compact desktop systems for light cutting and surface engraving on organic materials."
               }
             ]
           },
           {
             sectionNumber: "04",
             sectionLabel: "04 — COMMON MATERIALS",
-            heading: "Common Laser-Cutting Materials & Process Safety",
-            content: "Laser processing behavior depends directly on the optical absorption, thermal conductivity, and chemical composition of the substrate. Selecting verified materials prevents equipment damage and hazardous gas emission.",
+            heading: "Common Laser-Cutting Materials",
+            content: "Laser cutting works across various sheet materials. Material selection directly determines cut quality, edge finish, and operational safety.",
             materials: [
               "Wood & MDF",
               "Plywood Sheets",
               "Cast & Extruded Acrylic",
               "Cardboard & Chipboard",
-              "Paper & Kraftboard",
-              "Certain plastics (Laser-safe)",
-              "Metals with suitable laser systems"
-            ],
-            safetyNote: "CRITICAL MATERIAL SAFETY: Never process materials containing chlorine or halogen compounds (such as PVC, vinyl, or certain synthetics) or toxic binders. Laser vaporization of PVC produces hazardous hydrogen chloride (HCl) gas and toxic chlorine fumes, which cause severe respiratory injury and irreversible machine corrosion."
+              "Paper & Cardstock",
+              "Laser-Safe Plastics",
+              "Sheet Metals (Fiber Laser)"
+            ]
           },
           {
             sectionNumber: "05",
             sectionLabel: "05 — ADVANTAGES & LIMITATIONS",
-            heading: "Advantages & Technical Limitations of Laser Cutting",
-            content: "Understanding the technological trade-offs of laser fabrication is essential for selecting appropriate manufacturing processes and optimizing part designs for physical production.",
+            heading: "Advantages & Limitations of Laser Cutting",
+            content: "Understanding the capabilities and constraints of laser cutting helps in selecting the appropriate manufacturing method for a project.",
             advantages: [
-              "High precision & fine feature resolution with narrow kerf widths",
-              "Fast prototyping from digital vector CAD/artwork directly to physical parts",
-              "Repeatable results for multi-part batch prototyping without physical tooling",
-              "Complex designs and intricate contours can be fabricated with ease",
-              "Minimal physical contact with the material eliminates tool wear and clamping distortion",
-              "Suitable for both deep raster engraving and vector perimeter cutting"
+              "High precision with narrow kerf width and clean edge definition",
+              "Rapid transition from digital 2D vector design to physical parts",
+              "Repeatable results and high dimensional consistency for multi-part batches",
+              "Non-contact fabrication prevents tool wear, vibration, and mechanical deflection"
             ],
             limitations: [
-              "Material thickness can limit cutting capability based on laser tube wattage",
-              "Different materials require dedicated machine speed and power calibration",
-              "Heat can affect the cut edge or surrounding material (Heat-Affected Zone)",
-              "Some materials are unsuitable because of safety risks or harmful fumes",
-              "Large or complex raster engraving jobs can require significant processing time",
-              "Proper ventilation, active fume extraction, and safety precautions are required"
+              "Cutting thickness is strictly limited by laser tube wattage",
+              "Restricted to 2D planar profile cutting and surface engraving",
+              "Produces a localized heat-affected zone (HAZ) along cut edges",
+              "Certain synthetic polymers (e.g., PVC/vinyl) emit hazardous toxic fumes"
             ]
           }
         ],
 
-        // SECTION 06 — 18: STUDENT PRACTICAL FABRICATION DOCUMENTATION
+        // MY ACTIVITY SECTION: HANDS-ON WORKFLOW SEQUENCE (STARTS FROM LAB SAFETY)
         practicalSection: {
-          eyebrow: "FABRICATION EVIDENCE & CASE STUDY",
+          eyebrow: "HANDS-ON WORKFLOW",
           heading: "My Laser Cutting Activity",
-          intro: "A comprehensive digital-fabrication case study documenting the complete end-to-end workflow: from lab safety verification, machine inspection, and vector DXF preparation to RDWorks layer configuration, parameter execution, physical inspection, and academic reflection.",
+          intro: "A visual portfolio case study documenting the hands-on laser cutting workflow from lab safety and machine specifications to CAM configuration, physical machining, and final output.",
           steps: [
             {
-              stepNumber: "06",
-              stepLabel: "06 — LAB SAFETY",
+              stepNumber: "01",
+              stepLabel: "01 — LAB SAFETY & SAFETY RULES",
               title: "Lab Safety & Safety Rules",
-              subheading: "Laser Cutting Safety Protocols",
-              description: "Laser cutting involves high-energy optical radiation, concentrated thermal heat, airborne particulate fumes, high-voltage electrical supplies, and automated CNC motion systems. Safe operation in the digital fabrication laboratory requires strict adherence to standardized safety protocols, pre-run verification checklists, and continuous active supervision.",
-              safetyTopics: [
-                {
-                  num: "01",
-                  title: "Laser Safety",
-                  bullets: [
-                    "Never look directly into the laser beam path or reflected optical scatter.",
-                    "Keep the protective machine enclosure cover fully closed during all active cutting and engraving cycles.",
-                    "Do not tamper with, disable, or bypass machine safety interlock switches.",
-                    "Operate equipment strictly under authorized laboratory supervision and documented safety training.",
-                    "Maintain an unobstructed perimeter around the laser and keep combustible materials away from the work envelope.",
-                    "Immediately press the Emergency Stop (E-Stop) if abnormal flaming, smoke buildup, or machine malfunction occurs."
-                  ]
-                },
-                {
-                  num: "02",
-                  title: "Exhaust System",
-                  description: "High-volume exhaust ventilation actively evacuates smoke, vaporized particulate matter, and organic fumes generated during thermal cutting and raster scanning. The exhaust blower must be energized and verified before initiating toolpaths, ensuring clean air in the operator zone and preventing smoke residue from degrading optical mirrors."
-                },
-                {
-                  num: "03",
-                  title: "Chiller / Cooling System",
-                  description: "Industrial water chillers circulate conditioned deionized water through the laser tube jacket to dissipate high thermal loads. Stable operating temperatures prevent beam mode distortion and premature tube degradation. Chiller circulation flow and temperature thresholds must be confirmed before energizing the high-voltage supply."
-                },
-                {
-                  num: "04",
-                  title: "Earthing",
-                  description: "Dedicated low-impedance electrical grounding is mandatory for the machine chassis and power sub-assemblies. Proper earthing dissipates static charges, prevents EMI interference on the DSP motion controller, and provides a safe fault path to eliminate electrical shock hazards."
-                },
-                {
-                  num: "05",
-                  title: "Air Assist",
-                  description: "Pressurized air assist continuously directs an air stream through the laser nozzle coaxial with the beam. This prevents combustible vapors from igniting at the focal point, blows vaporized slag/debris out of the cut kerf, cools the substrate edge, and protects the optical focusing lens from smoke deposits."
-                },
-                {
-                  num: "06",
-                  title: "General Machine Safety",
-                  bullets: [
-                    "Verify material placement, flatness, and secure bed alignment before starting.",
-                    "Inspect the machine bed for unwanted scraps, offcuts, or foreign objects.",
-                    "Confirm optical focal height calibration and verify software workpiece origin.",
-                    "Maintain continuous visual supervision; NEVER leave an operating laser cutter unattended.",
-                    "Wait for exhaust ventilation to clear internal smoke completely before opening the hood.",
-                    "Strictly comply with all institutional digital fabrication laboratory Standard Operating Procedures (SOPs)."
-                  ]
-                }
-              ],
-              checklistLabel: "PRE-FABRICATION SAFETY VERIFICATION CHECKLIST",
+              description: "Laser cutting requires controlled operation because the process involves concentrated laser energy, heat, fumes and electrical equipment.",
+              checklistLabel: "REQUIRED LAB SAFETY TOPICS",
               checklist: [
-                "Laser enclosure interlock verified operational",
-                "Fume exhaust blower active and verified flowing",
-                "Water chiller temperature within operational range",
-                "Electrical chassis earthing confirmed",
-                "Coaxial air assist compressor active",
-                "Material safety compatibility checked (Zero PVC/Halogens)",
-                "Focal height calibrated with focus spacer",
-                "Work area clear and continuous supervision maintained"
+                "Laser Safety: Enclosure kept closed during operation; never look directly into beam or reflected scatter",
+                "Exhaust System: High-volume ventilation active to evacuate fumes, smoke, and particulate matter",
+                "Chiller / Cooling: Water chiller circulating conditioned water to maintain stable tube operating temperature",
+                "Earthing: Dedicated chassis and electrical grounding to prevent EMI and shock hazards",
+                "Air Assist: Coaxial compressed air at nozzle to prevent flaming and keep optics clean",
+                "General Machine Safety: Flat material placement, clean bed, focus calibration, and continuous supervision"
               ],
-              placeholders: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Laser Cutting Safety Setup Photograph",
-                  description: "Safety setup documentation showing the closed machine enclosure, active ventilation/exhaust ducting, and laboratory safety arrangement.",
-                  caption: "Laser cutting safety setup showing the machine enclosure, ventilation/exhaust, and laboratory safety arrangement."
-                }
-              ]
+              media: {
+                src: "assets/images/protosem/week-06/laser/safety.png",
+                alt: "Laser Cutter Rules and Safety Guidelines at Forge HW Junction",
+                caption: "Laser Cutter Rules & Safety guidelines at Forge HW Junction DFab"
+              }
             },
             {
-              stepNumber: "07",
-              stepLabel: "07 — MACHINE DETAILS",
+              stepNumber: "02",
+              stepLabel: "02 — MACHINE DETAILS",
               title: "Machine Details",
-              subheading: "Laser Cutting Machine Specifications",
-              description: "The physical fabrication was executed on a laboratory CNC laser cutting and engraving platform equipped with an RDWorks-compatible digital signal processor (DSP) controller, precision stepper axes, and integrated auxiliary fluid support subsystems.",
+              description: "The physical fabrication was executed on a 1490 CO₂ laser cutting platform at FORGE HW Junction DFab #2 with an RDWorks-compatible digital controller.",
               specTable: {
                 columns: ["Parameter", "Specification"],
                 rows: [
-                  ["Make", "Specification to be verified"],
-                  ["Model", "Specification to be verified"],
-                  ["Laser Type", "CO₂ Laser (Gas Discharge)"],
-                  ["Laser Tube Power", "Specification to be verified (Wattage to be confirmed from machine tube record)"],
-                  ["Bed Size", "Specification to be verified (Working envelope X × Y mm)"],
-                  ["Control Software", "RDWorks (Ruida DSP Motion Controller)"],
-                  ["Cooling System", "Industrial Chiller / Closed-Loop Water Cooling [To be verified]"],
-                  ["Air Assist", "Coaxial Compressed Air Assist [To be verified]"],
-                  ["Exhaust", "High-Velocity Fume Extraction / Blower System [To be verified]"]
+                  ["Make / Facility", "FORGE HW Junction DFab #2"],
+                  ["Model", "1490 CO₂ Laser"],
+                  ["Bed Size / Working Area", "1300 × 900 mm"],
+                  ["Laser Tube Wattage", "150W"],
+                  ["Machine Power", "1000W"],
+                  ["Max Speeds", "Cutting: 25 m/min | Engraving: 55 m/min"],
+                  ["Positioning Accuracy", "0.1 mm"],
+                  ["Blowing / Air Assist", "Lower Blowing System (Coaxial Air Assist)"],
+                  ["Control Software", "RDWorks (Ruida DSP Controller)"]
                 ]
               },
-              placeholders: [
+              media: {
+                src: "assets/images/protosem/week-06/laser/machinedetails.png",
+                alt: "1490 CO2 Laser Cutter Specifications at Forge HW Junction DFab #2",
+                caption: "1490 CO₂ Laser Cutter hardware specifications at Forge HW Junction DFab #2"
+              }
+            },
+            {
+              stepNumber: "03",
+              stepLabel: "03 — MATERIALS USED",
+              title: "Materials Used",
+              description: "Black 2mm acrylic sheet stock was selected and prepared for high-contrast surface raster engraving and perimeter vector through-cutting.",
+              specTable: {
+                columns: ["Material Parameter", "Specification"],
+                rows: [
+                  ["Material Type", "Black Acrylic (PMMA)"],
+                  ["Thickness", "2.0 mm"],
+                  ["Finish / Color", "Gloss Black"],
+                  ["Source", "Lab Stock / Workshop Supply"],
+                  ["Fabrication Mode", "Surface Engraving & Vector Cutting"]
+                ]
+              },
+              media: {
+                src: "assets/images/protosem/week-06/laser/material.png",
+                alt: "Black 2mm Acrylic Sheet Material Stock",
+                caption: "Black 2mm acrylic sheet stock used for the fabrication activity"
+              }
+            },
+            {
+              stepNumber: "04",
+              stepLabel: "04 — SELECTED DESIGN / IMAGE",
+              title: "Selected Design / Image",
+              description: "I explored several design references and selected a ship illustration with detailed contours, internal artwork, and wave patterns. The design provided a suitable combination of surface engraving and perimeter cutting for the fabrication activity.",
+              media: {
+                src: "assets/images/protosem/week-06/laser/laser ref img.jpeg",
+                alt: "Selected ship design reference from Pinterest",
+                caption: "Selected ship design reference from Pinterest"
+              }
+            },
+            {
+              stepNumber: "05",
+              stepLabel: "05 — IMAGE → DXF CONVERSION",
+              title: "Image to DXF Conversion",
+              description: "The selected ship artwork was converted into DXF vector geometry using Convertio and imported into RDWorks for further preparation and fabrication.",
+              conversionTool: "Convertio",
+              processSteps: [
+                "Prepare artwork: Isolate contours, contrast, and distinct line features.",
+                "Convert to DXF: Convert bitmap image into DXF vector geometry using Convertio.",
+                "Import into RDWorks: Load the generated DXF file into the CAM workspace.",
+                "Check geometry: Verify path continuity, scale, and node smoothness."
+              ],
+              techNote: "Process Workflow: Image → Vector/DXF → RDWorks. DXF encodes explicit geometric primitives required by the CNC motion controller.",
+              media: {
+                src: "assets/images/protosem/week-06/laser/img to dfx.png",
+                alt: "Image to DXF Conversion Workflow using Convertio",
+                caption: "Image-to-DXF vector conversion pipeline using Convertio"
+              }
+            },
+            {
+              stepNumber: "06",
+              stepLabel: "06 — FILE PREPARATION",
+              title: "File Preparation in RDWorks",
+              description: "The converted DXF geometry was imported into RDWorks V8 for layout arrangement and CAD pre-flight inspection. The artwork geometry was checked for closed boundaries and sized appropriately for the 2mm acrylic workpiece.",
+              checklistLabel: "PRE-FLIGHT CAD GEOMETRY CHECKLIST",
+              checklist: [
+                "Vector geometry cleaned and nodes smoothed",
+                "Global scale and dimensions checked in millimeters",
+                "Perimeter cutting paths verified as 100% closed loops",
+                "Internal artwork separated from outer boundary geometry",
+                "Duplicate and unwanted geometry removed"
+              ],
+              media: {
+                src: "assets/images/protosem/week-06/laser/rdworks.png",
+                alt: "File preparation and layout inspection in RDWorks",
+                caption: "Importing and arranging CAD vector artwork in RDWorks"
+              }
+            },
+            {
+              stepNumber: "07",
+              stepLabel: "07 — NESTING & LAYOUT IN RDWORKS",
+              title: "Nesting & Layout in RDWorks",
+              description: "The design was positioned within the usable material area in RDWorks, with separate colour-coded layers assigned for engraving and perimeter cutting. The layout was arranged to keep the artwork within the acrylic sheet while maintaining the required cutting and engraving regions.",
+              media: [
                 {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Full Laser Cutting Machine Photograph",
-                  description: "Overall photographic documentation of the complete CNC laser cutting machine used in the digital fabrication laboratory.",
-                  caption: "Laser cutting machine used for the fabrication activity."
+                  src: "assets/images/protosem/week-06/laser/in rdworks1.png",
+                  alt: "Layer separation and layout arrangement in RDWorks",
+                  caption: "Wireframe layout showing layer color assignments in RDWorks"
                 },
                 {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Machine Nameplate / Specification Label Photograph",
-                  description: "Close-up photograph of the manufacturer identification plate, serial number, electrical ratings, and tube power label.",
-                  caption: "Machine identification and technical specification label."
+                  src: "assets/images/protosem/week-06/laser/in rdworks.png",
+                  alt: "Nesting and toolpath preview in RDWorks",
+                  caption: "Toolpath simulation preview with scan raster hatching"
                 }
               ]
             },
             {
               stepNumber: "08",
-              stepLabel: "08 — MATERIALS USED",
-              title: "Materials Used",
-              subheading: "Fabrication Material Specifications",
-              description: "The digital design was physically fabricated into a flat substrate sheet prepared specifically for laser engraving and precision vector profiling.",
-              specTable: {
-                columns: ["Material Parameter", "Specification / Laboratory Record"],
+              stepLabel: "08 — FINAL MACHINE SETTINGS",
+              title: "Final Machine Settings",
+              description: "Configured dedicated motion and laser power parameters in RDWorks for the 2.0mm black acrylic sheet. Assigned distinct layers for Laser Scan (engraving) and Laser Cut (perimeter cutting) with prioritized execution.",
+              settingsTable: {
+                columns: [
+                  "Material",
+                  "Thickness",
+                  "Operation",
+                  "Speed (mm/s)",
+                  "Minimum Power (%)",
+                  "Maximum Power (%)",
+                  "Passes",
+                  "Frequency (Hz)"
+                ],
                 rows: [
-                  ["Material Type", "To be verified from the actual material/workshop record (e.g., MDF / Plywood / Acrylic)"],
-                  ["Thickness", "To be verified from the actual material measurement (e.g., 3.0 mm / 4.0 mm)"],
-                  ["Source", "Lab Stock / Workshop Material Supply"],
-                  ["Color / Surface Finish", "Natural / Plain Substrate [To be verified]"],
-                  ["Fabrication Operations", "Dual-Operation: Surface Raster Engraving + Perimeter Vector Through-Cutting"]
+                  [
+                    "Black Acrylic",
+                    "2.0 mm",
+                    "Laser Scan (Engrave)",
+                    "100.00",
+                    "30.0",
+                    "30.0",
+                    "1",
+                    "20,000 Hz"
+                  ],
+                  [
+                    "Black Acrylic",
+                    "2.0 mm",
+                    "Laser Cut (Perimeter)",
+                    "100.00",
+                    "30.0",
+                    "30.0",
+                    "1",
+                    "20,000 Hz"
+                  ]
                 ]
               },
-              placeholders: [
+              note: "Laser parameters were calibrated in RDWorks with 20 kHz PWM pulse modulation to ensure clean surface vaporisation during scanning and smooth edge finishing during perimeter cutting.",
+              media: [
                 {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Material Sheet Before Cutting Photograph",
-                  description: "Photograph of the raw material sheet positioned, leveled, and aligned on the machine honey-comb/knife bed before toolpath execution.",
-                  caption: "Material sheet prepared for the laser-cutting operation."
+                  src: "assets/images/protosem/week-06/laser/machine scan.png",
+                  alt: "Laser Scan Layer Settings (100 mm/s @ 30% Power)",
+                  caption: "Laser Scan Layer Settings: Speed 100.00 mm/s | Min/Max Power 30.0%"
                 },
                 {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Material Thickness Measurement Photograph",
-                  description: "Close-up measurement photograph of the stock sheet thickness using digital vernier calipers before cutting.",
-                  caption: "Material thickness reference measured before fabrication."
+                  src: "assets/images/protosem/week-06/laser/machine cut.png",
+                  alt: "Laser Cut Layer Settings (100 mm/s @ 30% Power)",
+                  caption: "Laser Cut Layer Settings: Speed 100.00 mm/s | Min/Max Power 30.0%"
                 }
               ]
             },
             {
               stepNumber: "09",
-              stepLabel: "09 — SELECTED DESIGN",
-              title: "Selected Design / Image",
-              subheading: "Design Selection & Fabrication Intent",
-              description: "For this digital fabrication task, an intricate ship illustration was chosen as a reference design from Pinterest. The visual composition features an ornate sailing vessel with dynamic multi-tiered masts, fine rigging lines, billowing sail geometry, wave ripples, and framed 'ODYSSEY' typography. This artwork provided an ideal benchmark to evaluate both high-resolution surface raster marking and clean outer perimeter through-cutting within a single integrated workpiece.",
-              designIntent: {
-                tag: "FABRICATION DESIGN INTENT",
-                title: "Dual-Operation Digital Fabrication Strategy",
-                intro: "The selected ship illustration was chosen specifically to test and evaluate two fundamental digital fabrication operations within one unified design:",
-                items: [
-                  {
-                    num: "01",
-                    title: "Surface Engraving / Scanning",
-                    desc: "Testing fine line resolution, text legibility, wave detail reproduction, and surface shading depth across intricate interior vectors."
-                  },
-                  {
-                    num: "02",
-                    title: "Perimeter Vector Cutting",
-                    desc: "Testing through-cut separation along the continuous outer contour, evaluating kerf tolerance, clean edge geometry, and part release."
-                  }
-                ],
-                note: "Design Attribution: Selected external illustration curated from Pinterest as a digital-to-physical fabrication reference study (not an original illustration by author)."
-              },
+              stepLabel: "09 — LASER CUTTING PROCESS",
+              title: "Laser Cutting Process",
+              description: "The prepared toolpaths were transferred to the laser cutter and executed on the 2mm black acrylic sheet. The machine performed the programmed engraving and cutting operations to produce the physical design.",
               media: {
-                src: "assets/images/protosem/week-06/laser/laser ref img.jpeg",
-                alt: "Selected ship design reference from Pinterest",
-                caption: "Step 01: Selected Ship Design Reference from Pinterest"
+                src: "assets/images/protosem/week-06/laser/laser mchine cutting.mp4",
+                type: "video",
+                isVideo: true,
+                alt: "Laser machine cutting and engraving the acrylic design",
+                caption: "Laser machine executing the configured toolpaths"
               }
             },
             {
               stepNumber: "10",
-              stepLabel: "10 — IMAGE → DXF CONVERSION",
-              title: "Image-to-DXF Conversion",
-              subheading: "Vectorizing Artwork for CNC Toolpaths",
-              description: "Laser cutting machines cannot directly execute raster bitmap images for precision vector pathing; CNC controllers require mathematical vector paths defined by coordinates, curves, and nodes. To bridge this requirement, the reference artwork was converted into a Drawing Exchange Format (DXF) vector geometry dataset.",
-              conversionTool: "Conversion software/tool to be verified (e.g., Vectorizer / CorelDRAW / Adobe Illustrator / Inkscape / RDWorks Built-in Trace)",
-              processSteps: [
-                "Select and import the high-resolution ship illustration reference.",
-                "Pre-process image contrast, brightness, and threshold to isolate distinct artwork features.",
-                "Execute vector tracing to convert raster pixel edges into continuous geometric bezier paths.",
-                "Export the generated vector paths into the standardized AutoCAD DXF interchange format.",
-                "Import the generated DXF file directly into the RDWorks laser CAD/CAM environment.",
-                "Inspect the imported vector geometry to verify path continuity, curve smoothness, and node integrity."
-              ],
-              techNote: "Why DXF? Drawing Exchange Format (DXF) is a universal CAD data interchange standard that encodes explicit geometric primitives (lines, polylines, arcs, splines) necessary for the Ruida DSP motion controller to compute velocity profiles and laser firing timings.",
-              images: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Original Reference Image Before Conversion",
-                  description: "High-resolution view of the original bitmap artwork prior to vector path generation.",
-                  caption: "Original selected artwork before vector conversion."
-                },
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Image-to-DXF Conversion Software Interface",
-                  description: "Screenshot of the vectorization software showing curve tracing thresholds and node generation.",
-                  caption: "Artwork being converted/prepared as vector geometry."
-                },
-                {
-                  src: "assets/images/protosem/week-06/laser/rdworks.png",
-                  alt: "Converted DXF geometry imported into RDWorks interface",
-                  caption: "Converted DXF geometry imported into RDWorks."
-                }
-              ]
+              stepLabel: "10 — MACHINE CONTROL PANEL",
+              title: "Machine Control Panel",
+              description: "The machine control panel was used to operate and monitor the fabrication process, including positioning the laser head at the origin and executing the programmed job.",
+              media: {
+                src: "assets/images/protosem/week-06/laser/laser control panel.jpeg",
+                alt: "Machine control panel used for operation",
+                caption: "Digital control panel used for machine operation"
+              }
             },
             {
               stepNumber: "11",
-              stepLabel: "11 — FILE PREPARATION",
-              title: "File Preparation",
-              subheading: "Vector Cleaning & CAD Pre-Flight Verification",
-              description: "Before transmitting CAD geometry to machine control software, rigorous vector pre-flight verification was performed. Raw vectorized artwork often contains hidden defects—such as open contours, overlapping duplicate segments, and stray anchor points—which can lead to failed cuts, excessive charring, or distorted geometry.",
-              checklistCards: [
-                {
-                  title: "VECTOR CLEANING",
-                  desc: "Inspected and smoothed vector paths, eliminating microscopic rogue nodes and ensuring smooth acceleration curves for the laser carriage."
-                },
-                {
-                  title: "SCALING & DIMENSIONS",
-                  desc: "Verified global dimensional scale in millimeters to match the intended physical prototype footprint within the machine envelope."
-                },
-                {
-                  title: "CLOSED PATH VERIFICATION",
-                  desc: "Verified that all perimeter cut boundaries formed 100% closed polylines, ensuring complete part release upon vector pass completion."
-                },
-                {
-                  title: "DUPLICATE REMOVAL",
-                  desc: "Ran automated overlap detection to delete coincident vectors, preventing the laser from making unintended repeated passes over identical paths."
-                },
-                {
-                  title: "UNWANTED GEOMETRY CLEANUP",
-                  desc: "Purged hidden construction guidelines, stray anchor points, and extraneous bounding boxes that should not be physically fabricated."
-                },
-                {
-                  title: "LAYER SEPARATION",
-                  desc: "Isolated interior artistic detail vectors from outer perimeter cutlines into distinct groups for independent RDWorks layer mapping."
-                }
-              ],
-              checklistLabel: "FILE PREPARATION & GEOMETRY VERIFICATION CHECKLIST",
-              checklist: [
-                "Geometry cleaned and nodes smoothed",
-                "Scale and millimeter dimensions verified",
-                "Cutting perimeter closed paths checked",
-                "Duplicate / overlapping geometry removed",
-                "Unwanted construction guidelines purged",
-                "Final DXF file validated for RDWorks import"
-              ],
-              placeholders: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Cleaned Vector / DXF CAD Geometry View",
-                  description: "Screenshot showing cleaned, verified vector paths and layer groupings in the CAD editor before RDWorks nesting.",
-                  caption: "Cleaned and verified vector geometry prepared for RDWorks."
-                }
-              ]
+              stepLabel: "11 — HANDS-ON FABRICATION",
+              title: "Hands-on Fabrication",
+              description: "This hands-on activity gave me practical experience in operating a CNC laser cutter, observing how digital toolpaths translate into physical material removal and engraving on acrylic.",
+              media: {
+                src: "assets/images/protosem/week-06/laser/me doing laser.jpeg",
+                alt: "Operating and supervising the laser cutting process",
+                caption: "Operating and supervising the laser cutting process"
+              }
             },
             {
               stepNumber: "12",
-              stepLabel: "12 — NESTING & RDWORKS LAYOUT",
-              title: "Nesting & RDWorks Layout",
-              subheading: "Workpiece Nesting, Layer Strategy & RDWorks CAM",
-              description: "In the RDWorks digital CAM environment, the verified DXF geometry was arranged relative to the usable material sheet area. Separate color-coded layers were assigned to distinguish high-speed surface raster scanning from perimeter through-cutting, establishing the correct execution order.",
-              layoutTopics: [
-                {
-                  label: "DESIGN PLACEMENT & NESTING",
-                  text: "The ship design was positioned within the safe working envelope of the material stock, leaving sufficient margin from clamps and edges to optimize material yield."
-                },
-                {
-                  label: "CUTTING VS ENGRAVING LAYERS",
-                  text: "Internal artwork details, text, and wave lines were assigned to Scan/Engrave mode, while the continuous outer boundary was assigned to Cut mode."
-                },
-                {
-                  label: "RDWORKS LAYER COLORS",
-                  text: "Color-coded processing layers were utilized to visually identify and isolate operational parameters (speed, power, sequence) across different features."
-                },
-                {
-                  label: "EXECUTION SEQUENCE",
-                  text: "RDWorks was ordered to execute interior engraving first, followed by perimeter vector cutting, preventing workpiece movement before detail etching."
-                }
-              ],
-              layerLegend: {
-                title: "RDWORKS LAYER CONFIGURATION LEGEND",
-                items: [
-                  {
-                    colorName: "Scan Layer [Verify Color]",
-                    mode: "Raster Scan / Engrave",
-                    desc: "Internal artwork, sails, rigging detail, text & wave patterns"
-                  },
-                  {
-                    colorName: "Cut Layer [Verify Color]",
-                    mode: "Vector Through-Cut",
-                    desc: "Outer hull perimeter and final bounding contour"
-                  }
-                ]
-              },
-              images: [
-                {
-                  src: "assets/images/protosem/week-06/laser/in rdworks.png",
-                  alt: "RDWorks workspace showing design layout, scan layers, and cut boundaries",
-                  caption: "Final RDWorks layout showing design placement, operation layers, and cutting/engraving configuration."
-                },
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Full RDWorks Layout with Material Sheet Boundary",
-                  description: "Expanded workspace view showing the complete workpiece nested inside the material stock boundary and origin point.",
-                  caption: "Final nesting and material layout before sending the job to the laser cutter."
-                }
-              ]
-            },
-            {
-              stepNumber: "13",
-              stepLabel: "13 — FINAL MACHINE SETTINGS",
-              title: "Final Machine Settings",
-              subheading: "RDWorks Process Parameters",
-              description: "Laser fabrication requires configuring distinct kinematic speeds, optical power percentages, and repetition frequencies tailored to material properties. In accordance with strict factual documentation standards, actual machine parameter values are recorded below directly from the fabrication run.",
-              settingsTable: {
-                columns: ["Material", "Thickness (mm)", "Operation", "Speed (mm/s)", "Min Power (%)", "Max Power (%)", "Passes", "Frequency (Hz)"],
-                rows: [
-                  [
-                    "[Actual Material]",
-                    "[Actual mm]",
-                    "Engraving / Scan",
-                    "[To be verified from machine record]",
-                    "[To be verified]",
-                    "[To be verified]",
-                    "1",
-                    "[To be verified]"
-                  ],
-                  [
-                    "[Actual Material]",
-                    "[Actual mm]",
-                    "Vector Cutting",
-                    "[To be verified from machine record]",
-                    "[To be verified]",
-                    "[To be verified]",
-                    "1",
-                    "[To be verified]"
-                  ]
-                ]
-              },
-              techNote: "Factual Documentation Policy: Exact speeds, powers, and frequency values are subject to verification from the physical RDWorks layer settings file and laboratory logbook. No guessed or fictitious settings are published in this portfolio.",
-              placeholders: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "RDWorks Parameter Settings Dialog Screenshot",
-                  description: "Screenshot of the RDWorks Layer Parameter dialog window showing exact Speed, Min/Max Power, and Interval settings used for the cut.",
-                  caption: "Actual RDWorks machine parameters used for the fabrication process."
-                }
-              ]
-            },
-            {
-              stepNumber: "14",
-              stepLabel: "14 — CUTTING PROCESS",
-              title: "Cutting Process",
-              subheading: "Chronological Fabrication Execution",
-              description: "The programmed toolpaths were executed on the CNC laser cutting machine following a structured operational sequence to ensure safety, precision, and part quality.",
-              processSequence: [
-                {
-                  step: "01",
-                  title: "Machine Setup & Alignment",
-                  desc: "Secured material sheet flat on honeycomb bed, jogged laser head to set origin point, and verified focal distance using focal spacer tool."
-                },
-                {
-                  step: "02",
-                  title: "Auxiliary System Activation",
-                  desc: "Energized fume exhaust blower, verified water chiller cooling flow/temperature, and engaged coaxial air assist compressor."
-                },
-                {
-                  step: "03",
-                  title: "Framing & Toolpath Download",
-                  desc: "Transferred RDWorks file via USB/Ethernet and ran a dry 'Frame' boundary preview to verify physical material clearance."
-                },
-                {
-                  step: "04",
-                  title: "Raster Engraving Execution",
-                  desc: "Machine executed high-speed horizontal scanning strokes to engrave internal ship artwork, rigging, and 'ODYSSEY' lettering."
-                },
-                {
-                  step: "05",
-                  title: "Vector Perimeter Cutting",
-                  desc: "Upon completion of raster passes, the laser immediately switched to full-depth vector cutting along the outer perimeter contour."
-                },
-                {
-                  step: "06",
-                  title: "Inspection & Part Removal",
-                  desc: "Allowed exhaust to evacuate residual smoke for 30 seconds before opening enclosure hood to remove the completed physical piece."
-                }
-              ],
-              images: [
-                {
-                  src: "assets/images/protosem/week-06/laser/laser mchine cutting.mp4",
-                  type: "video",
-                  isVideo: true,
-                  alt: "Laser cutter actively executing toolpaths",
-                  caption: "Laser cutter executing the configured engraving and cutting toolpaths."
-                },
-                {
-                  src: "assets/images/protosem/week-06/laser/laser control panel.jpeg",
-                  alt: "Laser machine digital control panel during operation",
-                  caption: "Machine control panel used to operate and monitor the laser-cutting process."
-                },
-                {
-                  src: "assets/images/protosem/week-06/laser/me doing laser.jpeg",
-                  alt: "Hands-on supervision and operation during fabrication",
-                  caption: "Hands-on observation and operation during the laser fabrication process."
-                }
-              ]
-            },
-            {
-              stepNumber: "15",
-              stepLabel: "15 — FINAL RESULT",
-              title: "Final Result — Hero Shot",
-              subheading: "Physical Fabricated Artifact Evaluation",
+              stepLabel: "12 — FINAL OUTPUT",
+              title: "Final Output",
               isFinal: true,
+              description: "The completed piece combines engraved surface details with a cleanly cut outer profile, demonstrating the complete transition from digital design to physical fabrication.",
               driveLink: "https://drive.google.com/file/d/1chX9dWIYWD4TF9-AlQS-h4x14N2pT8GC/view",
-              driveLinkLabel: "View Verified High-Resolution Final Output on Google Drive",
-              description: "The completed laser-cut and engraved ship artifact produced through the verified digital-to-physical workflow. The physical result demonstrates crisp raster surface definition across the ship artwork combined with clean, perpendicular vector through-cut boundaries.",
-              observations: [
-                "Surface raster engraving is evenly rendered across internal ship artwork, rigging lines, and 'ODYSSEY' typography.",
-                "Outer vector boundary provides clean dimensional separation from the parent material sheet with sharp corner transitions.",
-                "Process successfully validates the integrated workflow: digital reference selection → vector conversion → RDWorks layer setup → CNC laser fabrication."
-              ],
+              driveLinkLabel: "View High-Resolution Final Output on Google Drive",
               media: {
                 src: "assets/images/protosem/week-06/laser/laser output.jpeg",
-                alt: "Final laser-cut and engraved ship artifact produced from the prepared digital design",
-                caption: "Final laser-cut and engraved ship artifact produced from the prepared digital design."
-              },
-              placeholders: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Top / Front Detail View Photograph",
-                  description: "High-magnification detail photograph showing the sharpness of engraved lines, text contrast, and wood/substrate surface texture.",
-                  caption: "Detailed view of the completed laser-cut and engraved surface."
-                },
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Side View / Cut Edge Quality Photograph",
-                  description: "Orthogonal photograph of the cut edge profile showing kerf taper, striations, and material thickness.",
-                  caption: "Side view showing the resulting cut edge and material thickness."
-                }
-              ]
-            },
-            {
-              stepNumber: "16",
-              stepLabel: "16 — PROBLEMS & SOLUTIONS",
-              title: "Problems Faced & Solutions",
-              subheading: "Troubleshooting & Engineering Solutions",
-              description: "Digital fabrication processes frequently encounter technical challenges across vector conversion, material flatness, and machine parameter calibration. The table below outlines key engineering problems, root causes, implemented corrective actions, and verified final outcomes.",
-              troubleTable: {
-                columns: ["Problem Encountered", "Identified Root Cause", "Corrective Action Implemented", "Verified Final Outcome"],
-                rows: [
-                  [
-                    "Vector Node Redundancy in DXF",
-                    "Automated bitmap vectorization created dense overlapping nodes and split bezier segments.",
-                    "Cleaned vector paths in CAD, applied curve smoothing, and welded coincident vertices prior to RDWorks import.",
-                    "Smooth motion controller acceleration, zero stuttering, and crisp line definition."
-                  ],
-                  [
-                    "Layer Assignment & Order Conflict",
-                    "Initial DXF import mapped cutting lines before internal detail engraving in toolpath queue.",
-                    "Re-ordered layers in RDWorks to mandate Scan/Engrave execution prior to outer perimeter Vector Cut.",
-                    "Workpiece remained fully stabilized by parent sheet during detailed surface engraving."
-                  ],
-                  [
-                    "Material Surface Height Variance [To be verified]",
-                    "Slight sheet warping on honeycomb bed causing minor focal deviation across the envelope.",
-                    "Secured sheet edges with low-profile hold-down pins and recalibrated focal distance to the central workpiece plane.",
-                    "Uniform focal spot diameter, consistent line depth, and even engraving contrast throughout."
-                  ]
-                ]
-              },
-              placeholders: [
-                {
-                  isPlaceholder: true,
-                  tag: "PHOTO TO ADD",
-                  title: "Troubleshooting / Iteration Test Photograph",
-                  description: "Photograph documenting any initial trial, parameter test piece, or corrected geometry iteration during the lab session.",
-                  caption: "Example of the issue observed during fabrication before correction."
-                }
-              ]
-            },
-            {
-              stepNumber: "17",
-              stepLabel: "17 — REFLECTION",
-              title: "Reflection",
-              subheading: "Technical Synthesis & Key Learnings",
-              description: "A structured engineering reflection synthesizing technical insights, operational challenges, practical competencies gained, and opportunities for future fabrication optimization.",
-              reflectionSections: [
-                {
-                  title: "WHAT I LEARNED",
-                  content: "I learned how a digital design can be translated into a physical object through a complete laser-cutting workflow, from vector preparation and DXF handling to RDWorks configuration and machine fabrication."
-                },
-                {
-                  title: "CHALLENGES FACED",
-                  content: "[Insert actual challenge(s) encountered during the activity.]"
-                },
-                {
-                  title: "SKILLS GAINED",
-                  items: [
-                    "DXF/vector file handling",
-                    "RDWorks workflow",
-                    "Laser cutting and engraving concepts",
-                    "Digital fabrication",
-                    "Machine setup awareness",
-                    "Material-process understanding",
-                    "Physical output inspection"
-                  ]
-                },
-                {
-                  title: "IMPROVEMENTS MADE",
-                  content: "[Insert actual improvements made during the activity.]"
-                },
-                {
-                  title: "WHAT I WOULD DO DIFFERENTLY",
-                  content: "In future fabrication tasks, I would spend more time validating the vector geometry, documenting machine parameters, testing critical settings on scrap material where appropriate, and recording the complete fabrication process for better repeatability."
-                }
-              ]
-            },
-            {
-              stepNumber: "18",
-              stepLabel: "18 — SOURCE FILES",
-              title: "Source Files",
-              subheading: "Project Design & CAM Assets",
-              description: "Access the design and CAD/CAM source files associated with this digital fabrication project. In accordance with portfolio verification standards, file links are updated as verified assets are staged in the project repository.",
-              sourceFiles: [
-                {
-                  format: "DXF",
-                  name: "Laser Cut Ship Vector Geometry",
-                  description: "Cleaned 2D CAD vector interchange file containing isolated engraving paths and closed perimeter cutlines.",
-                  status: "Source file to be uploaded",
-                  url: null,
-                  filename: "laser-cutting-ship.dxf"
-                },
-                {
-                  format: "AI",
-                  name: "Original Vector Artwork File",
-                  description: "Master vector source file with editable layers, stroke styles, and vector groupings.",
-                  status: "Source file to be uploaded",
-                  url: null,
-                  filename: "laser-cutting-ship.ai"
-                }
-              ],
-              additionalLinks: [
-                {
-                  label: "Pinterest Ship Design Reference Source",
-                  url: "https://in.pinterest.com/pin/211106363776993189/",
-                  isExternal: true
-                },
-                {
-                  label: "High-Resolution Final Output on Google Drive",
-                  url: "https://drive.google.com/file/d/1chX9dWIYWD4TF9-AlQS-h4x14N2pT8GC/view",
-                  isExternal: true
-                }
-              ]
+                alt: "Completed laser-cut and engraved ship artifact",
+                caption: "Completed laser-cut and engraved ship artifact"
+              }
             }
           ]
         },
 
-        // Tab Reflection & Learning Synthesis
-        learningReflection: {
-          badge: "SYNTHESIS & REFLECTION",
-          heading: "What I Learned",
-          narrative: "Through this activity, I learned how a digital design can be prepared and converted into a physical object using a laser-cutting workflow. I gained practical experience with DXF files, RDWorks, engraving and cutting operations, machine operation, and the overall digital-fabrication process."
-        }
+        // POST-ACTIVITY SYNTHESIS (FACULTY REQUIREMENTS: PROBLEMS, REFLECTION, SOURCE FILES)
+        postPracticalSections: [
+          {
+            sectionNumber: "13",
+            sectionLabel: "13 — PROBLEMS & SOLUTIONS",
+            heading: "Problems Faced & Solutions",
+            content: "Technical challenges and solutions encountered during the fabrication activity.",
+            troubleTable: {
+              columns: ["Problem", "Cause", "Solution", "Outcome"],
+              rows: [
+                [
+                  "It was initially unclear which parts of the design should be scanned and which should be cut.",
+                  "The imported design contained both internal artwork and outer boundary geometry.",
+                  "The geometry was reviewed in RDWorks and assigned to separate scan and cut operations.",
+                  "The design was correctly prepared for fabrication."
+                ]
+              ]
+            }
+          },
+          {
+            sectionNumber: "14",
+            sectionLabel: "14 — REFLECTION",
+            heading: "Reflection",
+            reflectionSections: [
+              {
+                title: "01 — WHAT I LEARNED",
+                content: "Learned how to prepare vector designs, work with RDWorks, assign engraving and cutting layers, and translate digital geometry into a physical acrylic artifact."
+              },
+              {
+                title: "02 — CHALLENGES FACED",
+                content: "A key challenge was identifying which parts of the design should be engraved and which should be cut, especially where internal artwork and the outer boundary overlapped."
+              },
+              {
+                title: "03 — SKILLS GAINED",
+                content: "Improved my skills in vector preparation, file verification, laser parameter configuration, RDWorks workflow, and safe machine operation."
+              },
+              {
+                title: "04 — FUTURE IMPROVEMENTS",
+                content: "In future, I would verify the complete file configuration and machine parameters more carefully before fabrication to reduce preparation errors and improve the final result."
+              }
+            ]
+          },
+          {
+            sectionNumber: "15",
+            sectionLabel: "15 — SOURCE FILES",
+            heading: "Source Files",
+            content: "Project CAD and design source files for the laser cutting activity. Source files are provided for reference and download. Links should be verified before final submission.",
+            sourceFiles: [
+              {
+                format: "DXF",
+                name: "DXF Source File",
+                description: "2D CAD vector interchange file with separated engraving and cutting paths.",
+                status: "Available on Google Drive",
+                url: "https://drive.google.com/file/d/1llFQkejwq2vZRBWIIuvCDunJk4cQd-I7/view?usp=sharing",
+                filename: "laser-cutting-ship.dxf"
+              },
+              {
+                format: "AI",
+                name: "AI Source File",
+                description: "Master vector artwork file with editable layers and path outlines.",
+                status: "Available on Google Drive",
+                url: "https://drive.google.com/file/d/1chX9dWIYWD4TF9-AlQS-h4x14N2pT8GC/view",
+                filename: "laser-cutting-ship.ai"
+              }
+            ],
+            additionalLinks: [
+              {
+                label: "Pinterest Ship Design Reference Source",
+                url: "https://in.pinterest.com/pin/211106363776993189/",
+                isExternal: true
+              }
+            ]
+          }
+        ]
       },
       {
         id: "3d-printing",
@@ -1950,310 +1673,431 @@ const protoSemWeeks = [
         title: "3D Printing",
         intro: "3D printing is an additive manufacturing process used to create physical objects from digital 3D models. Instead of removing material from a larger block, the printer builds an object layer by layer. During this activity, I explored the complete workflow from selecting an existing 3D model to preparing it in slicing software and producing the physical object using a 3D printer.",
 
-        // 3D Printing Educational Sections (01 — 10)
+        // 3D Printing Educational Introduction (Concise Background & Theory)
         educationalSections: [
           {
             sectionNumber: "01",
             sectionLabel: "01 — WHAT IS 3D PRINTING?",
             heading: "What is 3D Printing?",
-            content: "3D printing is a manufacturing method in which a digital 3D model is converted into a physical object by depositing, curing, or binding material layer by layer. Each layer is created according to the sliced geometry until the complete physical object is produced.",
+            content: "3D printing is an additive manufacturing process in which a digital 3D model is converted into a physical object by depositing material sequentially layer by layer. Each cross-sectional layer is bonded to the previous one until the complete three-dimensional part is formed.",
             media: {
               src: "assets/images/protosem/week-06/3D printing/3d.png",
               alt: "3D Printing Technical Illustration — Additive Layer Deposition Principle",
-              caption: "Technical Illustration: 1. Digital Mesh Geometry → 2. G-code Slicing → 3. Layer-by-Layer Material Deposition"
+              caption: "3D Printing Technical Illustration — Additive Layer Deposition Principle"
             }
           },
           {
             sectionNumber: "02",
             sectionLabel: "02 — HOW DOES 3D PRINTING WORK?",
             heading: "How Does 3D Printing Work?",
-            steps: [
-              "Create or select a 3D model",
-              "Import the model into slicing software",
-              "Configure print parameters",
-              "Slice the model into printable layers",
-              "Send the print instructions to the printer",
-              "The printer builds the object layer by layer",
-              "Remove and inspect the completed print"
+            content: "The additive manufacturing workflow transforms virtual CAD data into physical parts through a series of discrete digital and mechanical stages.",
+            workflowSequence: [
+              { label: "3D CAD Model" },
+              { label: "STL Mesh Generation" },
+              { label: "Slicing Software" },
+              { label: "G-Code Generation" },
+              { label: "Layer Deposition" },
+              { label: "Physical Object" }
             ]
           },
           {
             sectionNumber: "03",
-            sectionLabel: "03 — STAGES OF 3D PRINTING",
-            heading: "Stages of 3D Printing",
-            stages: [
+            sectionLabel: "03 — TYPES OF 3D PRINTING TECHNOLOGIES",
+            heading: "Types of 3D Printing Technologies",
+            content: "Different additive manufacturing processes use specialized material states and energy sources to build physical components.",
+            types: [
               {
-                stageNumber: "01",
-                title: "Digital Model",
-                description: "A 3D model is created using computer-aided design (CAD) software or obtained from an existing digital model library."
+                name: "FDM / FFF",
+                tag: "Thermoplastic Filament Extrusion",
+                description: "Melts and deposits continuous thermoplastic filaments layer by layer. The primary technology utilized in this activity."
               },
               {
-                stageNumber: "02",
-                title: "Model Preparation",
-                description: "The digital model is imported into slicing software, oriented for optimal stability and surface finish, and positioned on the print bed."
+                name: "SLA",
+                tag: "Resin Photopolymerization",
+                description: "Uses ultraviolet light to cure liquid photopolymer resin into high-resolution smooth parts."
               },
               {
-                stageNumber: "03",
-                title: "Slicing",
-                description: "The slicer converts the continuous 3D geometry into discrete horizontal layers and generates the machine instructions required by the printer."
+                name: "SLS",
+                tag: "Powder Bed Fusion",
+                description: "Selectively sinters polymer powder particles using a laser, enabling self-supporting complex assemblies."
               },
               {
-                stageNumber: "04",
-                title: "Printing",
-                description: "The printer executes the instructions, depositing or curing material sequentially layer by layer to form the physical object."
-              },
-              {
-                stageNumber: "05",
-                title: "Post-Processing",
-                description: "The printed object is removed from the build plate, separated from support structures if present, and cleaned or finished if required."
+                name: "DLP",
+                tag: "Light Projector Curing",
+                description: "Employs a digital light projector screen to cure an entire layer of liquid resin simultaneously."
               }
             ]
           },
           {
             sectionNumber: "04",
-            sectionLabel: "04 — TYPES OF 3D PRINTING TECHNOLOGIES",
-            heading: "Types of 3D Printing Technologies",
-            types: [
+            sectionLabel: "04 — COMMON 3D PRINTING MATERIALS",
+            heading: "Common 3D Printing Materials",
+            content: "Material selection determines the mechanical strength, thermal performance, flexibility, and surface finish of the printed object.",
+            materialsCards: [
               {
-                name: "FDM / FFF",
-                tag: "Thermoplastic Filament Extrusion",
-                description: "Uses thermoplastic filament and builds objects layer by layer. This is the technology most closely related to the printer used in my activity."
+                name: "PLA",
+                type: "Thermoplastic Filament",
+                description: "Biodegradable thermoplastic known for dimensional stability, low shrinkage, and ease of printing. Selected for this activity."
               },
               {
-                name: "SLA",
-                tag: "Resin Photopolymerization",
-                description: "Uses liquid resin that is selectively cured using light to produce high-resolution parts with smooth surface finishes."
+                name: "ABS",
+                type: "Engineering Thermoplastic",
+                description: "High-strength, impact-resistant polymer requiring an enclosed heated chamber."
               },
               {
-                name: "SLS",
-                tag: "Powder Bed Fusion",
-                description: "Uses powdered material that is selectively fused using a laser, enabling complex self-supporting geometries without support structures."
+                name: "PETG",
+                type: "Durable Copolyester",
+                description: "Combines the ease of PLA with enhanced impact strength and moisture resistance."
               },
               {
-                name: "DLP",
-                tag: "Light Projector Curing",
-                description: "Uses a digital light projector screen to cure an entire layer of liquid resin simultaneously layer by layer."
+                name: "TPU",
+                type: "Flexible Elastomer",
+                description: "Flexible polymer engineered for vibration damping, elasticity, and impact absorption."
+              },
+              {
+                name: "Resin",
+                type: "Liquid Photopolymer",
+                description: "High-resolution liquid resin used in SLA/DLP for miniatures and intricate patterns."
               }
             ]
           },
           {
             sectionNumber: "05",
-            sectionLabel: "05 — 3D PRINTING PROCESS / WORKFLOW",
-            heading: "From Digital Model to Physical Object",
-            content: "Slicing software prepares the model for manufacturing by converting the geometry into printable instructions. In my activity, Bambu Studio was used to prepare the 3D model for printing.",
-            workflowSequence: [
-              { label: "3D Model" },
-              { label: "Slicing Software" },
-              { label: "Print Settings" },
-              { label: "Layer Generation" },
-              { label: "3D Printer" },
-              { label: "Printed Object" }
-            ]
-          },
-          {
-            sectionNumber: "06",
-            sectionLabel: "06 — COMMON 3D PRINTING MATERIALS",
-            heading: "Common 3D Printing Materials",
-            materialsCards: [
-              {
-                name: "PLA",
-                type: "Thermoplastic Filament",
-                description: "A commonly used thermoplastic known for being easy to print and suitable for prototypes, models, and decorative objects."
-              },
-              {
-                name: "ABS",
-                type: "High-Strength Thermoplastic",
-                description: "A stronger thermoplastic often used where greater heat resistance and durability are required."
-              },
-              {
-                name: "PETG",
-                type: "Durable Thermoplastic",
-                description: "A material that provides a balance of strength, durability, and printability for functional components."
-              },
-              {
-                name: "TPU",
-                type: "Flexible Elastomer",
-                description: "A flexible thermoplastic used for parts that need elasticity, impact absorption, and bend resistance."
-              },
-              {
-                name: "Resin",
-                type: "Liquid Photopolymer",
-                description: "A liquid photopolymer commonly used in resin-based 3D printing processes for high-detail miniatures and jewelry."
-              }
+            sectionLabel: "05 — ADVANTAGES & LIMITATIONS",
+            heading: "Advantages & Limitations of 3D Printing",
+            content: "Understanding the capabilities and constraints of additive manufacturing guides effective Design for Additive Manufacturing (DFAM).",
+            advantages: [
+              "Direct digital-to-physical fabrication without requiring dedicated tooling or molds",
+              "Supports complex organic geometries, internal cavities, and intricate undercuts",
+              "Rapid iteration cycle from CAD model modification to physical evaluation",
+              "High material efficiency by depositing filament only where structurally required"
             ],
-            safetyNote: "Material selection depends on the required mechanical properties, printing process, and machine compatibility. This section serves as a general educational overview across additive manufacturing."
-          },
-          {
-            sectionNumber: "07",
-            sectionLabel: "07 — ADVANTAGES OF 3D PRINTING",
-            heading: "Advantages of 3D Printing",
-            items: [
-              "Rapid prototyping",
-              "Converts digital designs into physical objects",
-              "Supports complex geometries",
-              "Reduces the need for traditional manufacturing tools",
-              "Useful for customized designs",
-              "Makes design iteration easier"
-            ]
-          },
-          {
-            sectionNumber: "08",
-            sectionLabel: "08 — LIMITATIONS OF 3D PRINTING",
-            heading: "Limitations of 3D Printing",
-            items: [
-              "Printing can take significant time depending on the object",
-              "Surface finish can show visible layer lines",
-              "Print quality depends on model orientation and settings",
-              "Some materials require controlled printing conditions",
-              "Supports may be required for some geometries",
-              "Printed parts may have different mechanical properties compared with traditionally manufactured parts"
-            ]
-          },
-          {
-            sectionNumber: "09",
-            sectionLabel: "09 — OUR 3D PRINTER",
-            heading: "Our 3D Printer",
-            subheading: "Bambu Lab H2S",
-            content: "The Bambu Lab H2S was used for the practical 3D printing activity. It provided the hardware platform for converting the prepared digital model into a physical object.",
-            media: {
-              src: "assets/images/protosem/week-06/3D printing/H2s spec.png",
-              alt: "Bambu Lab H2S 3D Printer Specification",
-              caption: "Bambu Lab H2S — printer specification and hardware reference"
-            }
-          },
-          {
-            sectionNumber: "10",
-            sectionLabel: "10 — FILAMENT SPECIFICATION",
-            heading: "Filament",
-            subheading: "PLA Basic",
-            content: "PLA (Polylactic Acid) is a commonly used thermoplastic filament in FDM 3D printing. It is popular for prototypes, models, educational projects, and decorative parts because it is relatively easy to print.",
-            media: {
-              src: "assets/images/protosem/week-06/3D printing/pla.jpg",
-              alt: "PLA Basic Filament Reference",
-              caption: "PLA Basic — thermoplastic filament material reference"
-            },
-            specGrid: [
-              { label: "MATERIAL", value: "PLA" },
-              { label: "FULL NAME", value: "Polylactic Acid" },
-              { label: "TYPE", value: "Thermoplastic Filament" },
-              { label: "COMMON USES", value: "Prototypes, Models, Educational & Decorative Objects" }
-            ],
-            characteristics: [
-              "Easy to print",
-              "Good for detailed models",
-              "Widely used for prototyping",
-              "Available in a broad range of colors"
+            limitations: [
+              "Anisotropic mechanical strength (inter-layer Z-bonding weaker than planar XY toolpaths)",
+              "Longer fabrication cycle times for high-volume manufacturing batches",
+              "Steep geometry overhangs exceeding 45° require support structures",
+              "Stepped layer lines require surface post-processing for smooth cosmetic finishes"
             ]
           }
         ],
 
-        // Student Practical Documentation (01 — 06 in exact order)
+        // Faculty-Required Practical Documentation (01 — 11 Sequential Structure)
         practicalSection: {
           eyebrow: "HANDS-ON WORKFLOW",
           heading: "My 3D Printing Activity",
-          intro: "For the practical activity, I selected a 3D model, prepared it using Bambu Studio, and produced the physical object using the available 3D printer.",
+          intro: "A structured digital fabrication case study documenting the end-to-end additive manufacturing workflow on the Bambu Lab H2S — from model discovery and CAM slicing to hardware limits, subtractive comparison, parameter configuration, and physical output.",
           steps: [
             {
               stepNumber: "01",
-              stepLabel: "01 — MODEL SELECTION",
-              title: "Model Selection",
-              description: "To begin the 3D printing activity, I explored the Printables online repository and selected a high-quality 3D digital model as the base design for physical fabrication. The chosen geometric model featured well-defined contours and intricate structural details, making it an ideal digital asset to evaluate slicing orientation, layer height accuracy, and FDM additive extrusion.",
+              stepLabel: "01 — PRINTER DETAILS",
+              title: "Printer Details",
+              description: "The Bambu Lab H2S was used for the practical 3D printing activity. It is an enclosed high-speed FDM additive manufacturing platform equipped with an active heated chamber and dual-gear direct extruder for engineering and standard thermoplastic polymers.",
+              specTable: {
+                columns: ["Parameter", "Specification"],
+                rows: [
+                  ["Make", "Bambu Lab"],
+                  ["Model", "H2S"],
+                  ["Technology", "Fused Deposition Modeling (FDM)"],
+                  ["Build Volume", "340 × 320 × 340 mm"],
+                  ["Nozzle Size", "0.4 mm (Hardened Steel)"],
+                  ["Max Toolhead Speed", "1000 mm/s"],
+                  ["Max Acceleration", "20,000 mm/s²"],
+                  ["Supported Materials", "PLA, ABS, PETG, TPU, PC, PA, Carbon/Glass Fiber Reinforced Polymers"]
+                ]
+              },
               media: {
-                src: "assets/images/protosem/week-06/3D printing/source (1).png",
-                alt: "Selected 3D model reference from Printables",
-                caption: "Step 01: 3D Model Selected from Printables"
+                src: "assets/images/protosem/week-06/3D printing/H2s spec.png",
+                alt: "Bambu Lab H2S 3D Printer Specification",
+                caption: "Bambu Lab H2S — printer specification and hardware reference"
               }
             },
             {
               stepNumber: "02",
-              stepLabel: "02 — PREPARING THE MODEL",
-              title: "Preparing the Model",
-              description: "After selecting the model, I downloaded and configured Bambu Studio, then imported the digital 3D model into the slicing workspace to prepare it for manufacturing. Inside the slicer, I carefully oriented the geometry on the virtual build plate, selected optimal layer heights, configured infill density, and verified support settings to ensure print stability and smooth surface reproduction.",
+              stepLabel: "02 — SLICER & MATERIAL",
+              title: "Slicer & Material",
+              description: "Bambu Studio was configured as the CAM slicing software to prepare the digital geometry for fabrication. White PLA Basic thermoplastic filament was selected for its high dimensional accuracy, uniform layer bonding, and predictable thermal behavior on the textured PEI build plate.",
+              specTable: {
+                columns: ["Parameter", "Specification"],
+                rows: [
+                  ["Slicer / Software", "Bambu Studio"],
+                  ["Material", "PLA Basic"],
+                  ["Material Type", "PLA / Thermoplastic Filament"],
+                  ["Filament Diameter", "1.75 mm"],
+                  ["Print Plate", "Textured PEI Plate"],
+                  ["Material Application", "Rapid Prototyping & High-Detail Visual Models"]
+                ]
+              },
               media: {
-                src: "assets/images/protosem/week-06/3D printing/in bambu.png",
-                alt: "3D model loaded and prepared in Bambu Studio",
-                caption: "Step 02: Model Import and Preparation in Bambu Studio"
+                src: "assets/images/protosem/week-06/3D printing/pla.png",
+                alt: "PLA Basic — thermoplastic filament used for the 3D printing activity",
+                caption: "PLA Basic — thermoplastic filament used for the 3D printing activity"
               }
             },
             {
               stepNumber: "03",
-              stepLabel: "03 — INTERACTIVE 3D MODEL",
-              title: "Interactive 3D Model",
-              driveLink: "https://drive.google.com/file/d/1eTWxgoGG95RZdxxBQETuLDDoEIMY0A7O/view?usp=drive_link",
-              driveLinkLabel: "View 3D Model File on Google Drive",
-              description: "Explore the interactive 3D CAD model used for this digital fabrication activity. The digital mesh geometry can be freely rotated, zoomed, and inspected in real-time 3D space from any perspective, providing an interactive visualization of the exact virtual CAD geometry before slicing toolpath conversion and physical extrusion.",
-              model3d: {
-                src: "assets/images/protosem/week-06/3D printing/lakshana.glb",
-                fallbackSrc: "public/models/my-model.glb",
-                alt: "Interactive 3D Model for 3D Printing",
-                title: "Interactive 3D CAD Model",
-                instruction: "Drag to rotate • Scroll to zoom",
-                tag: "INTERACTIVE 3D CAD MODEL"
-              }
+              stepLabel: "03 — PRINTER LIMITS & CAPABILITIES",
+              title: "Printer Limits & Capabilities",
+              description: "Evaluation of the practical capabilities and operational constraints observed during the Bambu Lab H2S fabrication workflow.",
+              capabilitiesHeader: "CAPABILITIES",
+              capabilities: [
+                "High-speed CoreXY motion architecture supporting up to 1000 mm/s speed and 20,000 mm/s² acceleration",
+                "Large 340 × 320 × 340 mm enclosed build chamber accommodating large-scale single-piece prototypes",
+                "Automated multi-point bed leveling and active vibration compensation for reliable first-layer deposition",
+                "High-temperature hardened steel nozzle (up to 300 °C) supporting carbon-fiber and engineering composites"
+              ],
+              limitationsHeader: "PRACTICAL LIMITATIONS",
+              limitations: [
+                "Anisotropic structural strength: inter-layer adhesion along the Z-axis is inherently weaker than planar XY toolpaths",
+                "Steep geometry overhangs exceeding 45° require support structures to prevent sagging and defect formation",
+                "High thermal-shrinkage polymers require chamber pre-heating to prevent corner lifting and warping",
+                "Extrusion resolution is constrained by the 0.4 mm nozzle orifice, limiting minimum feature wall thickness"
+              ]
             },
             {
               stepNumber: "04",
-              stepLabel: "04 — 3D PRINTING PROCESS",
-              title: "3D Printing Process",
-              description: "The sliced machine instructions (G-code) were transferred to the Bambu Lab 3D printer to initiate the physical fabrication process. The printer's heated nozzle precisely melted and deposited PLA thermoplastic filament onto the build plate layer by layer, progressively building the three-dimensional geometry from bottom to top according to the sliced cross-sectional toolpaths.",
-              media: {
-                src: "assets/images/protosem/week-06/3D printing/machine doing.mp4",
-                type: "video",
-                isVideo: true,
-                alt: "3D printer performing the layer-by-layer printing process",
-                caption: "Step 04: Bambu 3D Printer — Layer-by-Layer Printing Process"
+              stepLabel: "04 — WHY THE OBJECT CANNOT BE MADE SUBTRACTIVELY",
+              title: "Why the Object Cannot Be Made Subtractively",
+              description: "The organic geometry of the selected Baby Groot model presents critical geometric and physical constraints that make conventional subtractive CNC machining unfeasible compared to additive manufacturing.",
+              manufacturingComparison: {
+                subtractive: {
+                  title: "Subtractive CNC Limitations",
+                  points: [
+                    {
+                      title: "Enclosed Undercuts & Pockets",
+                      desc: "Deep cavities beneath the chin, arms, and overhangs cannot be accessed by rotating endmills without severe tool-shank collisions."
+                    },
+                    {
+                      title: "Fragile Organic Features",
+                      desc: "Delicate fingers and fine micro-bark fissures risk tool deflection, high cutting forces, and workpiece breakage."
+                    },
+                    {
+                      title: "Severe Material Waste",
+                      desc: "Carving this complex organic model from a solid billet would machine away over 80% of raw stock into chips."
+                    }
+                  ]
+                },
+                additive: {
+                  title: "Additive 3D Printing Advantages",
+                  points: [
+                    {
+                      title: "Layer-by-Layer Deposition",
+                      desc: "Material is built upward layer by layer, freely creating complex internal hollows and overhangs with auto-generated tree supports."
+                    },
+                    {
+                      title: "Zero Tooling Forces",
+                      desc: "Non-contact 0.4mm nozzle deposits molten filament without exerting physical stress or vibration on fragile features."
+                    },
+                    {
+                      title: "Net-Shape Efficiency",
+                      desc: "Material is placed only where structurally needed, using a 15% internal grid infill to conserve raw filament."
+                    }
+                  ]
+                }
+              },
+              dfamCallout: {
+                badge: "DFAM PRINCIPLE · DESIGN FOR ADDITIVE MANUFACTURING",
+                title: "Geometric Complexity Decoupled from Manufacturing Cost",
+                text: "In subtractive machining, every additional undercut, curve, and pocket requires extra fixturing and tooling setups, exponentially increasing cost. In additive manufacturing, geometric complexity (organic bark fissures, deep overhangs, intricate curves) is 'free'—it requires zero additional tooling setups or specialized cutters."
               }
             },
             {
               stepNumber: "05",
-              stepLabel: "05 — HANDS-ON FABRICATION",
-              title: "Hands-on Fabrication",
-              description: "During the fabrication process, I actively monitored the 3D printer's operation and calibration parameters to ensure consistent first-layer adhesion and uniform extrusion quality. Working directly with the machine provided valuable hands-on experience with print monitoring, nozzle temperature management, build plate adhesion, and observing additive manufacturing dynamics in real time.",
+              stepLabel: "05 — STL DEFINITION",
+              title: "STL Definition",
+              description: "STL (Standard Tessellation Language / Stereolithography) is the industry-standard 3D file format used to represent surface geometry for additive manufacturing workflows. It translates continuous CAD surfaces into an unstructured triangulated mesh of planar facets, where each triangle is defined by three vertex coordinates and a surface normal vector indicating outer orientation. Finer meshes with higher triangle counts approximate curved surfaces more accurately without introducing geometric faceting. Slicing software processes this triangular mesh to generate horizontal planar slices and CNC G-code toolpaths.",
               media: {
-                src: "assets/images/protosem/week-06/3D printing/me working.jpeg",
-                alt: "Observing the 3D printer during fabrication",
-                caption: "Step 05: Hands-on Observation and Machine Monitoring"
+                src: "assets/images/protosem/week-06/3D printing/stl_mesh_concept.svg",
+                alt: "STL Data Transformation Pipeline: CAD Surface to Triangular Mesh to Sliced Layers",
+                caption: "STL represents 3D surface geometry as a triangular mesh for slicing and additive manufacturing."
               }
             },
             {
               stepNumber: "06",
-              stepLabel: "06 — FINAL PRINTED OUTPUT",
-              title: "Final Printed Output",
+              stepLabel: "06 — SELECTED STL FILE",
+              title: "Selected STL File",
+              description: "For the fabrication activity, I explored 3D repositories and selected the 'Heavy Metal Groot' model by Max666 from Printables. The model was provided in standard STL format (heavy_metal_groot_01.stl). It was selected for its rich organic surface textures, delicate hand gesture, and challenging overhang features, which provided an authentic benchmark to evaluate 0.20 mm layer height resolution, tree support separation, and FDM surface reproduction.",
+              media: {
+                src: "assets/images/protosem/week-06/3D printing/source (1).png",
+                alt: "Selected 3D model from Printables used for the fabrication activity",
+                caption: "Selected 3D model from Printables used for the fabrication activity"
+              },
+              model3d: {
+                src: "assets/images/protosem/week-06/3D printing/lakshana.glb",
+                fallbackSrc: "public/models/my-model.glb",
+                alt: "Interactive 3D Model for 3D Printing",
+                title: "Interactive 3D CAD Model Preview",
+                tag: "INTERACTIVE 3D CAD MODEL",
+                caption: "Interactive 3D mesh preview of the selected Baby Groot model."
+              },
+              driveLink: "https://drive.google.com/file/d/19sPXRUei5-cXP3oJs762uOR7fD6HcWjU/view?usp=drive_link",
+              driveLinkLabel: "View STL Source File on Google Drive"
+            },
+            {
+              stepNumber: "07",
+              stepLabel: "07 — SLICER SETTINGS",
+              title: "Slicer Settings",
+              description: "The STL file was imported into Bambu Studio and configured using the verified 0.20mm Standard process profile for the Bambu Lab H2S. Slicer parameters were tuned to achieve high surface fidelity on organic contours while maintaining robust first-layer bed adhesion.",
+              settingsTable: {
+                columns: ["Setting", "Final Value"],
+                rows: [
+                  ["Nozzle Temperature", "220 °C"],
+                  ["Bed Temperature", "55 °C"],
+                  ["Layer Height", "0.20 mm"],
+                  ["Initial Layer Height", "0.20 mm"],
+                  ["Infill", "15%"],
+                  ["Infill Pattern", "Grid"],
+                  ["Wall / Shell Count", "2 Walls"],
+                  ["Print Speed", "Standard (@BBL H2S 0.20mm Profile)"],
+                  ["Supports", "Auto Tree Supports"],
+                  ["Adhesion Type", "Textured PEI Plate"]
+                ]
+              },
+              note: "The 0.20mm layer height with 15% grid infill provided optimal structural rigidity and smooth surface definition across the character's organic facial and hand contours.",
+              media: {
+                src: "assets/images/protosem/week-06/3D printing/in bambu.png",
+                alt: "Final Bambu Studio slicer configuration used for the print",
+                caption: "Final Bambu Studio slicer configuration used for the print"
+              }
+            },
+            {
+              stepNumber: "08",
+              stepLabel: "08 — PRINT TIME & MATERIAL WEIGHT",
+              title: "Print Time & Material Weight",
+              description: "Comparison between the slicer-calculated print estimates generated in Bambu Studio and the physical fabrication metrics recorded on the Bambu Lab H2S printer.",
+              specTable: {
+                columns: ["Parameter", "Estimated (Bambu Studio)", "Actual Observed"],
+                rows: [
+                  ["Print Time", "1h 33m", "—"],
+                  ["Material Weight", "28.46 g", "27.20 g"]
+                ]
+              },
+              observation: "The estimated print time (1h 33m) and filament usage (28.46 g) were calculated by Bambu Studio slicer based on the 0.20mm layer height and 15% infill configuration."
+            },
+            {
+              stepNumber: "09",
+              stepLabel: "09 — 3D PRINTING PROCESS",
+              title: "3D Printing Process",
+              description: "The sliced G-code toolpaths were transferred to the Bambu Lab H2S 3D printer to initiate the physical fabrication process. The printer's heated nozzle precisely melted and deposited PLA thermoplastic filament onto the textured PEI build plate layer by layer, progressively building the three-dimensional geometry from bottom to top according to the sliced cross-sectional contours.",
+              media: {
+                src: "assets/images/protosem/week-06/3D printing/machine doing.mp4",
+                type: "video",
+                isVideo: true,
+                alt: "Bambu 3D printer executing layer-by-layer material deposition",
+                caption: "Bambu 3D printer executing layer-by-layer material deposition"
+              }
+            },
+            {
+              stepNumber: "10",
+              stepLabel: "10 — HANDS-ON FABRICATION",
+              title: "Hands-on Fabrication",
+              description: "During the fabrication process, I actively monitored the 3D printer's operation and calibration parameters to ensure consistent first-layer bed adhesion, skirt extrusion, and smooth layer bonding. Direct machine observation provided practical experience in supervising additive manufacturing dynamics, nozzle temperature stability, and real-time print execution.",
+              media: {
+                src: "assets/images/protosem/week-06/3D printing/me working.jpeg",
+                alt: "Monitoring first-layer adhesion and active print execution",
+                caption: "Monitoring first-layer adhesion and active print execution"
+              }
+            },
+            {
+              stepNumber: "11",
+              stepLabel: "11 — FINAL RESULT",
+              title: "Final Result",
               isFinal: true,
+              description: "The completed 3D print in white PLA Basic exhibits consistent 0.20 mm layer stacking, crisp reproduction of fine organic bark textures, and clean overhang resolution across the character's hand gesture.",
               driveLink: "https://drive.google.com/file/d/1eTWxgoGG95RZdxxBQETuLDDoEIMY0A7O/view?usp=drive_link",
-              driveLinkLabel: "View 3D Printed Outcome on Google Drive",
-              description: "The final printed object represents the successful completion of the end-to-end digital-to-physical additive manufacturing workflow. The completed PLA artifact showcases clean geometric reproduction, precise layer stacking, and high structural integrity, successfully validating the entire pipeline from digital model selection and Bambu Studio slicing to physical printer execution.",
+              driveLinkLabel: "View High-Resolution 3D Printed Outcome on Google Drive",
               images: [
                 {
                   src: "assets/images/protosem/week-06/3D printing/output1.jpeg",
-                  alt: "Final 3D Printed Output — Perspective View",
-                  caption: "Final 3D Printed Output — Perspective View"
+                  alt: "Final 3D-printed object — completed PLA print",
+                  caption: "Final 3D-printed object — completed PLA print"
                 },
                 {
                   src: "assets/images/protosem/week-06/3D printing/output2.jpeg",
-                  alt: "Final 3D Printed Output — Detail View",
-                  caption: "Final 3D Printed Output — Detail View"
+                  alt: "Isometric detail view showing layer adhesion and surface finish",
+                  caption: "Isometric detail view showing layer adhesion and surface finish"
+                }
+              ]
+            },
+            {
+              stepNumber: "12",
+              stepLabel: "12 — SOURCE FILES",
+              title: "Source Files",
+              description: "Digital design and slicer manufacturing files for the 3D printing activity. Source files are provided for reference and download. Links should be verified before final submission.",
+              sourceFiles: [
+                {
+                  format: "STL",
+                  name: "STL Source File",
+                  description: "3D surface polygon mesh file (heavy_metal_groot_01.stl) used for slicing and additive fabrication.",
+                  status: "Available on Google Drive",
+                  url: "https://drive.google.com/file/d/19sPXRUei5-cXP3oJs762uOR7fD6HcWjU/view?usp=drive_link",
+                  filename: "heavy_metal_groot_01.stl"
+                },
+                {
+                  format: "3MF",
+                  name: "3MF Printer Project",
+                  description: "Complete Bambu Studio project archive containing 3D geometry, plate orientation, and slicing process presets.",
+                  status: "Available on Google Drive",
+                  url: "https://drive.google.com/file/d/1eTWxgoGG95RZdxxBQETuLDDoEIMY0A7O/view?usp=drive_link",
+                  filename: "heavy_metal_groot.3mf"
+                }
+              ]
+            },
+            {
+              stepNumber: "13",
+              stepLabel: "13 — REFERENCES & CREDITS",
+              title: "References & Credits",
+              description: "External technical resources, 3D model sources, and software tools utilized during this digital fabrication activity.",
+              references: [
+                {
+                  category: "3D MODEL SOURCE",
+                  title: "Printables — Heavy Metal Groot",
+                  description: "Original 3D CAD character design created by creator Max666 and published on the Printables 3D model repository.",
+                  url: "https://www.printables.com/model/16627-heavy-metal-groot/files"
+                },
+                {
+                  category: "HARDWARE SPEC",
+                  title: "Bambu Lab — H2S 3D Printer",
+                  description: "Hardware specifications, motion kinematics, and multi-material capability documentation for the Bambu Lab H2S platform.",
+                  url: "https://bambulab.com"
+                },
+                {
+                  category: "SLICING SOFTWARE",
+                  title: "Bambu Studio — Slicing & Toolpath Engine",
+                  description: "Open-source slicing software used for model orientation, layer generation, support configuration, and G-code export.",
+                  url: "https://bambulab.com/en/download/studio"
                 }
               ]
             }
           ]
         },
 
-        // Reflection & Learning
-        learningReflection: {
-          badge: "SYNTHESIS & REFLECTION",
-          heading: "What I Learned",
-          narrative: "Through this activity, I gained a practical understanding of how a digital 3D model is transformed into a physical object. Working with Bambu Studio and observing the printer helped me understand the complete workflow of additive manufacturing.",
-          takeaways: [
-            "Understood the basic concept of additive manufacturing",
-            "Learned how a digital 3D model is prepared for printing",
-            "Understood the role of slicing software",
-            "Explored Bambu Studio for print preparation",
-            "Learned about PLA filament and its common use",
-            "Understood the layer-by-layer printing process",
-            "Gained practical experience with the digital-to-physical workflow"
-          ]
-        }
+        // Post-Practical Faculty Synthesis Section (Reflection 4-Box Grid)
+        postPracticalSections: [
+          {
+            sectionNumber: "14",
+            sectionLabel: "14 — REFLECTION",
+            heading: "Reflection",
+            content: "Personal synthesis of key learnings, fabrication challenges, technical skills developed, and future optimization pathways in additive manufacturing.",
+            reflectionSections: [
+              {
+                title: "01 — WHAT I LEARNED",
+                content: "Learned the complete additive manufacturing workflow from STL discovery on Printables, slicing parameter optimization in Bambu Studio, and layer-by-layer extrusion on the Bambu Lab H2S."
+              },
+              {
+                title: "02 — CHALLENGES FACED",
+                content: "Balancing organic overhangs and tree supports to prevent surface scarring while maintaining clean first-layer adhesion on the textured PEI plate."
+              },
+              {
+                title: "03 — SKILLS GAINED",
+                content: "Developed practical competency in CAM 3D slicing, layer height configuration, infill selection, tree support management, and additive printer operation."
+              },
+              {
+                title: "04 — FUTURE IMPROVEMENTS",
+                content: "In future prints, I would calibrate variable layer heights across fine organic details and experiment with custom support blockers to minimize post-processing."
+              }
+            ]
+          }
+        ]
       }
     ],
 
