@@ -7,6 +7,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initBrandLogoDynamic();
   initScrollProgress();
   initHeaderScroll();
   initMobileMenu();
@@ -22,6 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   initPageTransitions();
 });
+
+/**
+ * 0. Dynamic LGS Brand Monogram Concept Loader
+ */
+function initBrandLogoDynamic() {
+  const officialSvg = `<svg class="brand-monogram" width="28" height="28" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+    <path d="M 18,17 C 18,12 22,8 27,8 C 32,8 36,12 36,17 L 36,53 C 36,63 43,69 52,69 C 43,77 30,81 22,74 C 19,71.5 18,63 18,53 Z"/>
+    <path d="M 39,55 C 39.5,46 50,38 68,38 C 66.5,47.5 56,61 41,61 C 39.2,61 38.7,58 39,55 Z"/>
+    <path d="M 45,68 C 47,60 58.5,54 79,54 C 77,65 66,76 50,76 C 46,76 44.5,72 45,68 Z"/>
+    <path d="M 75,10 Q 75,23 88,23 Q 75,23 75,36 Q 75,23 62,23 Q 75,23 75,10 Z"/>
+  </svg>`;
+
+  const brandAnchors = document.querySelectorAll('.site-brand');
+  brandAnchors.forEach(anchor => {
+    let existingMonogram = anchor.querySelector('.brand-monogram');
+    if (existingMonogram) {
+      existingMonogram.outerHTML = officialSvg;
+    }
+  });
+}
 
 /**
  * 1. Minimal Hairline Scroll Progress Indicator
