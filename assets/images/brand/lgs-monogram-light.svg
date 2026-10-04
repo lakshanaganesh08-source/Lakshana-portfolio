@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" aria-label="LGS Personal Brand Monogram - Light Version">
+  <!-- LGS Geometric Monogram — Light (#FAFAF8) for Dark Backgrounds -->
+  <g stroke="#FAFAF8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- L Component -->
+    <path d="M12 9V39H38" stroke-width="3.5"/>
+    <!-- G Component -->
+    <path d="M37 11C34 9.5 28 8.5 22 10.5C15 13 12 20 12 26C12 32 16 38 27 38C35 38 38 33 38 28H26" stroke-width="3.2"/>
+    <!-- S Component -->
+    <path d="M34 16C30 13.5 24 14 20 17C15 21 21 25.5 28 27.5C35 29.5 39 33 36 37C33 40 26 40 20 38" stroke-width="2.8"/>
+  </g>
+</svg>
